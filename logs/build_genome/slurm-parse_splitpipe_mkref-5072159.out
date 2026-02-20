@@ -1,0 +1,381 @@
+# Init SplitPipe split-pipe v1.6.4
+# Initializing defaults
+# Current python version 3.13.12 >= min version v3.12.8
+# Set threads to 32 (ncpu=64, initial nthreads=0 limited to 32) (init threads)
+# Set kit to custom (init kit; mkref mode)
+# Set run_name genome_hg38_ensembl109 (init run_name)
+# Use_case behavior set to mkref (init use_case)
+
+# Setting up run-time env; Use_case mkref, Mode mkref, Kit custom Chem 0
+# Checking run env (conda); timeout 30
+# Checking called executables; timeout 30
+# Version info: 2.7.11b /home/mcn26/.conda/envs/splitpipe/bin/STAR
+# Version info: samtools 1.22.1 /home/mcn26/.conda/envs/splitpipe/bin/samtools
+# WARNING: 'fastqc' command not found; May need to install
+# WARNING: 'fastqc' is optional; Will skip use
+# Version info:  /usr/bin/which: no fastqc in (/home/mcn26/.conda/envs/splitpipe/bin:/apps/software/system/software/miniconda/24.11.3/condabin:/apps/software/system/software/miniconda/24.11.3:/apps/software/system/software/miniconda/24.11.3/sbin:/apps/software/system/software/miniconda/24.11.3/bin:/opt/lenovo/onecli:/apps/software/2024a/software/VSCode/1.102.3/bin:/apps/bin:/opt/TurboVNC/bin:/home/mcn26/.local/bin:/home/mcn26/bin:/opt/slurm/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/mcn26/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/scripts/noConfigScripts)
+# Version info: gzip 1.9 /usr/bin/gzip
+# Version info: pigz 2.8 /home/mcn26/.conda/envs/splitpipe/bin/pigz
+# Version info: UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP. /home/mcn26/.conda/envs/splitpipe/bin/unzip
+# Set up samples; mkref mode; Handled elsewhere; Ignoring
+# Run process definitions set from current settings
+# Opening log /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/split-pipe_v1_6_4.log 
+# Starting memory profile tracing
+# Memory log /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/mem_profile.txt
+#2 Call: /home/mcn26/.conda/envs/splitpipe/lib/python3.13/site-packages/splitpipe/scripts/mem_loop.py --outfile /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/mem_profile.txt --number 302400 --seconds 2 --pid 502695 --quiet --append --prefix 'Tstep' 
+################################################################################
+# Program                   split-pipe v1.6.4
+# Run date                  2026-02-20 20:58:31.513353+0
+# Run on                    a1132u33n01.mghpcc.ycrc.yale.edu (x86_64 Linux) by mcn26
+# System                    1.08 Tb (1,081,757,933,568) RAM and 64 CPUs
+# PID                       502695
+################################################################################
+#
+#                ------ >>> Command line <<< -----------------
+#
+/home/mcn26/.conda/envs/splitpipe/bin/split-pipe \
+--mode mkref \
+--genome_name hg38 \
+--fasta /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/downloads/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz \
+--genes /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/downloads/Homo_sapiens.GRCh38.109.gtf.gz \
+--output_dir /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109
+#
+#                ------ >>> Initialization messages <<< ------
+#
+# Current python version 3.13.12 >= min version v3.12.8
+# Set threads to 32 (ncpu=64, initial nthreads=0 limited to 32) (init threads)
+# Set kit to custom (init kit; mkref mode)
+# Set run_name genome_hg38_ensembl109 (init run_name)
+# Use_case behavior set to mkref (init use_case)
+# Setting up run-time env; Use_case mkref, Mode mkref, Kit custom Chem 0
+# Checking run env (conda); timeout 30
+# Checking called executables; timeout 30
+# Version info: 2.7.11b /home/mcn26/.conda/envs/splitpipe/bin/STAR
+# Version info: samtools 1.22.1 /home/mcn26/.conda/envs/splitpipe/bin/samtools
+# WARNING: 'fastqc' command not found; May need to install
+# WARNING: 'fastqc' is optional; Will skip use
+# Version info:  /usr/bin/which: no fastqc in (/home/mcn26/.conda/envs/splitpipe/bin:/apps/software/system/software/miniconda/24.11.3/condabin:/apps/software/system/software/miniconda/24.11.3:/apps/software/system/software/miniconda/24.11.3/sbin:/apps/software/system/software/miniconda/24.11.3/bin:/opt/lenovo/onecli:/apps/software/2024a/software/VSCode/1.102.3/bin:/apps/bin:/opt/TurboVNC/bin:/home/mcn26/.local/bin:/home/mcn26/bin:/opt/slurm/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/mcn26/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/scripts/noConfigScripts)
+# Version info: gzip 1.9 /usr/bin/gzip
+# Version info: pigz 2.8 /home/mcn26/.conda/envs/splitpipe/bin/pigz
+# Version info: UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP. /home/mcn26/.conda/envs/splitpipe/bin/unzip
+# Set up samples; mkref mode; Handled elsewhere; Ignoring
+# Run process definitions set from current settings
+# Opening log /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/split-pipe_v1_6_4.log 
+#
+#                ------ >>> Parameter settings <<< -----------
+#
+# use_case                  mkref
+# mode                      mkref
+# chemistry                 <Not set>
+# kit                       custom
+# kit_source                automatic
+# parfile                   <Not set>
+# logfile                   /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/split-pipe_v1_6_4.log
+# run_name                  genome_hg38_ensembl109	(automatic)
+# input_dir                 <Not set>
+# output_dir                /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/
+# parent_dir                <Not set>
+# fq1                       <Not set>
+# fq2                       <Not set>
+# sublib_list               <Not set>
+# sublib_pref               <Not set>
+# sublib_suff               <Not set>
+# sublibraries              <Not set>
+# samp_list                 <Not set>
+# samp_sltab                <Not set>
+# sample                    <Not set>
+# genome_dir                <Not set>
+# genome_name               Item_1_of_1	hg38
+# genes                     Item_1_of_1	/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/downloads/Homo_sapiens.GRCh38.109.gtf.gz
+# fasta                     Item_1_of_1	/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/downloads/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+# gfasta                    <Not set>
+# targeted_list             <Not set>
+# genome_min_version        v1.5.0
+# parent_min_version        v1.5.0
+# python_min_version        v3.12.8
+# nthreads                  32	(automatic)
+# max_threads               32
+# rseed                     42
+# reuse                     False
+# make_allwell              False
+# make_allsample            True
+# samp_wells_unique         True
+# keep_going                True
+# keep_temps                False
+# no_compress               False
+# gzip_compresslevel        4
+# log_memory_use            True
+# one_step                  False
+# until_step                <Not set>
+# start_timeout             30
+# star_extra_args           <Not set>
+# agg_sum_transpose         False
+# bc_save_data_clean        True
+# bc_amp_seq                <Not set>
+# bc_round_set              <Not set>
+# bc_edit_dist              2
+# sample_bc_rounds          0
+# kit_score_warn            0.7
+# kit_score_min             0.1
+# kit_score_remain_frac     0.2
+# kit_score_skip            False
+# chem_score_warn           0.5
+# chem_score_min            0.2
+# chem_score_max_len        10
+# chem_score_skip           False
+# fq_size_dif_warn          0.07
+# fq_size_dif_max           0.1
+# fq_size_dif_check         True
+# fq_size_guess_min         100000
+# fastq_samp_slice          [3000000, 4000000]
+# mkref_id_for_no_name      True
+# mkref_na_for_no_biotype   True
+# mkref_clean_gene_name     True
+# mkref_gff3_gene_features  gene,pseudogene,ncRNA_gene
+# mkref_gff3_exon_parents   mRNA,transcript
+# mkref_chr_geno_prefix     True
+# mkref_max_gtf_not_fas     0
+# mkref_geno_no_exon        True
+# mkref_gtf_dict_stepsize   10000
+# mkref_star_args           --genomeSAindexNbases,14,--genomeSAsparseD,2,--limitGenomeGenerateRAM,24000000000
+# mkref_star_splicing       True
+# mkref_validate            False
+# tcr_analysis              False
+# bcr_analysis              False
+# immune_genome             <Not set>
+# immune_use_imgt_db        False
+# immune_kmer               21
+# immune_read_thresh        2
+# immune_max_reads_per_cell 100000
+# immune_trim               <Not set>
+# immune_no_filter_run      0
+# immune_filter_only_run    0
+# focal_barcoding           False
+# crsp_analysis             False
+# crsp_guides               <Not set>
+# crsp_use_star             False
+# crsp_guide_offset         0
+# crsp_pref_samp_len        10
+# crsp_match_hamming_dist   1
+# inqc_fastqc_run           True
+# inqc_fastqc_show_warn     False
+# inqc_min_reads            100000
+# inqc_min_good_r1len_frac  0.5
+# inqc_min_good_r2len_frac  0.9
+# inqc_min_perf_frac        0.3
+# inqc_warn_perf_frac       0.5
+# pre_min_r1_len            45
+# pre_check_name_match      True
+# pre_head_name_num_regex   <Not set>
+# pre_head_name_num_split   <Not set>
+# pre_name_mismatch_stop    1
+# pre_head_seq_index_regex  .+:(\w+)$
+# pre_head_keep_original    True
+# pre_perfect_bc_cell_thresh 0.92
+# pre_keep_no_bc_fq         False
+# pre_keep_bc_fq            False
+# pre_tso_seq               AACGCAGAGTGAATGGG
+# pre_tso_read_limit        15
+# pre_num_multiproc         8
+# align_min_start_reads     50000
+# align_star_keep_no_map    False
+# align_star_args           --outFilterMultimapNmax,3
+# align_star_linker_clip3p  True
+# post_warn_map_frac        0.33
+# post_min_map_frac         0.1
+# post_samtools_extra_args  <Not set>
+# mol_min_mapq_score        255
+# mol_samtools_extra_args   <Not set>
+# mol_awuf_read_thresh      1
+# mol_awuf_tscp_thresh      3
+# given_cell_list           <Not set>
+# dge_min_start_tscp        10000
+# dge_copy_dge_genes_file   True
+# dge_save_express_gene_file True
+# dge_compress_dge_files    False
+# dge_keep_orphan_unfilt    False
+# dge_species_purity_thresh 0.9
+# dge_species2_purity_thresh 0.9
+# dge_tscp_cut_given        <Not set>
+# dge_tscp_cut_min          30
+# dge_tscp_cut_max          <Not set>
+# dge_tscp_cut_scale_fac    1.0
+# dge_cell_est              <Not set>
+# dge_cell_given            <Not set>
+# dge_cell_gxfold           3
+# dge_cell_min              10
+# dge_cell_auc_min          0.5
+# dge_cell_max              <Not set>
+# dge_cell_scale_by_frac    True
+# dge_cell_hard_min         5
+# dge_gene_cell_min         3
+# dge_tscp_cut_umin         10
+# dge_gene_cell_umin        1
+# dge_tscp_cut_targeted_min 15
+# dge_tscp_cut_targeted_umin 5
+# dge_gene_cell_targeted_min 2
+# dge_tscp_read_min         1
+# dge_gene_tscp_min         1
+# dge_tscp_read_fb_min      1
+# dge_gene_tscp_fb_min      1
+# dge_gene_tscp_fb_umin     1
+# dge_tscp_read_fb_umin     1
+# subsamp_num_samp          10
+# subsamp_step_jump         1.2
+# comb_new_tscp             False
+# comb_unfilt_dge           True
+# comb_max_sublibs          <Not set>
+# ana_scanpy_verbosity      <Not set>
+# ana_rep_do_simple_samps   True
+# ana_save_anndata          False
+# ana_mem_eff_cell_thresh   100000
+# ana_norm_target_sum       10000
+# ana_scale_max_value       10
+# ana_scale_zero_center     True
+# ana_pca_min_hvar          100
+# ana_pca_dim_max           50
+# ana_pca_dim_min           10
+# ana_pca_dim_targeted_max  10
+# ana_pca_irlbpy            True
+# ana_cluster_min_bc        30
+# ana_cluster_1base         True
+# ana_umap_n_neighbors      50
+# ana_umap_min_dist         0.5
+# ana_cluster_alg           leiden
+# ana_cluster_2nd_alg       louvain
+# ana_ctab_top_n            20
+# ana_ctab_sco_min_den      0.01
+# ana_gene_cell_min         3
+# rep_save_figs             True
+# rep_plate_min_zero        True
+# rep_umap_subsamp          15000
+# rep_umap_ss_clus_min      10
+# rep_umap_norm_fac         10000.0
+# rep_umap_fb_zero_nc       True
+# rep_gene_def_url          https://www.ncbi.nlm.nih.gov/gene/?term={gene_id}
+# rep_gene_url              <Not set>
+# rep_alt_sty_fmt           False
+# clean_per_step            False
+# clean_make_summaries_zip  True
+# map_targ_genome_dir_path  map_targs
+# map_targ                  <Not set>
+# map_targ_kmer_len         30
+# map_targ_kmer_step        1
+# map_targ_kmer_search_max  41
+# map_targ_kmer_search_step 10
+#
+#                ------ >>> Run details <<< ------------------
+#
+# Run_plan step_1_of_1    MkRef
+#
+################################################################################
+
+
+# Time	Starting split-pipe v1.6.4	2026-02-20 20:58:31.513932+0
+# Time	Before MkRef	2026-02-20 20:58:31.513959+0
+# >> Running Mkref
+#2 MemStatus: Mkref  2.14 Gb proc, 268 Mb rss, 1.87 Gb vms, 25.8% usd, 803 Gb avail
+#2 DskStatus: Mkref  '/home/' 11 Tb total, 3.7 Tb (33.69%) used, 7.29 Tb (66.31%) free
+# Processing fasta files
+#2 Chromosome genome prefix: True
+#2 Processing hg38 /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/downloads/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+# New fasta file: /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas
+# Total chromosomes 194, bases 3,099,750,718
+# Reading gene annotation files
+#2 Chromosome genome prefix: True
+# Loading 1 listed gtfs
+# Reading hg38 GTF /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/downloads/Homo_sapiens.GRCh38.109.gtf.gz
+#2 Checking format for gene data with 3420361 records
+#2 Subsample size 10000 records
+#2 Attribute format not 'key=value'; not gff3
+#2 Feature 'gene' has 219 (subsampled) records
+#2 Feature 'exon' has 4763 (subsampled) records
+#2 Gene and exon ID (subsampled) keys all present
+#2 List of 'biotype' keys checked: {'gene_biotype': np.int64(219), 'gene_type': np.int64(0), 'biotype': np.int64(0)}
+#2 Gene biotype key 'gene_biotype' (100.00%)
+#2 Gene name key 'gene_name' (64.38%)
+# Loading /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/downloads/Homo_sapiens.GRCh38.109.gtf.gz
+#2 Processing gene and exon records from 3420361 total records
+#2 Gene records from features in {'gene'}
+#2 Gene ID from attribute key gene_id
+#2 Gene name from attribute key gene_name
+#2 Gene biotype from attribute key gene_biotype
+#2 Exon gene_id from attribute key gene_id
+# /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/downloads/Homo_sapiens.GRCh38.109.gtf.gz, format flavor gtf, (62710, 1648278) gene, exon records
+# WARNING: Replaced 20930 missing 'gene_name' col values from 'gene_id' col
+# Checking fasta gtf overlap
+# All gtf genome features overlap with seq chromosomes
+# Checking gene records have exons
+# All gene records have exon records
+# Processing gene annotations
+# Saving chromosome, gene, exon files
+# Wrote 194 x 4 table to /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/all_chrom.csv
+#2 GENO_CHROM_DATA Row_1_of_196                       fasta  gene    exon
+#2 GENO_CHROM_DATA Row_2_of_196  chrom                                   
+#2 GENO_CHROM_DATA Row_3_of_196  hg38_1           248956422  5659  153359
+#2 GENO_CHROM_DATA Row_4_of_196  hg38_10          133797422  2428   65194
+#2 GENO_CHROM_DATA Row_5_of_196  hg38_11          135086622  3470   94428
+#2 GENO_CHROM_DATA Row_6_of_196  hg38_12          133275309  3144   89338
+# Wrote 62710 x 13 table to /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genes.gtf
+#2 GENO_PROC_GENE_GTF Row_1_of_62711              Chromosome                 Source Feature      Start        End Score Strand Frame                                                                                                                                              Attributes          gene_id                    gene_name                        gene_biotype genome
+#2 GENO_PROC_GENE_GTF Row_2_of_62711  0               hg38_1         ensembl_havana    gene    1471765    1497848     .      +     .                          gene_id "ENSG00000160072"; gene_version "20"; gene_name "ATAD3B"; gene_source "ensembl_havana"; gene_biotype "protein_coding";  ENSG00000160072                     "ATAD3B"                      protein_coding   hg38
+#2 GENO_PROC_GENE_GTF Row_3_of_62711  1               hg38_1                 havana    gene     182696     184174     .      +     .                         gene_id "ENSG00000279928"; gene_version "2"; gene_name "DDX11L17"; gene_source "havana"; gene_biotype "unprocessed_pseudogene";  ENSG00000279928                   "DDX11L17"              unprocessed_pseudogene   hg38
+#2 GENO_PROC_GENE_GTF Row_4_of_62711  2               hg38_1                 havana    gene    2581560    2584533     .      +     .                                                               gene_id "ENSG00000228037"; gene_version "1"; gene_source "havana"; gene_biotype "lncRNA";  ENSG00000228037            "ENSG00000228037"                              lncRNA   hg38
+#2 GENO_PROC_GENE_GTF Row_5_of_62711  3               hg38_1         ensembl_havana    gene    3069168    3438621     .      +     .                          gene_id "ENSG00000142611"; gene_version "17"; gene_name "PRDM16"; gene_source "ensembl_havana"; gene_biotype "protein_coding";  ENSG00000142611                     "PRDM16"                      protein_coding   hg38
+#2 GENO_PROC_GENE_GTF Row_6_of_62711  4               hg38_1                 havana    gene    5301928    5307394     .      -     .                                                               gene_id "ENSG00000284616"; gene_version "1"; gene_source "havana"; gene_biotype "lncRNA";  ENSG00000284616            "ENSG00000284616"                              lncRNA   hg38
+# Wrote 1648278 x 10 table to /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/exons.gtf
+#2 GENO_PROC_EXON_GTF Row_1_of_1648279                Chromosome                 Source Feature      Start        End Score Strand Frame                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             Attributes          gene_id
+#2 GENO_PROC_EXON_GTF Row_2_of_1648279  0                 hg38_1         ensembl_havana    exon    1471765    1472089     .      +     .                                                                                    gene_id "ENSG00000160072"; gene_version "20"; transcript_id "ENST00000673477"; transcript_version "1"; exon_number "1"; gene_name "ATAD3B"; gene_source "ensembl_havana"; gene_biotype "protein_coding"; transcript_name "ATAD3B-206"; transcript_source "ensembl_havana"; transcript_biotype "protein_coding"; tag "CCDS"; ccds_id "CCDS30"; exon_id "ENSE00003889014"; exon_version "1"; tag "basic"; tag "Ensembl_canonical"; tag "MANE_Select";  ENSG00000160072
+#2 GENO_PROC_EXON_GTF Row_3_of_1648279  1                 hg38_1         ensembl_havana    exon    1477274    1477350     .      +     .                                                                                    gene_id "ENSG00000160072"; gene_version "20"; transcript_id "ENST00000673477"; transcript_version "1"; exon_number "2"; gene_name "ATAD3B"; gene_source "ensembl_havana"; gene_biotype "protein_coding"; transcript_name "ATAD3B-206"; transcript_source "ensembl_havana"; transcript_biotype "protein_coding"; tag "CCDS"; ccds_id "CCDS30"; exon_id "ENSE00003467707"; exon_version "1"; tag "basic"; tag "Ensembl_canonical"; tag "MANE_Select";  ENSG00000160072
+#2 GENO_PROC_EXON_GTF Row_4_of_1648279  2                 hg38_1         ensembl_havana    exon    1478644    1478745     .      +     .                                                                                    gene_id "ENSG00000160072"; gene_version "20"; transcript_id "ENST00000673477"; transcript_version "1"; exon_number "3"; gene_name "ATAD3B"; gene_source "ensembl_havana"; gene_biotype "protein_coding"; transcript_name "ATAD3B-206"; transcript_source "ensembl_havana"; transcript_biotype "protein_coding"; tag "CCDS"; ccds_id "CCDS30"; exon_id "ENSE00003569130"; exon_version "1"; tag "basic"; tag "Ensembl_canonical"; tag "MANE_Select";  ENSG00000160072
+#2 GENO_PROC_EXON_GTF Row_5_of_1648279  3                 hg38_1         ensembl_havana    exon    1479049    1479108     .      +     .                                                                                    gene_id "ENSG00000160072"; gene_version "20"; transcript_id "ENST00000673477"; transcript_version "1"; exon_number "4"; gene_name "ATAD3B"; gene_source "ensembl_havana"; gene_biotype "protein_coding"; transcript_name "ATAD3B-206"; transcript_source "ensembl_havana"; transcript_biotype "protein_coding"; tag "CCDS"; ccds_id "CCDS30"; exon_id "ENSE00003608502"; exon_version "1"; tag "basic"; tag "Ensembl_canonical"; tag "MANE_Select";  ENSG00000160072
+#2 GENO_PROC_EXON_GTF Row_6_of_1648279  4                 hg38_1         ensembl_havana    exon    1480867    1480936     .      +     .                                                                                    gene_id "ENSG00000160072"; gene_version "20"; transcript_id "ENST00000673477"; transcript_version "1"; exon_number "5"; gene_name "ATAD3B"; gene_source "ensembl_havana"; gene_biotype "protein_coding"; transcript_name "ATAD3B-206"; transcript_source "ensembl_havana"; transcript_biotype "protein_coding"; tag "CCDS"; ccds_id "CCDS30"; exon_id "ENSE00003474888"; exon_version "1"; tag "basic"; tag "Ensembl_canonical"; tag "MANE_Select";  ENSG00000160072
+# Saving gene_info file
+#2 Number of gene_bins 483326
+#2 Write_gene_info: /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/gene_info.json
+# Generating gene data tables
+#2 Building gene data table
+#2 Missing gene names: 0
+# Wrote 62710 x 3 table to /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/all_genes.csv
+#2 GENO_GENE_DATA Row_1_of_62711                 gene_id                    gene_name genome
+#2 GENO_GENE_DATA Row_2_of_62711  0      ENSG00000000003                     "TSPAN6"   hg38
+#2 GENO_GENE_DATA Row_3_of_62711  1      ENSG00000000005                       "TNMD"   hg38
+#2 GENO_GENE_DATA Row_4_of_62711  2      ENSG00000000419                       "DPM1"   hg38
+#2 GENO_GENE_DATA Row_5_of_62711  3      ENSG00000000457                      "SCYL3"   hg38
+#2 GENO_GENE_DATA Row_6_of_62711  4      ENSG00000000460                   "C1orf112"   hg38
+#2 Loading sequences /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas
+#2 Building stats table
+# Wrote 62710 x 11 table to /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/all_gene_stats.csv
+#2 GENO_GENE_STATS Row_1_of_62711                 gene_id                         name            chrom    g_start    g_len strand ex_num  ex_len   g_gc  ex_gc                             biotype
+#2 GENO_GENE_STATS Row_2_of_62711  0      ENSG00000160072                     "ATAD3B"           hg38_1    1471764    26083      +     22    5897  58.83  62.32                      protein_coding
+#2 GENO_GENE_STATS Row_3_of_62711  1      ENSG00000279928                   "DDX11L17"           hg38_1     182695     1478      +      5     570  59.54  58.07              unprocessed_pseudogene
+#2 GENO_GENE_STATS Row_4_of_62711  2      ENSG00000228037            "ENSG00000228037"           hg38_1    2581559     2973      +      3     626  51.13  48.56                              lncRNA
+#2 GENO_GENE_STATS Row_5_of_62711  3      ENSG00000142611                     "PRDM16"           hg38_1    3069167   369453      +     29    7449  57.58   60.1                      protein_coding
+#2 GENO_GENE_STATS Row_6_of_62711  4      ENSG00000284616            "ENSG00000284616"           hg38_1    5301927     5466      -      4    1225  43.87  45.63                              lncRNA
+# Creating genome index
+# Subproc: Call:   /home/mcn26/.conda/envs/splitpipe/bin/STAR --runMode genomeGenerate --sjdbGTFfile /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/exons.gtf --genomeDir /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109 --genomeFastaFiles /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas --runThreadN 32 --genomeSAindexNbases 14 --genomeSAsparseD 2 --limitGenomeGenerateRAM 24000000000
+# Subproc: Status: Success
+# Subproc: Output: (first 100 char)
+	/home/mcn26/.conda/envs/splitpipe/bin/STAR-avx2 --runMode genomeGenerate --sjdbGTFfile /home/mcn26/
+# Subproc: Duration 0:17:42.50
+# STAR output saved to /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/STAR_mkref_sdtout.txt
+# Saved env info /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/mkref_def.json 
+# Cleaning up
+# Subproc: Call:   pigz --force /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genes.gtf /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/exons.gtf -4
+# Subproc: Status: Success
+# Subproc: Output: (first 100 char)
+
+# Subproc: Duration 0:00:16.30
+#2 MemStatus: Mkref  10.2 Gb proc, 4.28 Gb rss, 5.9 Gb vms, 21.3% usd, 851 Gb avail
+#2 DskStatus: Mkref  '/home/' 11 Tb total, 3.73 Tb (33.88%) used, 7.27 Tb (66.12%) free
+# << Running Mkref; Status True; Duration 0:20:04.97
+# 
+# Finished successfully (0 problems)
+
+# Time	Total elapsed 	0:20:04.97
+# Time	All done	2026-02-20 21:18:36.489562+0
+# Closing down SplitPipe
+New file: /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/split-pipe_v1_6_4.log
+# Total time 0:20:06.07
+Genome build complete.
+GENOME_DIR=/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109

@@ -1,0 +1,554 @@
+STAR version=2.7.11b
+STAR compilation time,server,dir=2025-11-14T12:06:42+0000 :/opt/conda/conda-bld/star_1763121846936/work/source
+##### Command Line:
+/home/mcn26/.conda/envs/splitpipe/bin/STAR-avx2 --runMode genomeGenerate --sjdbGTFfile /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/exons.gtf --genomeDir /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109 --genomeFastaFiles /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas --runThreadN 32 --genomeSAindexNbases 14 --genomeSAsparseD 2 --limitGenomeGenerateRAM 24000000000
+##### Initial USER parameters from Command Line:
+###### All USER parameters from Command Line:
+runMode                       genomeGenerate        ~RE-DEFINED
+sjdbGTFfile                   /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/exons.gtf     ~RE-DEFINED
+genomeDir                     /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109     ~RE-DEFINED
+genomeFastaFiles              /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas        ~RE-DEFINED
+runThreadN                    32     ~RE-DEFINED
+genomeSAindexNbases           14     ~RE-DEFINED
+genomeSAsparseD               2     ~RE-DEFINED
+limitGenomeGenerateRAM        24000000000     ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runMode                           genomeGenerate   
+runThreadN                        32
+genomeDir                         /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109
+genomeFastaFiles                  /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas   
+genomeSAindexNbases               14
+genomeSAsparseD                   2
+limitGenomeGenerateRAM            24000000000
+sjdbGTFfile                       /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/exons.gtf
+
+-------------------------------
+##### Final effective command line:
+/home/mcn26/.conda/envs/splitpipe/bin/STAR-avx2   --runMode genomeGenerate      --runThreadN 32   --genomeDir /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109   --genomeFastaFiles /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas      --genomeSAindexNbases 14   --genomeSAsparseD 2   --limitGenomeGenerateRAM 24000000000   --sjdbGTFfile /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/exons.gtf
+----------------------------------------
+
+Number of fastq files for each mate = 1
+ParametersSolo: --soloCellFilterType CellRanger2.2 filtering parameters:  3000 0.99 10
+Finished loading and checking parameters
+--genomeDir directory exists and will be overwritten: /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/
+!!!!! WARNING: Could not move Log.out file from ./Log.out into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/Log.out. Will keep ./Log.out
+
+Feb 20 16:00:37 ... starting to generate Genome files
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 0  "hg38_1" chrStart: 0
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 1  "hg38_10" chrStart: 249036800
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 2  "hg38_11" chrStart: 382992384
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 3  "hg38_12" chrStart: 518258688
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 4  "hg38_13" chrStart: 651689984
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 5  "hg38_14" chrStart: 766246912
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 6  "hg38_15" chrStart: 873463808
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 7  "hg38_16" chrStart: 975699968
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 8  "hg38_17" chrStart: 1066139648
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 9  "hg38_18" chrStart: 1149501440
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 10  "hg38_19" chrStart: 1229979648
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 11  "hg38_2" chrStart: 1288699904
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 12  "hg38_20" chrStart: 1530920960
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 13  "hg38_21" chrStart: 1595408384
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 14  "hg38_22" chrStart: 1642332160
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 15  "hg38_3" chrStart: 1693188096
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 16  "hg38_4" chrStart: 1891631104
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 17  "hg38_5" chrStart: 2081947648
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 18  "hg38_6" chrStart: 2263613440
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 19  "hg38_7" chrStart: 2434531328
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 20  "hg38_8" chrStart: 2593914880
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 21  "hg38_9" chrStart: 2739142656
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 22  "hg38_MT" chrStart: 2877554688
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 23  "hg38_X" chrStart: 2877816832
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 24  "hg38_Y" chrStart: 3034054656
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 25  "hg38_KI270728.1" chrStart: 3091464192
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 26  "hg38_KI270727.1" chrStart: 3093561344
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 27  "hg38_KI270442.1" chrStart: 3094085632
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 28  "hg38_KI270729.1" chrStart: 3094609920
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 29  "hg38_GL000225.1" chrStart: 3095134208
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 30  "hg38_KI270743.1" chrStart: 3095396352
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 31  "hg38_GL000008.2" chrStart: 3095658496
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 32  "hg38_GL000009.2" chrStart: 3095920640
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 33  "hg38_KI270747.1" chrStart: 3096182784
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 34  "hg38_KI270722.1" chrStart: 3096444928
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 35  "hg38_GL000194.1" chrStart: 3096707072
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 36  "hg38_KI270742.1" chrStart: 3096969216
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 37  "hg38_GL000205.2" chrStart: 3097231360
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 38  "hg38_GL000195.1" chrStart: 3097493504
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 39  "hg38_KI270736.1" chrStart: 3097755648
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 40  "hg38_KI270733.1" chrStart: 3098017792
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 41  "hg38_GL000224.1" chrStart: 3098279936
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 42  "hg38_GL000219.1" chrStart: 3098542080
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 43  "hg38_KI270719.1" chrStart: 3098804224
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 44  "hg38_GL000216.2" chrStart: 3099066368
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 45  "hg38_KI270712.1" chrStart: 3099328512
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 46  "hg38_KI270706.1" chrStart: 3099590656
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 47  "hg38_KI270725.1" chrStart: 3099852800
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 48  "hg38_KI270744.1" chrStart: 3100114944
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 49  "hg38_KI270734.1" chrStart: 3100377088
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 50  "hg38_GL000213.1" chrStart: 3100639232
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 51  "hg38_GL000220.1" chrStart: 3100901376
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 52  "hg38_KI270715.1" chrStart: 3101163520
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 53  "hg38_GL000218.1" chrStart: 3101425664
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 54  "hg38_KI270749.1" chrStart: 3101687808
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 55  "hg38_KI270741.1" chrStart: 3101949952
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 56  "hg38_GL000221.1" chrStart: 3102212096
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 57  "hg38_KI270716.1" chrStart: 3102474240
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 58  "hg38_KI270731.1" chrStart: 3102736384
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 59  "hg38_KI270751.1" chrStart: 3102998528
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 60  "hg38_KI270750.1" chrStart: 3103260672
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 61  "hg38_KI270519.1" chrStart: 3103522816
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 62  "hg38_GL000214.1" chrStart: 3103784960
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 63  "hg38_KI270708.1" chrStart: 3104047104
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 64  "hg38_KI270730.1" chrStart: 3104309248
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 65  "hg38_KI270438.1" chrStart: 3104571392
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 66  "hg38_KI270737.1" chrStart: 3104833536
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 67  "hg38_KI270721.1" chrStart: 3105095680
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 68  "hg38_KI270738.1" chrStart: 3105357824
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 69  "hg38_KI270748.1" chrStart: 3105619968
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 70  "hg38_KI270435.1" chrStart: 3105882112
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 71  "hg38_GL000208.1" chrStart: 3106144256
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 72  "hg38_KI270538.1" chrStart: 3106406400
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 73  "hg38_KI270756.1" chrStart: 3106668544
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 74  "hg38_KI270739.1" chrStart: 3106930688
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 75  "hg38_KI270757.1" chrStart: 3107192832
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 76  "hg38_KI270709.1" chrStart: 3107454976
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 77  "hg38_KI270746.1" chrStart: 3107717120
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 78  "hg38_KI270753.1" chrStart: 3107979264
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 79  "hg38_KI270589.1" chrStart: 3108241408
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 80  "hg38_KI270726.1" chrStart: 3108503552
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 81  "hg38_KI270735.1" chrStart: 3108765696
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 82  "hg38_KI270711.1" chrStart: 3109027840
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 83  "hg38_KI270745.1" chrStart: 3109289984
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 84  "hg38_KI270714.1" chrStart: 3109552128
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 85  "hg38_KI270732.1" chrStart: 3109814272
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 86  "hg38_KI270713.1" chrStart: 3110076416
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 87  "hg38_KI270754.1" chrStart: 3110338560
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 88  "hg38_KI270710.1" chrStart: 3110600704
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 89  "hg38_KI270717.1" chrStart: 3110862848
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 90  "hg38_KI270724.1" chrStart: 3111124992
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 91  "hg38_KI270720.1" chrStart: 3111387136
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 92  "hg38_KI270723.1" chrStart: 3111649280
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 93  "hg38_KI270718.1" chrStart: 3111911424
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 94  "hg38_KI270317.1" chrStart: 3112173568
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 95  "hg38_KI270740.1" chrStart: 3112435712
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 96  "hg38_KI270755.1" chrStart: 3112697856
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 97  "hg38_KI270707.1" chrStart: 3112960000
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 98  "hg38_KI270579.1" chrStart: 3113222144
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 99  "hg38_KI270752.1" chrStart: 3113484288
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 100  "hg38_KI270512.1" chrStart: 3113746432
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 101  "hg38_KI270322.1" chrStart: 3114008576
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 102  "hg38_GL000226.1" chrStart: 3114270720
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 103  "hg38_KI270311.1" chrStart: 3114532864
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 104  "hg38_KI270366.1" chrStart: 3114795008
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 105  "hg38_KI270511.1" chrStart: 3115057152
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 106  "hg38_KI270448.1" chrStart: 3115319296
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 107  "hg38_KI270521.1" chrStart: 3115581440
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 108  "hg38_KI270581.1" chrStart: 3115843584
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 109  "hg38_KI270582.1" chrStart: 3116105728
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 110  "hg38_KI270515.1" chrStart: 3116367872
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 111  "hg38_KI270588.1" chrStart: 3116630016
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 112  "hg38_KI270591.1" chrStart: 3116892160
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 113  "hg38_KI270522.1" chrStart: 3117154304
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 114  "hg38_KI270507.1" chrStart: 3117416448
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 115  "hg38_KI270590.1" chrStart: 3117678592
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 116  "hg38_KI270584.1" chrStart: 3117940736
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 117  "hg38_KI270320.1" chrStart: 3118202880
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 118  "hg38_KI270382.1" chrStart: 3118465024
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 119  "hg38_KI270468.1" chrStart: 3118727168
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 120  "hg38_KI270467.1" chrStart: 3118989312
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 121  "hg38_KI270362.1" chrStart: 3119251456
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 122  "hg38_KI270517.1" chrStart: 3119513600
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 123  "hg38_KI270593.1" chrStart: 3119775744
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 124  "hg38_KI270528.1" chrStart: 3120037888
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 125  "hg38_KI270587.1" chrStart: 3120300032
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 126  "hg38_KI270364.1" chrStart: 3120562176
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 127  "hg38_KI270371.1" chrStart: 3120824320
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 128  "hg38_KI270333.1" chrStart: 3121086464
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 129  "hg38_KI270374.1" chrStart: 3121348608
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 130  "hg38_KI270411.1" chrStart: 3121610752
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 131  "hg38_KI270414.1" chrStart: 3121872896
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 132  "hg38_KI270510.1" chrStart: 3122135040
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 133  "hg38_KI270390.1" chrStart: 3122397184
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 134  "hg38_KI270375.1" chrStart: 3122659328
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 135  "hg38_KI270420.1" chrStart: 3122921472
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 136  "hg38_KI270509.1" chrStart: 3123183616
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 137  "hg38_KI270315.1" chrStart: 3123445760
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 138  "hg38_KI270302.1" chrStart: 3123707904
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 139  "hg38_KI270518.1" chrStart: 3123970048
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 140  "hg38_KI270530.1" chrStart: 3124232192
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 141  "hg38_KI270304.1" chrStart: 3124494336
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 142  "hg38_KI270418.1" chrStart: 3124756480
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 143  "hg38_KI270424.1" chrStart: 3125018624
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 144  "hg38_KI270417.1" chrStart: 3125280768
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 145  "hg38_KI270508.1" chrStart: 3125542912
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 146  "hg38_KI270303.1" chrStart: 3125805056
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 147  "hg38_KI270381.1" chrStart: 3126067200
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 148  "hg38_KI270529.1" chrStart: 3126329344
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 149  "hg38_KI270425.1" chrStart: 3126591488
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 150  "hg38_KI270396.1" chrStart: 3126853632
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 151  "hg38_KI270363.1" chrStart: 3127115776
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 152  "hg38_KI270386.1" chrStart: 3127377920
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 153  "hg38_KI270465.1" chrStart: 3127640064
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 154  "hg38_KI270383.1" chrStart: 3127902208
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 155  "hg38_KI270384.1" chrStart: 3128164352
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 156  "hg38_KI270330.1" chrStart: 3128426496
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 157  "hg38_KI270372.1" chrStart: 3128688640
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 158  "hg38_KI270548.1" chrStart: 3128950784
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 159  "hg38_KI270580.1" chrStart: 3129212928
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 160  "hg38_KI270387.1" chrStart: 3129475072
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 161  "hg38_KI270391.1" chrStart: 3129737216
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 162  "hg38_KI270305.1" chrStart: 3129999360
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 163  "hg38_KI270373.1" chrStart: 3130261504
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 164  "hg38_KI270422.1" chrStart: 3130523648
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 165  "hg38_KI270316.1" chrStart: 3130785792
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 166  "hg38_KI270340.1" chrStart: 3131047936
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 167  "hg38_KI270338.1" chrStart: 3131310080
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 168  "hg38_KI270583.1" chrStart: 3131572224
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 169  "hg38_KI270334.1" chrStart: 3131834368
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 170  "hg38_KI270429.1" chrStart: 3132096512
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 171  "hg38_KI270393.1" chrStart: 3132358656
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 172  "hg38_KI270516.1" chrStart: 3132620800
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 173  "hg38_KI270389.1" chrStart: 3132882944
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 174  "hg38_KI270466.1" chrStart: 3133145088
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 175  "hg38_KI270388.1" chrStart: 3133407232
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 176  "hg38_KI270544.1" chrStart: 3133669376
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 177  "hg38_KI270310.1" chrStart: 3133931520
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 178  "hg38_KI270412.1" chrStart: 3134193664
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 179  "hg38_KI270395.1" chrStart: 3134455808
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 180  "hg38_KI270376.1" chrStart: 3134717952
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 181  "hg38_KI270337.1" chrStart: 3134980096
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 182  "hg38_KI270335.1" chrStart: 3135242240
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 183  "hg38_KI270378.1" chrStart: 3135504384
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 184  "hg38_KI270379.1" chrStart: 3135766528
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 185  "hg38_KI270329.1" chrStart: 3136028672
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 186  "hg38_KI270419.1" chrStart: 3136290816
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 187  "hg38_KI270336.1" chrStart: 3136552960
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 188  "hg38_KI270312.1" chrStart: 3136815104
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 189  "hg38_KI270539.1" chrStart: 3137077248
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 190  "hg38_KI270385.1" chrStart: 3137339392
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 191  "hg38_KI270423.1" chrStart: 3137601536
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 192  "hg38_KI270392.1" chrStart: 3137863680
+/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/genome.fas : chr # 193  "hg38_KI270394.1" chrStart: 3138125824
+Chromosome sequence lengths: 
+hg38_1	248956422
+hg38_10	133797422
+hg38_11	135086622
+hg38_12	133275309
+hg38_13	114364328
+hg38_14	107043718
+hg38_15	101991189
+hg38_16	90338345
+hg38_17	83257441
+hg38_18	80373285
+hg38_19	58617616
+hg38_2	242193529
+hg38_20	64444167
+hg38_21	46709983
+hg38_22	50818468
+hg38_3	198295559
+hg38_4	190214555
+hg38_5	181538259
+hg38_6	170805979
+hg38_7	159345973
+hg38_8	145138636
+hg38_9	138394717
+hg38_MT	16569
+hg38_X	156040895
+hg38_Y	57227415
+hg38_KI270728.1	1872759
+hg38_KI270727.1	448248
+hg38_KI270442.1	392061
+hg38_KI270729.1	280839
+hg38_GL000225.1	211173
+hg38_KI270743.1	210658
+hg38_GL000008.2	209709
+hg38_GL000009.2	201709
+hg38_KI270747.1	198735
+hg38_KI270722.1	194050
+hg38_GL000194.1	191469
+hg38_KI270742.1	186739
+hg38_GL000205.2	185591
+hg38_GL000195.1	182896
+hg38_KI270736.1	181920
+hg38_KI270733.1	179772
+hg38_GL000224.1	179693
+hg38_GL000219.1	179198
+hg38_KI270719.1	176845
+hg38_GL000216.2	176608
+hg38_KI270712.1	176043
+hg38_KI270706.1	175055
+hg38_KI270725.1	172810
+hg38_KI270744.1	168472
+hg38_KI270734.1	165050
+hg38_GL000213.1	164239
+hg38_GL000220.1	161802
+hg38_KI270715.1	161471
+hg38_GL000218.1	161147
+hg38_KI270749.1	158759
+hg38_KI270741.1	157432
+hg38_GL000221.1	155397
+hg38_KI270716.1	153799
+hg38_KI270731.1	150754
+hg38_KI270751.1	150742
+hg38_KI270750.1	148850
+hg38_KI270519.1	138126
+hg38_GL000214.1	137718
+hg38_KI270708.1	127682
+hg38_KI270730.1	112551
+hg38_KI270438.1	112505
+hg38_KI270737.1	103838
+hg38_KI270721.1	100316
+hg38_KI270738.1	99375
+hg38_KI270748.1	93321
+hg38_KI270435.1	92983
+hg38_GL000208.1	92689
+hg38_KI270538.1	91309
+hg38_KI270756.1	79590
+hg38_KI270739.1	73985
+hg38_KI270757.1	71251
+hg38_KI270709.1	66860
+hg38_KI270746.1	66486
+hg38_KI270753.1	62944
+hg38_KI270589.1	44474
+hg38_KI270726.1	43739
+hg38_KI270735.1	42811
+hg38_KI270711.1	42210
+hg38_KI270745.1	41891
+hg38_KI270714.1	41717
+hg38_KI270732.1	41543
+hg38_KI270713.1	40745
+hg38_KI270754.1	40191
+hg38_KI270710.1	40176
+hg38_KI270717.1	40062
+hg38_KI270724.1	39555
+hg38_KI270720.1	39050
+hg38_KI270723.1	38115
+hg38_KI270718.1	38054
+hg38_KI270317.1	37690
+hg38_KI270740.1	37240
+hg38_KI270755.1	36723
+hg38_KI270707.1	32032
+hg38_KI270579.1	31033
+hg38_KI270752.1	27745
+hg38_KI270512.1	22689
+hg38_KI270322.1	21476
+hg38_GL000226.1	15008
+hg38_KI270311.1	12399
+hg38_KI270366.1	8320
+hg38_KI270511.1	8127
+hg38_KI270448.1	7992
+hg38_KI270521.1	7642
+hg38_KI270581.1	7046
+hg38_KI270582.1	6504
+hg38_KI270515.1	6361
+hg38_KI270588.1	6158
+hg38_KI270591.1	5796
+hg38_KI270522.1	5674
+hg38_KI270507.1	5353
+hg38_KI270590.1	4685
+hg38_KI270584.1	4513
+hg38_KI270320.1	4416
+hg38_KI270382.1	4215
+hg38_KI270468.1	4055
+hg38_KI270467.1	3920
+hg38_KI270362.1	3530
+hg38_KI270517.1	3253
+hg38_KI270593.1	3041
+hg38_KI270528.1	2983
+hg38_KI270587.1	2969
+hg38_KI270364.1	2855
+hg38_KI270371.1	2805
+hg38_KI270333.1	2699
+hg38_KI270374.1	2656
+hg38_KI270411.1	2646
+hg38_KI270414.1	2489
+hg38_KI270510.1	2415
+hg38_KI270390.1	2387
+hg38_KI270375.1	2378
+hg38_KI270420.1	2321
+hg38_KI270509.1	2318
+hg38_KI270315.1	2276
+hg38_KI270302.1	2274
+hg38_KI270518.1	2186
+hg38_KI270530.1	2168
+hg38_KI270304.1	2165
+hg38_KI270418.1	2145
+hg38_KI270424.1	2140
+hg38_KI270417.1	2043
+hg38_KI270508.1	1951
+hg38_KI270303.1	1942
+hg38_KI270381.1	1930
+hg38_KI270529.1	1899
+hg38_KI270425.1	1884
+hg38_KI270396.1	1880
+hg38_KI270363.1	1803
+hg38_KI270386.1	1788
+hg38_KI270465.1	1774
+hg38_KI270383.1	1750
+hg38_KI270384.1	1658
+hg38_KI270330.1	1652
+hg38_KI270372.1	1650
+hg38_KI270548.1	1599
+hg38_KI270580.1	1553
+hg38_KI270387.1	1537
+hg38_KI270391.1	1484
+hg38_KI270305.1	1472
+hg38_KI270373.1	1451
+hg38_KI270422.1	1445
+hg38_KI270316.1	1444
+hg38_KI270340.1	1428
+hg38_KI270338.1	1428
+hg38_KI270583.1	1400
+hg38_KI270334.1	1368
+hg38_KI270429.1	1361
+hg38_KI270393.1	1308
+hg38_KI270516.1	1300
+hg38_KI270389.1	1298
+hg38_KI270466.1	1233
+hg38_KI270388.1	1216
+hg38_KI270544.1	1202
+hg38_KI270310.1	1201
+hg38_KI270412.1	1179
+hg38_KI270395.1	1143
+hg38_KI270376.1	1136
+hg38_KI270337.1	1121
+hg38_KI270335.1	1048
+hg38_KI270378.1	1048
+hg38_KI270379.1	1045
+hg38_KI270329.1	1040
+hg38_KI270419.1	1029
+hg38_KI270336.1	1026
+hg38_KI270312.1	998
+hg38_KI270539.1	993
+hg38_KI270385.1	990
+hg38_KI270423.1	981
+hg38_KI270392.1	971
+hg38_KI270394.1	970
+Genome sequence total length = 3099750718
+Genome size with padding = 3138387968
+Feb 20 16:01:06 ..... processing annotations GTF
+Processing pGe.sjdbGTFfile=/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109/process/exons.gtf, found:
+		252798 transcripts
+		1648278 exons (non-collapsed)
+		402268 collapsed junctions
+Total junctions: 402268
+Feb 20 16:01:14 ..... finished GTF processing
+
+Estimated genome size with padding and SJs: total=genome+SJ=3339387968 = 3138387968 + 201000000
+GstrandBit=32
+Number of SA indices: 2945849067
+Feb 20 16:01:18 ... starting to sort Suffix Array. This may take a long time...
+Number of chunks: 87;   chunks size limit: 332310440 bytes
+Feb 20 16:01:24 ... sorting Suffix Array chunks and saving them to disk...
+Writing 264151328 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_11 ; empty space on disk = 2853311309938688 bytes ... done
+Writing 226669704 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_8 ; empty space on disk = 2853311309938688 bytes ... done
+Writing 200155352 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_26 ; empty space on disk = 2853216576339968 bytes ... done
+Writing 362755256 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_0 ; empty space on disk = 2853216576339968 bytes ... done
+Writing 250618704 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_9 ; empty space on disk = 2853216576339968 bytes ... done
+Writing 236483960 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_2 ; empty space on disk = 2853191210237952 bytes ... done
+Writing 331900656 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_10 ; empty space on disk = 2853165983596544 bytes ... done
+Writing 249881888 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_15 ; empty space on disk = 2853096169406464 bytes ...Writing 236487256 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_24 ; empty space on disk = 2853096169406464 bytes ... done
+ done
+Writing 235267688 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_3 ; empty space on disk = 2853096169406464 bytes ...Writing 314274232 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_7 ; empty space on disk = 2853096169406464 bytes ... done
+ done
+Writing 250363312 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_31 ; empty space on disk = 2853096169406464 bytes ... done
+Writing 303822088 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_12 ; empty space on disk = 2853096169406464 bytes ... done
+Writing 222065248 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_13 ; empty space on disk = 2853096169406464 bytes ... done
+Writing 263169368 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_22 ; empty space on disk = 2853068830932992 bytes ... done
+Writing 237146744 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_29 ; empty space on disk = 2853068830932992 bytes ... done
+Writing 324345512 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_14 ; empty space on disk = 2853068830932992 bytes ... done
+Writing 271283024 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_6 ; empty space on disk = 2853068830932992 bytes ... done
+Writing 312163048 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_5 ; empty space on disk = 2853056484999168 bytes ... done
+Writing 211727088 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_23 ; empty space on disk = 2853056484999168 bytes ... done
+Writing 315572072 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_20 ; empty space on disk = 2853056484999168 bytes ... done
+Writing 267921304 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_17 ; empty space on disk = 2853056484999168 bytes ... done
+Writing 249085104 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_25 ; empty space on disk = 2853056484999168 bytes ... done
+Writing 285225248 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_16 ; empty space on disk = 2853028446076928 bytes ... done
+Writing 268394912 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_18 ; empty space on disk = 2853028446076928 bytes ... done
+Writing 327560176 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_19 ; empty space on disk = 2853028446076928 bytes ... done
+Writing 305271472 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_21 ; empty space on disk = 2853028446076928 bytes ... done
+Writing 245638352 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_28 ; empty space on disk = 2853028446076928 bytes ... done
+Writing 308658048 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_1 ; empty space on disk = 2853028446076928 bytes ... done
+Writing 272762584 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_4 ; empty space on disk = 2853028446076928 bytes ... done
+Writing 284287616 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_30 ; empty space on disk = 2853028446076928 bytes ... done
+Writing 245454608 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_27 ; empty space on disk = 2853028446076928 bytes ... done
+Writing 265046888 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_45 ; empty space on disk = 2852058095943680 bytes ... done
+Writing 276441456 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_53 ; empty space on disk = 2852058095943680 bytes ... done
+Writing 244265384 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_52 ; empty space on disk = 2852058095943680 bytes ... done
+Writing 305336784 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_54 ; empty space on disk = 2851954453643264 bytes ... done
+Writing 328527856 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_32 ; empty space on disk = 2851954453643264 bytes ... done
+Writing 291411768 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_50 ; empty space on disk = 2851936035405824 bytes ... done
+Writing 239732784 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_35 ; empty space on disk = 2851936035405824 bytes ... done
+Writing 324125136 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_58 ; empty space on disk = 2851923183009792 bytes ... done
+Writing 223422536 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_61 ; empty space on disk = 2851923183009792 bytes ... done
+Writing 270882744 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_55 ; empty space on disk = 2851835085848576 bytes ... done
+Writing 303275648 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_63 ; empty space on disk = 2851835085848576 bytes ... done
+Writing 252680592 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_39 ; empty space on disk = 2851810971746304 bytes ... done
+Writing 221924200 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_34 ; empty space on disk = 2851810971746304 bytes ... done
+Writing 315978872 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_51 ; empty space on disk = 2851810971746304 bytes ... done
+Writing 259851576 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_60 ; empty space on disk = 2851810971746304 bytes ... done
+Writing 279695648 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_59 ; empty space on disk = 2851790272856064 bytes ...Writing 232871400 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_40 ; empty space on disk = 2851790272856064 bytes ... done
+ done
+Writing 265283960 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_62 ; empty space on disk = 2851790272856064 bytes ...Writing 263327440 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_38 ; empty space on disk = 2851790272856064 bytes ... done
+ done
+Writing 265187256 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_56 ; empty space on disk = 2851790272856064 bytes ... done
+Writing 254200080 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_49 ; empty space on disk = 2851790272856064 bytes ... done
+Writing 265669272 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_46 ; empty space on disk = 2851790272856064 bytes ... done
+Writing 318486528 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_33 ; empty space on disk = 2851744327401472 bytes ... done
+Writing 259380504 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_48 ; empty space on disk = 2851744327401472 bytes ... done
+Writing 274644136 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_42 ; empty space on disk = 2851744327401472 bytes ... done
+Writing 248803296 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_43 ; empty space on disk = 2851703442374656 bytes ... done
+Writing 320825064 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_57 ; empty space on disk = 2851703442374656 bytes ... done
+Writing 322617664 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_41 ; empty space on disk = 2851703442374656 bytes ... done
+Writing 312283672 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_44 ; empty space on disk = 2851703442374656 bytes ...Writing 315417480 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_47 ; empty space on disk = 2851703442374656 bytes ... done
+ done
+Writing 319006424 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_37 ; empty space on disk = 2851667615678464 bytes ... done
+Writing 329206832 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_36 ; empty space on disk = 2851667615678464 bytes ... done
+Writing 4072 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_86 ; empty space on disk = 2851638682320896 bytes ... done
+Writing 218305096 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_66 ; empty space on disk = 2851625892839424 bytes ... done
+Writing 309086288 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_64 ; empty space on disk = 2851586987524096 bytes ... done
+Writing 325785000 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_81 ; empty space on disk = 2851624034762752 bytes ... done
+Writing 222001424 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_76 ; empty space on disk = 2851684422254592 bytes ... done
+Writing 240374232 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_67 ; empty space on disk = 2851684422254592 bytes ... done
+Writing 191648528 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_82 ; empty space on disk = 2851732170211328 bytes ... done
+Writing 174185584 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_84 ; empty space on disk = 2851756758269952 bytes ... done
+Writing 297820136 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_65 ; empty space on disk = 2851764939259904 bytes ... done
+Writing 224530064 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_71 ; empty space on disk = 2851730421186560 bytes ... done
+Writing 239187392 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_72 ; empty space on disk = 2851730421186560 bytes ... done
+Writing 224856048 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_73 ; empty space on disk = 2851717341249536 bytes ... done
+Writing 179280328 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_83 ; empty space on disk = 2851717341249536 bytes ... done
+Writing 298036432 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_77 ; empty space on disk = 2851717341249536 bytes ... done
+Writing 331177320 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_75 ; empty space on disk = 2851717341249536 bytes ... done
+Writing 299546520 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_68 ; empty space on disk = 2851720815181824 bytes ... done
+Writing 329024248 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_78 ; empty space on disk = 2851720815181824 bytes ... done
+Writing 295960032 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_70 ; empty space on disk = 2851720815181824 bytes ... done
+Writing 310822752 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_80 ; empty space on disk = 2851720815181824 bytes ...Writing 229544440 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_69 ; empty space on disk = 2851720815181824 bytes ... done
+ done
+Writing 326396456 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_74 ; empty space on disk = 2851720815181824 bytes ... done
+Writing 362755256 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_85 ; empty space on disk = 2851720815181824 bytes ... done
+Writing 286091056 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA_79 ; empty space on disk = 2851713442643968 bytes ... done
+Feb 20 16:12:50 ... loading chunks from disk, packing SA...
+Feb 20 16:13:26 ... finished generating suffix array
+Feb 20 16:13:26 ... generating Suffix Array index
+Feb 20 16:15:11 ... completed Suffix Array index
+Feb 20 16:15:11   Finished preparing junctions
+Feb 20 16:15:11 ..... inserting junctions into the genome indices
+Feb 20 16:16:38   Finished SA search: number of new junctions=402227, old junctions=0
+Feb 20 16:17:18   Finished sorting SA indicesL nInd=160889000
+Genome size with junctions=3219235595  3138387968   80847627
+GstrandBit1=32   GstrandBit=32
+Feb 20 16:17:46   Finished inserting junction indices
+Feb 20 16:18:10   Finished SAi
+Feb 20 16:18:10 ..... finished inserting junctions into genome
+Feb 20 16:18:10 ... writing Genome to disk ...
+Writing 3219235595 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//Genome ; empty space on disk = 2850394314113024 bytes ... done
+SA size in bytes: 12815294530
+Feb 20 16:18:11 ... writing Suffix Array to disk ...
+Writing 12815294530 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SA ; empty space on disk = 2850394314113024 bytes ... done
+Feb 20 16:18:18 ... writing SAindex to disk
+Writing 8 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SAindex ; empty space on disk = 2850384337960960 bytes ... done
+Writing 120 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SAindex ; empty space on disk = 2850384337960960 bytes ... done
+Writing 1565873491 bytes into /home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109//SAindex ; empty space on disk = 2850384337960960 bytes ... done
+Feb 20 16:18:19 ..... finished successfully
+DONE: Genome generation, EXITING
