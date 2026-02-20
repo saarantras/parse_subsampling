@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+#SBATCH --job-name=parse_subsample_aggregate
+#SBATCH --partition=day
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=16G
+#SBATCH --time=00:30:00
+#SBATCH --requeue
+#SBATCH --output=slurm-%x-%j.out
+#SBATCH --error=slurm-%x-%j.err
+
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -13,5 +24,5 @@ python "${PROJECT_ROOT}/scripts/aggregate_metrics.py" \
   --runs-dir "${RUNS_DIR}" \
   --per-run-out "${RESULTS_DIR}/per_run_metrics.tsv" \
   --curve-out "${RESULTS_DIR}/identity_curve.tsv" \
-  --main-fig "${FIGURES_DIR}/reads_vs_identity_corr.png" \
-  --class-fig "${FIGURES_DIR}/reads_vs_identity_corr_by_class.png"
+  --main-fig "${FIGURES_DIR}/reads_vs_identity_accuracy.png" \
+  --class-fig "${FIGURES_DIR}/reads_vs_identity_accuracy_by_class.png"

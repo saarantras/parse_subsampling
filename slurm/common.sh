@@ -16,7 +16,7 @@ if [[ -f "${PROJECT_ROOT}/config/pipeline.env" ]]; then
 fi
 
 GENOME_DIR="${GENOME_DIR:-/home/mcn26/palmer_scratch/analysis/genome}"
-SPLIT_PIPE_CONDA_ENV="${SPLIT_PIPE_CONDA_ENV:-spipe}"
+SPLIT_PIPE_CONDA_ENV="${SPLIT_PIPE_CONDA_ENV:-splitpipe}"
 ANALYSIS_CONDA_ENV="${ANALYSIS_CONDA_ENV:-${SPLIT_PIPE_CONDA_ENV}}"
 
 ALL_PARTITION="${ALL_PARTITION:-day}"

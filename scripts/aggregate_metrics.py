@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Aggregate run-level metrics and generate identity recovery plots."""
+"""Aggregate run-level metrics and generate accuracy-vs-depth plots."""
 
 from __future__ import annotations
 
@@ -14,6 +14,9 @@ except ModuleNotFoundError as exc:
     raise SystemExit(
         "Missing analysis dependency. Activate ANALYSIS_CONDA_ENV with numpy, pandas, and matplotlib installed."
     ) from exc
+
+
+CLASS_RECALL_COLS = ["k562_recall", "sknsh_recall", "hepg2_recall"]
 
 
 def parse_args() -> argparse.Namespace:
@@ -48,11 +51,11 @@ def load_metrics(grid: pd.DataFrame, runs_dir: Path) -> pd.DataFrame:
     numeric_cols = [
         "sampled_read_pairs",
         "called_cells_total",
+        "evaluated_cells",
         "reads_per_cell",
-        "mean_true_class_corr",
-        "k562_corr",
-        "sknsh_corr",
-        "hepg2_corr",
+        "fraction_correct",
+        "balanced_accuracy",
+        *CLASS_RECALL_COLS,
     ]
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce")
@@ -64,20 +67,20 @@ def compute_curve(per_run: pd.DataFrame) -> pd.DataFrame:
         per_run.groupby("fraction", as_index=False)
         .agg(
             reads_per_cell=("reads_per_cell", "mean"),
-            mean_corr=("mean_true_class_corr", "mean"),
-            sd_corr=("mean_true_class_corr", "std"),
-            n_reps=("mean_true_class_corr", "count"),
+            mean_fraction_correct=("fraction_correct", "mean"),
+            sd_fraction_correct=("fraction_correct", "std"),
+            n_reps=("fraction_correct", "count"),
         )
         .sort_values("reads_per_cell")
     )
-    grouped["sd_corr"] = grouped["sd_corr"].fillna(0.0)
-    return grouped[["reads_per_cell", "mean_corr", "sd_corr", "n_reps"]]
+    grouped["sd_fraction_correct"] = grouped["sd_fraction_correct"].fillna(0.0)
+    return grouped[["reads_per_cell", "mean_fraction_correct", "sd_fraction_correct", "n_reps"]]
 
 
 def required_depth(curve: pd.DataFrame) -> float:
-    plateau = float(curve["mean_corr"].max())
+    plateau = float(curve["mean_fraction_correct"].max())
     threshold = 0.95 * plateau
-    meets = curve[curve["mean_corr"] >= threshold]
+    meets = curve[curve["mean_fraction_correct"] >= threshold]
     if meets.empty:
         return float("nan")
     return float(meets.sort_values("reads_per_cell").iloc[0]["reads_per_cell"])
@@ -89,19 +92,19 @@ def plot_main(curve: pd.DataFrame, out_path: Path) -> None:
     fig, ax = plt.subplots(figsize=(8, 5))
     ax.errorbar(
         curve["reads_per_cell"],
-        curve["mean_corr"],
-        yerr=curve["sd_corr"],
+        curve["mean_fraction_correct"],
+        yerr=curve["sd_fraction_correct"],
         fmt="o-",
         capsize=4,
         linewidth=1.5,
     )
     if np.isfinite(req_x):
-        ax.axvline(req_x, linestyle="--", linewidth=1.2, label=f"95% plateau depth = {req_x:.1f}")
+        ax.axvline(req_x, linestyle="--", linewidth=1.2, label=f"95% of max accuracy depth = {req_x:.1f}")
         ax.legend(frameon=False)
 
     ax.set_xlabel("Reads per cell (realized)")
-    ax.set_ylabel("Mean true-class correlation")
-    ax.set_title("Cell identity recovery vs read depth")
+    ax.set_ylabel("Fraction correctly assigned")
+    ax.set_title("Cell-type assignment accuracy vs read depth")
     ax.grid(alpha=0.25)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -111,18 +114,17 @@ def plot_main(curve: pd.DataFrame, out_path: Path) -> None:
 
 
 def plot_by_class(per_run: pd.DataFrame, out_path: Path) -> None:
-    class_cols = ["k562_corr", "sknsh_corr", "hepg2_corr"]
     labels = {
-        "k562_corr": "K562",
-        "sknsh_corr": "SK-N-SH",
-        "hepg2_corr": "HepG2",
+        "k562_recall": "K562",
+        "sknsh_recall": "SK-N-SH",
+        "hepg2_recall": "HepG2",
     }
 
     grouped = per_run.groupby("fraction", as_index=False).agg(reads_per_cell=("reads_per_cell", "mean"))
     grouped = grouped.sort_values("reads_per_cell")
 
     fig, ax = plt.subplots(figsize=(8, 5))
-    for col in class_cols:
+    for col in CLASS_RECALL_COLS:
         stats = (
             per_run.groupby("fraction", as_index=False)
             .agg(mean=(col, "mean"), sd=(col, "std"))
@@ -141,8 +143,8 @@ def plot_by_class(per_run: pd.DataFrame, out_path: Path) -> None:
         )
 
     ax.set_xlabel("Reads per cell (realized)")
-    ax.set_ylabel("True-class correlation")
-    ax.set_title("Per-class identity recovery")
+    ax.set_ylabel("Per-class recall")
+    ax.set_title("Per-class assignment recall vs read depth")
     ax.grid(alpha=0.25)
     ax.legend(frameon=False)
 

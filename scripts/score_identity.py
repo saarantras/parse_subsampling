@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Score cell identity recovery using mean true-class correlation."""
+"""Score cell identity recovery as a 3-way classification task."""
 
 from __future__ import annotations
 
@@ -22,6 +22,8 @@ SAMPLE_TO_CLASS = {
     "xcond_2": "sknsh",
     "xcond_3": "hepg2",
 }
+CLASS_ORDER = ["k562", "sknsh", "hepg2"]
+CLASS_TO_INDEX = {name: idx for idx, name in enumerate(CLASS_ORDER)}
 
 
 def parse_args() -> argparse.Namespace:
@@ -33,6 +35,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--reference-run-dir", required=True, type=Path)
     p.add_argument("--sampling-dir", required=True, type=Path)
     p.add_argument("--output-tsv", required=True, type=Path)
+    p.add_argument("--confusion-counts-out", type=Path)
+    p.add_argument("--confusion-rowfrac-out", type=Path)
     p.add_argument("--target-sum", type=float, default=1e4)
     return p.parse_args()
 
@@ -120,23 +124,74 @@ def called_cells_total(run_dir: Path) -> int:
     return sum(1 for _ in open(path)) - 1
 
 
+def build_reference_centroids(reference_run_dir: Path, target_sum: float) -> dict[str, np.ndarray]:
+    centroids: dict[str, np.ndarray] = {}
+    for sample_name, class_name in SAMPLE_TO_CLASS.items():
+        ref_x = load_dge_filtered(reference_run_dir / "combined" / sample_name)
+        ref_x = normalize_log1p(ref_x, target_sum)
+        centroids[class_name] = centroid_from_matrix(ref_x)
+    return centroids
+
+
+def classify_run(run_dir: Path, centroids: dict[str, np.ndarray], target_sum: float) -> tuple[np.ndarray, dict[str, float], int]:
+    confusion = np.zeros((len(CLASS_ORDER), len(CLASS_ORDER)), dtype=int)
+    total_cells = 0
+
+    for sample_name, true_class in SAMPLE_TO_CLASS.items():
+        run_x = load_dge_filtered(run_dir / "combined" / sample_name)
+        run_x = normalize_log1p(run_x, target_sum)
+
+        score_cols = []
+        for class_name in CLASS_ORDER:
+            score_cols.append(rowwise_pearson(run_x, centroids[class_name]))
+        scores = np.column_stack(score_cols)
+
+        # Hard-assign every cell by argmax correlation.
+        safe_scores = np.where(np.isnan(scores), -1.0, scores)
+        pred_idx = np.argmax(safe_scores, axis=1)
+        true_idx = CLASS_TO_INDEX[true_class]
+
+        for p_idx in pred_idx:
+            confusion[true_idx, int(p_idx)] += 1
+        total_cells += run_x.shape[0]
+
+    class_recall = {}
+    for class_name, idx in CLASS_TO_INDEX.items():
+        support = confusion[idx, :].sum()
+        class_recall[class_name] = float(confusion[idx, idx] / support) if support > 0 else float("nan")
+
+    return confusion, class_recall, total_cells
+
+
+def write_confusions(confusion: np.ndarray, counts_out: Path, rowfrac_out: Path) -> None:
+    labels_true = [f"true_{x}" for x in CLASS_ORDER]
+    labels_pred = [f"pred_{x}" for x in CLASS_ORDER]
+
+    counts_df = pd.DataFrame(confusion, index=labels_true, columns=labels_pred)
+    counts_out.parent.mkdir(parents=True, exist_ok=True)
+    counts_df.to_csv(counts_out, sep="\t")
+
+    row_sums = confusion.sum(axis=1, keepdims=True)
+    rowfrac = np.divide(confusion, row_sums, out=np.zeros_like(confusion, dtype=float), where=row_sums > 0)
+    rowfrac_df = pd.DataFrame(rowfrac, index=labels_true, columns=labels_pred)
+    rowfrac_out.parent.mkdir(parents=True, exist_ok=True)
+    rowfrac_df.to_csv(rowfrac_out, sep="\t")
+
+
 def main() -> None:
     args = parse_args()
 
-    ref_centroids: dict[str, np.ndarray] = {}
-    for sample in SAMPLE_TO_CLASS:
-        ref_x = load_dge_filtered(args.reference_run_dir / "combined" / sample)
-        ref_x = normalize_log1p(ref_x, args.target_sum)
-        ref_centroids[sample] = centroid_from_matrix(ref_x)
+    confusion_counts_out = args.confusion_counts_out or (args.run_dir / "score_confusion_counts.tsv")
+    confusion_rowfrac_out = args.confusion_rowfrac_out or (args.run_dir / "score_confusion_rowfrac.tsv")
 
-    class_scores: dict[str, float] = {}
-    for sample, class_name in SAMPLE_TO_CLASS.items():
-        run_x = load_dge_filtered(args.run_dir / "combined" / sample)
-        run_x = normalize_log1p(run_x, args.target_sum)
-        corr = rowwise_pearson(run_x, ref_centroids[sample])
-        class_scores[class_name] = float(np.nanmean(corr))
+    centroids = build_reference_centroids(args.reference_run_dir, args.target_sum)
+    confusion, class_recall, evaluated_cells = classify_run(args.run_dir, centroids, args.target_sum)
 
-    mean_true_class_corr = float(np.nanmean(list(class_scores.values())))
+    correct = int(np.trace(confusion))
+    fraction_correct = float(correct / evaluated_cells) if evaluated_cells > 0 else float("nan")
+    balanced_accuracy = float(np.nanmean([class_recall[c] for c in CLASS_ORDER]))
+
+    write_confusions(confusion, confusion_counts_out, confusion_rowfrac_out)
 
     sampled_pairs = sampled_read_pairs(args.sampling_dir)
     n_cells = called_cells_total(args.run_dir)
@@ -152,11 +207,13 @@ def main() -> None:
                 "replicate",
                 "sampled_read_pairs",
                 "called_cells_total",
+                "evaluated_cells",
                 "reads_per_cell",
-                "mean_true_class_corr",
-                "k562_corr",
-                "sknsh_corr",
-                "hepg2_corr",
+                "fraction_correct",
+                "balanced_accuracy",
+                "k562_recall",
+                "sknsh_recall",
+                "hepg2_recall",
             ]
         )
         writer.writerow(
@@ -166,11 +223,13 @@ def main() -> None:
                 str(args.replicate),
                 str(sampled_pairs),
                 str(n_cells),
+                str(evaluated_cells),
                 f"{reads_per_cell:.6f}",
-                f"{mean_true_class_corr:.6f}",
-                f"{class_scores['k562']:.6f}",
-                f"{class_scores['sknsh']:.6f}",
-                f"{class_scores['hepg2']:.6f}",
+                f"{fraction_correct:.6f}",
+                f"{balanced_accuracy:.6f}",
+                f"{class_recall['k562']:.6f}",
+                f"{class_recall['sknsh']:.6f}",
+                f"{class_recall['hepg2']:.6f}",
             ]
         )
 

@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+#SBATCH --job-name=parse_subsample_combine
+#SBATCH --partition=day
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=32G
+#SBATCH --time=01:00:00
+#SBATCH --requeue
+#SBATCH --output=slurm-%x-%j.out
+#SBATCH --error=slurm-%x-%j.err
+
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -32,5 +43,10 @@ fi
   cd "${run_dir}"
   split-pipe --mode combine --sublibraries sublib_0 sublib_1 --output_dir combined
 )
+
+if ! ls "${run_dir}/combined"/*_analysis_summary.html >/dev/null 2>&1; then
+  echo "Expected split-pipe report HTML files not found in ${run_dir}/combined" >&2
+  exit 1
+fi
 
 touch "${done_flag}"

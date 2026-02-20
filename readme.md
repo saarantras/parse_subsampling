@@ -7,7 +7,7 @@ This repository implements a FASTQ-level read-depth subsampling workflow for Par
 ### Goal
 Generate a recovery curve with:
 - `x`: realized reads per cell
-- `y`: mean true-class correlation to full-depth reference centroids
+- `y`: fraction of cells correctly assigned to cell type (primary metric)
 
 Ground truth is encoded by split-pipe sample/well definitions:
 - `xcond_1` (`A1-A2`) -> `K562`
@@ -29,6 +29,13 @@ Grid file: `config/subsample_grid.tsv`
 3. Run `split-pipe --mode combine` across `sublib_0` and `sublib_1`.
 4. Score each run against full-depth reference centroids using filtered DGE matrices.
 5. Aggregate all runs into final tables/figures.
+
+Classification assignment in each run:
+- Build 3 full-depth reference centroids from `ref_full` (`K562`, `SK-N-SH`, `HepG2`).
+- For each cell in `combined/xcond_1|xcond_2|xcond_3/DGE_filtered`, compute correlation to all 3 centroids.
+- Predicted label is hard argmax correlation.
+- Ground truth label is the `xcond_*` source (`xcond_1 -> K562`, `xcond_2 -> SK-N-SH`, `xcond_3 -> HepG2`).
+- Primary metric is `fraction_correct = correct_assignments / evaluated_cells`.
 
 ### SLURM Orchestration
 Dependency chain per run:
@@ -62,13 +69,17 @@ All jobs use `--requeue` and run-level done markers in `runs/<run_id>/.done/` fo
 ## Outputs
 
 - `results/per_run_metrics.tsv`
-  - Columns: `run_id,fraction,replicate,sampled_read_pairs,called_cells_total,reads_per_cell,mean_true_class_corr,k562_corr,sknsh_corr,hepg2_corr`
+  - Columns: `run_id,fraction,replicate,sampled_read_pairs,called_cells_total,evaluated_cells,reads_per_cell,fraction_correct,balanced_accuracy,k562_recall,sknsh_recall,hepg2_recall`
 - `results/identity_curve.tsv`
-  - Columns: `reads_per_cell,mean_corr,sd_corr,n_reps`
-- `figures/reads_vs_identity_corr.png`
-- `figures/reads_vs_identity_corr_by_class.png`
+  - Columns: `reads_per_cell,mean_fraction_correct,sd_fraction_correct,n_reps`
+- `figures/reads_vs_identity_accuracy.png`
+- `figures/reads_vs_identity_accuracy_by_class.png`
+- Per-run confusion matrices:
+  - `runs/<run_id>/score_confusion_counts.tsv`
+  - `runs/<run_id>/score_confusion_rowfrac.tsv`
 
 Run-level artifacts are stored under `runs/<run_id>/`.
+All split-pipe run outputs are retained under each run directory, including report HTML visualizations for sublibrary and combined outputs.
 
 ## Setup
 
@@ -80,6 +91,8 @@ cp config/pipeline.env.example config/pipeline.env
 - `GENOME_DIR` must point to your split-pipe reference directory.
 - Set `SPLIT_PIPE_CONDA_ENV` / `ANALYSIS_CONDA_ENV`.
 - Adjust partition/resources if needed.
+- Defaults assume `splitpipe` conda env for both split-pipe and Python analysis steps.
+- SLURM workers load miniconda and activate the requested conda env before invoking Python/split-pipe.
 
 ## Run
 
@@ -98,6 +111,8 @@ Force resubmission of already-completed runs:
 bash scripts/submit_subsampling_pipeline.sh --force
 ```
 
+Each worker script in `slurm/` includes full `#SBATCH` headers and can also be submitted directly with `sbatch` if desired.
+
 ## Validation
 
 After aggregate job completes:
@@ -108,7 +123,7 @@ python scripts/validate_outputs.py --per-run results/per_run_metrics.tsv
 ## Runtime Notes
 
 - `reads_per_cell` is computed as `(total sampled read pairs across both sublibs * 2) / called_cells_total`.
-- The required read depth is annotated in the main figure as the smallest depth reaching 95% of the observed plateau.
+- The required read depth is annotated in the main figure as the smallest depth where mean `fraction_correct` reaches 95% of its observed maximum.
 
 ## Cluster References
 

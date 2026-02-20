@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+#SBATCH --job-name=parse_subsample_all
+#SBATCH --partition=day
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=96G
+#SBATCH --time=08:00:00
+#SBATCH --requeue
+#SBATCH --output=slurm-%x-%j.out
+#SBATCH --error=slurm-%x-%j.err
+
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -95,5 +106,10 @@ split-pipe \
   --sample xcond_1 A1-A2 \
   --sample xcond_2 A3-A7 \
   --sample xcond_3 A8-A12
+
+if ! ls "${out_dir}"/*_analysis_summary.html >/dev/null 2>&1; then
+  echo "Expected split-pipe report HTML files not found in ${out_dir}" >&2
+  exit 1
+fi
 
 touch "${done_flag}"

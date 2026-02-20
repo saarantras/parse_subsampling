@@ -18,11 +18,13 @@ EXPECTED_COLUMNS = [
     "replicate",
     "sampled_read_pairs",
     "called_cells_total",
+    "evaluated_cells",
     "reads_per_cell",
-    "mean_true_class_corr",
-    "k562_corr",
-    "sknsh_corr",
-    "hepg2_corr",
+    "fraction_correct",
+    "balanced_accuracy",
+    "k562_recall",
+    "sknsh_recall",
+    "hepg2_recall",
 ]
 
 
@@ -56,10 +58,10 @@ def main() -> None:
         raise SystemExit(f"pairing check failed: found {mismatch_total} mismatches")
 
     if "ref_full" in set(per_run["run_id"]):
-        ref = float(per_run.loc[per_run["run_id"] == "ref_full", "mean_true_class_corr"].max())
-        low = per_run[per_run["fraction"].astype(float) <= 0.02]["mean_true_class_corr"]
+        ref = float(per_run.loc[per_run["run_id"] == "ref_full", "fraction_correct"].max())
+        low = per_run[per_run["fraction"].astype(float) <= 0.02]["fraction_correct"]
         if not low.empty and low.mean() > ref:
-            raise SystemExit("metric sanity check failed: low-depth average exceeds reference")
+            raise SystemExit("metric sanity check failed: low-depth average accuracy exceeds reference")
 
     print("Validation passed: schema, pairing integrity, and basic metric sanity checks.")
 
