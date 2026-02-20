@@ -16,6 +16,11 @@ if [[ -f "${PROJECT_ROOT}/config/pipeline.env" ]]; then
 fi
 
 GENOME_DIR="${GENOME_DIR:-/home/mcn26/palmer_scratch/analysis/genome}"
+GENOME_BUILD_ROOT="${GENOME_BUILD_ROOT:-/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build}"
+GENOME_NAME="${GENOME_NAME:-hg38}"
+GENOME_FASTA_URL="${GENOME_FASTA_URL:-https://ftp.ensembl.org/pub/release-109/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz}"
+GENOME_GTF_URL="${GENOME_GTF_URL:-https://ftp.ensembl.org/pub/release-109/gtf/homo_sapiens/Homo_sapiens.GRCh38.109.gtf.gz}"
+GENOME_OUT_DIR="${GENOME_OUT_DIR:-${GENOME_BUILD_ROOT}/genome_hg38_ensembl109}"
 SPLIT_PIPE_CONDA_ENV="${SPLIT_PIPE_CONDA_ENV:-splitpipe}"
 ANALYSIS_CONDA_ENV="${ANALYSIS_CONDA_ENV:-${SPLIT_PIPE_CONDA_ENV}}"
 
@@ -39,6 +44,11 @@ SCORE_TIME="${SCORE_TIME:-01:00:00}"
 AGG_CPUS="${AGG_CPUS:-2}"
 AGG_MEM="${AGG_MEM:-16G}"
 AGG_TIME="${AGG_TIME:-00:30:00}"
+
+BUILD_PARTITION="${BUILD_PARTITION:-day}"
+BUILD_CPUS="${BUILD_CPUS:-5}"
+BUILD_MEM="${BUILD_MEM:-120G}"
+BUILD_TIME="${BUILD_TIME:-04:00:00}"
 
 ensure_dirs() {
   mkdir -p "${RUNS_DIR}" "${RESULTS_DIR}" "${FIGURES_DIR}"

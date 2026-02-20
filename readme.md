@@ -57,6 +57,7 @@ All jobs use `--requeue` and run-level done markers in `runs/<run_id>/.done/` fo
 - `scripts/capture_run_meta.py`: writes `runs/<run_id>/run_meta.json`
 - `scripts/score_identity.py`: computes run-level identity metrics
 - `scripts/aggregate_metrics.py`: produces final tables and plots
+- `scripts/submit_genome_build.sh`: submits standalone genome build job
 - `scripts/submit_subsampling_pipeline.sh`: main SLURM submitter
 - `scripts/submit_smoke_test.sh`: smoke-test submitter
 - `scripts/validate_outputs.py`: schema/pairing/sanity checks
@@ -64,6 +65,7 @@ All jobs use `--requeue` and run-level done markers in `runs/<run_id>/.done/` fo
 - `slurm/run_combine.sh`: worker for combine run
 - `slurm/run_score.sh`: worker for scoring run
 - `slurm/run_aggregate.sh`: worker for aggregation run
+- `slurm/build_genome_hg38_ensembl109.sh`: one-time standalone mkref build worker
 - `slurm/common.sh`: shared env/defaults
 
 ## Outputs
@@ -93,6 +95,25 @@ cp config/pipeline.env.example config/pipeline.env
 - Adjust partition/resources if needed.
 - Defaults assume `splitpipe` conda env for both split-pipe and Python analysis steps.
 - SLURM workers load miniconda and activate the requested conda env before invoking Python/split-pipe.
+
+## Build Genome (One-Time, Separate)
+
+The subsampling pipeline does **not** run `split-pipe --mode mkref` automatically.
+Build the reference once using the standalone builder, then point `GENOME_DIR` to the built output.
+
+Submit build:
+```bash
+bash scripts/submit_genome_build.sh
+```
+
+Default build/output paths:
+- Downloads: `/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/downloads`
+- Reference output (`GENOME_DIR` target): `/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109`
+
+After build completes, set in `config/pipeline.env`:
+```bash
+GENOME_DIR=/home/mcn26/scratch_pi_skr2/mcn26/parse_splitpipe_genome_build/genome_hg38_ensembl109
+```
 
 ## Run
 
