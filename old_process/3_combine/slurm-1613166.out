@@ -1,0 +1,1507 @@
+Thu May 25 23:17:28 EDT 2023
+# Init SplitPipe split-pipe v1.0.6p
+# Initializing defaults
+# Loaded run process definitions sublib_0/process/run_proc_def.json
+# Combine mode; Setting reuse False
+# Setting threads to 32 (ncpu=64, initial nthreads=0 limited to 32) (init threads)
+# No random seed given; Creating one
+# Set fastq fq1 raw_data/ryan-sublib-1_L1_ds.6cea746bf1ed4d7a8266237195f20760/ryan-sublib-1_S1_L001_R1_001.fastq.gz (init fastqs)
+# Set fastq fq2 raw_data/ryan-sublib-1_L1_ds.6cea746bf1ed4d7a8266237195f20760/ryan-sublib-1_S1_L001_R2_001.fastq.gz (init fastqs)
+# Set chemistry v2, sublib_0 (init chemistry)
+# Got kit WT_mini, sublib_0, from sublib_0
+# Kit set to WT_mini, sublib_0 (init kit)
+# Combine mode; Samples will be set from sublibs
+# Genome set to genome (init genome)
+# Set run_name combined (init run_name)
+# Combine mode; use_case from sublib_0
+# Use_case behavior set to normal (init use_case)
+
+# # Setting up run-time env; Use_case normal, Mode comb, Kit WT_mini Chem v2
+# Checking run env (conda); timeout 30
+# Checking called executables; timeout 30
+# Version info: STAR /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/STAR 2.7.10b
+# Version info: samtools /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/samtools samtools 1.17
+# Version info: fastqc /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/fastqc FastQC v0.12.1
+# Version info: gzip /usr/bin/gzip gzip 1.9
+# Version info: pigz /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/pigz pigz 2.6
+# Version info: unzip /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/unzip UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP.
+# Combine mode; No kit scoring
+# Set barcodes for kit WT_mini chemistry v2 (set kit defaults)
+# Genome genome version 1.0.6 >= min v1.0.4
+# Setting up genome files
+# Copy genome/all_genes.csv to combined/process/all_genes.csv
+# Setting up for combine mode
+# Sublibs have 4 unique sample names
+# Samples set up, 2 sublibs deep
+# Set up samples; comb mode; Handled elsewhere; Ignoring
+# Opening log combined/split-pipe_v1_0_6p.log 
+################################################################################
+# Program                   split-pipe v1.0.6p
+# Run date                  2023-05-26 03:18:10.132662+0
+# Run on                    r813u09n05.mccleary.ycrc.yale.edu (x86_64 Linux) by mcn26
+# System                    1007.5G (1081840525312) RAM and 64 CPUs
+# PID                       1621205
+################################################################################
+#
+#                ------ >>> Initialization messages <<< ------
+# Loaded run process definitions sublib_0/process/run_proc_def.json
+# Combine mode; Setting reuse False
+# Setting threads to 32 (ncpu=64, initial nthreads=0 limited to 32) (init threads)
+# No random seed given; Creating one
+# Set fastq fq1 raw_data/ryan-sublib-1_L1_ds.6cea746bf1ed4d7a8266237195f20760/ryan-sublib-1_S1_L001_R1_001.fastq.gz (init fastqs)
+# Set fastq fq2 raw_data/ryan-sublib-1_L1_ds.6cea746bf1ed4d7a8266237195f20760/ryan-sublib-1_S1_L001_R2_001.fastq.gz (init fastqs)
+# Set chemistry v2, sublib_0 (init chemistry)
+# Got kit WT_mini, sublib_0, from sublib_0
+# Kit set to WT_mini, sublib_0 (init kit)
+# Combine mode; Samples will be set from sublibs
+# Genome set to genome (init genome)
+# Set run_name combined (init run_name)
+# Combine mode; use_case from sublib_0
+# Use_case behavior set to normal (init use_case)
+# # Setting up run-time env; Use_case normal, Mode comb, Kit WT_mini Chem v2
+# Checking run env (conda); timeout 30
+# Checking called executables; timeout 30
+# Version info: STAR /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/STAR 2.7.10b
+# Version info: samtools /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/samtools samtools 1.17
+# Version info: fastqc /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/fastqc FastQC v0.12.1
+# Version info: gzip /usr/bin/gzip gzip 1.9
+# Version info: pigz /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/pigz pigz 2.6
+# Version info: unzip /gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/bin/unzip UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP.
+# Combine mode; No kit scoring
+# Set barcodes for kit WT_mini chemistry v2 (set kit defaults)
+# Genome genome version 1.0.6 >= min v1.0.4
+# Setting up genome files
+# Copy genome/all_genes.csv to combined/process/all_genes.csv
+# Setting up for combine mode
+# Sublibs have 4 unique sample names
+# Samples set up, 2 sublibs deep
+# Set up samples; comb mode; Handled elsewhere; Ignoring
+# Opening log combined/split-pipe_v1_0_6p.log 
+#
+#                ------ >>> Parameter settings <<< ------
+# use_case                  normal
+# mode                      comb
+# chemistry                 v2
+# kit                       WT_mini	(12 wells)
+# kit_source                sublib_0
+# parfile                   <Not set>
+# logfile                   combined/split-pipe_v1_0_6p.log
+# run_name                  combined	(automatic)
+# input_dir                 <Not set>
+# output_dir                combined/
+# parent_dir                <Not set>
+# fq1                       raw_data/ryan-sublib-1_L1_ds.6cea746bf1ed4d7a8266237195f20760/ryan-sublib-1_S1_L001_R1_001.fastq.gz
+# fq2                       raw_data/ryan-sublib-1_L1_ds.6cea746bf1ed4d7a8266237195f20760/ryan-sublib-1_S1_L001_R2_001.fastq.gz
+# sublib_list               <Not set>
+# sublib_pref               <Not set>
+# sublib_suff               <Not set>
+# sublibraries              Item_1_of_2	sublib_0
+# sublibraries              Item_2_of_2	sublib_1
+# samp_list                 <Not set>
+# samp_sltab                <Not set>
+# sample                    Item_1_of_4	['all-well', 'A1:A12', '(Combine mode; 2 of 2 sublibraries)']
+# sample                    Item_2_of_4	['xcond_1', 'A1-A2', '(Combine mode; 2 of 2 sublibraries)']
+# sample                    Item_3_of_4	['xcond_2', 'A3-A7', '(Combine mode; 2 of 2 sublibraries)']
+# sample                    Item_4_of_4	['xcond_3', 'A8-A12', '(Combine mode; 2 of 2 sublibraries)']
+# genome_dir                genome
+# genome_name               <Not set>
+# genes                     <Not set>
+# fasta                     <Not set>
+# gfasta                    <Not set>
+# targeted_list             <Not set>
+# focal_barcoding           False
+# crispr                    False
+# nthreads                  32	(automatic)
+# max_threads               32
+# rseed                     4824	(automatic)
+# reuse                     False
+# make_allwell              True
+# make_allsample            False
+# samp_wells_unique         False
+# keep_going                True
+# keep_temps                False
+# keep_fb_genome            True
+# no_compress               False
+# gzip_compresslevel        4
+# one_step                  False
+# start_timeout             30
+# dryrun                    False
+# bc_save_data_file         True
+# bc_save_data_clean        True
+# bc_amp_seq                NNNNNNNNNN33333333GTGGCCGATGTTTCGCATCGGCGTACGACT22222222ATCCACGTGCTTGAGACTGTGG11111111
+# bc_round_set              Item_1_of_3	['bc1', 'n24_v4', ' 24 barcodes,  12 wells; A-A, 1-12']
+# bc_round_set              Item_2_of_3	['bc2', 'v1', ' 96 barcodes,  96 wells; A-H, 1-12']
+# bc_round_set              Item_3_of_3	['bc3', 'v1', ' 96 barcodes,  96 wells; A-H, 1-12']
+# bc_edit_dist              2
+# kit_score_warn            0.7
+# kit_score_min             0
+# kit_score_remain_frac     0.2
+# kit_score_skip            False
+# tso_seq                   AACGCAGAGTGAATGGG
+# tso_read_limit            15
+# fastq_samp_slice          [100000, 1100000]
+# mkref_id_for_no_name      True
+# mkref_gtf_guess_min       1
+# mkref_min_genes           1
+# mkref_min_exons           1
+# mkref_max_gtf_not_fas     0
+# mkref_gtf_dict_stepsize   10000
+# mkref_star_splicing       True
+# mkref_star_genomesaindexnbases 14
+# mkref_star_genomesasparsed 2
+# mkref_star_extra_args     <Not set>
+# inqc_fastqc_run           True
+# inqc_fastqc_show_warn     False
+# inqc_min_reads            100000
+# inqc_min_good_r1len_frac  0.5
+# inqc_min_good_r2len_frac  0.9
+# pre_min_r1_len            45
+# pre_check_name_match      True
+# pre_check_name_r1r2       True
+# pre_head_keep_seq_index   True
+# pre_head_regex            @(\S+)\s+([12])\S*:(\S*)$
+# pre_perfect_bc_cell_thresh 0.92
+# pre_keep_no_bc_fq         False
+# align_min_genome_version  v1.0.4
+# align_min_start_reads     50000
+# align_star_outfiltermultimapnmax 3
+# align_star_keep_no_map    False
+# align_star_extra_args     <Not set>
+# post_min_map_frac         0.2
+# tcr_analysis              False
+# tcr_kmer                  21
+# tcr_read_threshold        2
+# tcr_trim                  30
+# mol_min_mapq_score        255
+# dge_min_start_tscp        10000
+# dge_copy_dge_genes_file   True
+# dge_save_express_gene_file True
+# dge_ssc_xstep_size        1000
+# dge_ssc_xstep_ndup        5
+# dge_species_purity_thresh 0.9
+# dge_tscp_cut_given        <Not set>
+# dge_tscp_cut_min          30
+# dge_tscp_cut_max          <Not set>
+# dge_tscp_cut_scale_fac    1.0
+# dge_cell_est              <Not set>
+# dge_cell_given            <Not set>
+# dge_cell_gxfold           3
+# dge_cell_min              10
+# dge_cell_auc_min          0.4
+# dge_cell_max              30000
+# dge_cell_scale_by_frac    True
+# dge_cell_hard_min         5
+# dge_cell_list             <Not set>
+# dge_gene_cell_min         3
+# dge_tscp_cut_umin         10
+# dge_gene_cell_umin        1
+# dge_tscp_cut_targeted_min 15
+# dge_tscp_cut_targeted_umin 5
+# dge_gene_cell_targeted_min 2
+# dge_tscp_read_min         1
+# dge_tscp_read_fb_min      2
+# dge_gene_tscp_min         1
+# dge_gene_tscp_fb_min      2
+# dge_fb_gene_tscp_mixmod   True
+# comb_new_tscp             False
+# comb_unfilt_dge           True
+# ana_scanpy_verbosity      <Not set>
+# ana_save_anndata          True
+# ana_mem_eff_cell_thresh   100000
+# ana_norm_target_sum       10000
+# ana_scale_max_value       10
+# ana_scale_zero_center     True
+# ana_pca_min_hvar          100
+# ana_pca_dim_max           50
+# ana_pca_dim_min           10
+# ana_pca_dim_targeted_max  10
+# ana_pca_irlbpy            True
+# ana_cluster_min_bc        30
+# ana_cluster_1base         True
+# ana_save_umap             True
+# ana_umap_n_neighbors      50
+# ana_umap_min_dist         0.5
+# ana_cluster_alg           leiden
+# ana_ctab_top_n            20
+# ana_ctab_sco_min_den      0.01
+# ana_gene_cell_min         3
+# rep_save_figs             True
+# rep_plate_min_zero        True
+# rep_umap_subsamp          15000
+# rep_umap_ss_clus_min      10
+# rep_umap_norm_fac         10000.0
+# rep_umap_fb_zero_nc       True
+# rep_gene_def_url          https://www.ncbi.nlm.nih.gov/gene/?term={gene_id}
+# rep_gene_url              <Not set>
+# clean_per_step            False
+# clean_make_summaries_zip  True
+# map_targ_genome_dir_path  map_targs
+# map_targ                  <Not set>
+# map_targ_kmer_len         30
+# map_targ_kmer_step        1
+# map_targ_kmer_search_max  41
+# map_targ_kmer_search_step 10
+################################################################################
+
+
+# Time	Starting split-pipe v1.0.6p	2023-05-26 03:18:10.134412+0
+# Saved env info combined/process/run_proc_def.json 
+# Time	Before Combine	2023-05-26 03:18:10.203548+0
+# >> Running DGE
+#2 MemStatus: DGE  1.8G proc, 549.9M rss, 1.2G vms, 10.5% usd, 902.1G avail
+#2 DskStatus: DGE  '/ombined/' 10.0T total, 1.7T (17.1%) used, 8.3T (82.9%) free
+# Processing global (not per-sample) data
+#2 Not combining tscp assign files (comb_new_tscp False)
+#2 Read Dataframe: Dims 18 x 1, Mem 288B (288) from sublib_0/process/pipeline_stats.csv
+#2 Read Dataframe: Dims 18 x 1, Mem 288B (288) from sublib_1/process/pipeline_stats.csv
+# Wrote 18 by 4 table to combined/process/pipeline_stats.csv
+#2 PF_STAT_PIPE Row_1_of_20                                 value  value__sublib_0  value__sublib_1
+#2 PF_STAT_PIPE Row_2_of_20  statistic                                                             
+#2 PF_STAT_PIPE Row_3_of_20  bc1_perfrac                 0.696685     7.000000e-01     6.890000e-01
+#2 PF_STAT_PIPE Row_4_of_20  bc2_perfrac                 0.783987     7.870000e-01     7.770000e-01
+#2 PF_STAT_PIPE Row_5_of_20  bc3_perfrac                 0.869288     8.720000e-01     8.630000e-01
+#2 PF_STAT_PIPE Row_6_of_20  bc_edit_dist_0           214468613.0     1.500588e+08     6.440986e+07
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_0/process/sequencing_stats.csv
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_1/process/sequencing_stats.csv
+# Wrote 6 by 4 table to combined/process/sequencing_stats.csv
+#2 PF_STAT_SEQ Row_1_of_8                         value  value__sublib_0  value__sublib_1
+#2 PF_STAT_SEQ Row_2_of_8  statistic                                                     
+#2 PF_STAT_SEQ Row_3_of_8  bc1_Q30             0.850974     8.570000e-01            0.837
+#2 PF_STAT_SEQ Row_4_of_8  bc2_Q30             0.884672     8.910000e-01            0.870
+#2 PF_STAT_SEQ Row_5_of_8  bc3_Q30             0.899179     9.040000e-01            0.888
+#2 PF_STAT_SEQ Row_6_of_8  cDNA_Q30            0.915078     9.177000e-01            0.909
+# Processing data for 4 samples
+
+# DGE processing sample (1) xcond_1
+#2 MemStatus: DGE_samp_1  1.8G proc, 550.0M rss, 1.2G vms, 10.5% usd, 902.1G avail
+#2 Combining DGE files; DIR_S_DGE_N_F
+#2 DGE files from potentially 2 sublibs
+#2 Read Dataframe: Dims 79 x 11, Mem 7.4K (7584) from sublib_0/xcond_1/DGE_filtered/cell_metadata.csv
+#2 Loaded 483811 data from sublib_0/xcond_1/DGE_filtered/DGE.mtx
+#2 Processed cells 79, 79 total
+#2 Read Dataframe: Dims 74 x 11, Mem 6.9K (7104) from sublib_1/xcond_1/DGE_filtered/cell_metadata.csv
+#2 Loaded 341754 data from sublib_1/xcond_1/DGE_filtered/DGE.mtx
+#2 Processed cells 74, 153 total
+# Final combined DGE matrix has 825565 elements
+#2 Copy genome/all_genes.csv to combined/xcond_1/DGE_filtered/all_genes.csv
+#2 Combining DGE files; DIR_S_DGE_N_UF
+#2 DGE files from potentially 2 sublibs
+#2 Read Dataframe: Dims 12120 x 11, Mem 1.1M (1163520) from sublib_0/xcond_1/DGE_unfiltered/cell_metadata.csv
+#2 Loaded 1670916 data from sublib_0/xcond_1/DGE_unfiltered/DGE.mtx
+#2 Processed cells 12120, 12120 total
+#2 Read Dataframe: Dims 6681 x 11, Mem 626.3K (641376) from sublib_1/xcond_1/DGE_unfiltered/cell_metadata.csv
+#2 Loaded 872691 data from sublib_1/xcond_1/DGE_unfiltered/DGE.mtx
+#2 Processed cells 6681, 18801 total
+# Final combined DGE matrix has 2543606 elements
+#2 Copy genome/all_genes.csv to combined/xcond_1/DGE_unfiltered/all_genes.csv
+#2 Read Dataframe: Dims 22305 x 4, Mem 871.3K (892200) from sublib_0/xcond_1/report/expressed_genes.csv
+#2 Read Dataframe: Dims 19420 x 4, Mem 758.6K (776800) from sublib_1/xcond_1/report/expressed_genes.csv
+# Wrote 23886 by 6 table to combined/xcond_1/report/expressed_genes.csv
+#2 SFR_EXPRESS_GENE Row_1_of_23888                                   gene_name genome  cell_count  cell_count__s1  cell_count__s2
+#2 SFR_EXPRESS_GENE Row_2_of_23888  gene_id                                                                                      
+#2 SFR_EXPRESS_GENE Row_3_of_23888  ENSG00000000003                     TSPAN6   hg38          46              29              17
+#2 SFR_EXPRESS_GENE Row_4_of_23888  ENSG00000000419                       DPM1   hg38          74              41              33
+#2 SFR_EXPRESS_GENE Row_5_of_23888  ENSG00000000457                      SCYL3   hg38          39              23              16
+#2 SFR_EXPRESS_GENE Row_6_of_23888  ENSG00000000460                   C1orf112   hg38          77              46              31
+#2 Merging combine-mode csv files
+#2 Read Dataframe: Dims 50 x 1, Mem 800B (800) from sublib_0/xcond_1/report/analysis_all_stats.csv
+#2 Read Dataframe: Dims 50 x 1, Mem 800B (800) from sublib_1/xcond_1/report/analysis_all_stats.csv
+#2 Read Dataframe: Dims 17241 x 1, Mem 269.4K (275856) from sublib_0/xcond_1/report/tscp_counts.csv
+#2 Read Dataframe: Dims 16766 x 1, Mem 262.0K (268256) from sublib_1/xcond_1/report/tscp_counts.csv
+# Wrote 34007 by 2 table to combined/xcond_1/report/tscp_counts.csv
+#2 SFR_TSCP_CT Row_1_of_34009                count
+#2 SFR_TSCP_CT Row_2_of_34009  bc_wells           
+#2 SFR_TSCP_CT Row_3_of_34009  01_01_01__s1      9
+#2 SFR_TSCP_CT Row_4_of_34009  01_01_01__s2      9
+#2 SFR_TSCP_CT Row_5_of_34009  01_01_02__s1      8
+#2 SFR_TSCP_CT Row_6_of_34009  01_01_02__s2      5
+#2 Read Dataframe: Dims 79 x 1, Mem 1.2K (1264) from sublib_0/xcond_1/report/species_tscp_counts.csv
+#2 Read Dataframe: Dims 74 x 1, Mem 1.2K (1184) from sublib_1/xcond_1/report/species_tscp_counts.csv
+# Wrote 153 by 2 table to combined/xcond_1/report/species_tscp_counts.csv
+#2 SFR_SPEC_TSCP_CT Row_1_of_155                 hg38
+#2 SFR_SPEC_TSCP_CT Row_2_of_155  bc_wells           
+#2 SFR_SPEC_TSCP_CT Row_3_of_155  01_02_73__s2   7857
+#2 SFR_SPEC_TSCP_CT Row_4_of_155  01_04_38__s1  10613
+#2 SFR_SPEC_TSCP_CT Row_5_of_155  01_05_77__s1  26401
+#2 SFR_SPEC_TSCP_CT Row_6_of_155  01_07_01__s1  14829
+#2 Read Dataframe: Dims 79 x 1, Mem 1.2K (1264) from sublib_0/xcond_1/report/species_read_counts.csv
+#2 Read Dataframe: Dims 74 x 1, Mem 1.2K (1184) from sublib_1/xcond_1/report/species_read_counts.csv
+# Wrote 153 by 2 table to combined/xcond_1/report/species_read_counts.csv
+#2 SFR_SPEC_READ_CT Row_1_of_155                  hg38
+#2 SFR_SPEC_READ_CT Row_2_of_155  bc_wells            
+#2 SFR_SPEC_READ_CT Row_3_of_155  01_02_73__s2    9223
+#2 SFR_SPEC_READ_CT Row_4_of_155  01_04_38__s1   13237
+#2 SFR_SPEC_READ_CT Row_5_of_155  01_05_77__s1   32902
+#2 SFR_SPEC_READ_CT Row_6_of_155  01_07_01__s1   18502
+#2 Read Dataframe: Dims 24 x 1, Mem 384B (384) from sublib_0/xcond_1/report/gene_counts_subsampled.csv
+#2 Read Dataframe: Dims 20 x 1, Mem 320B (320) from sublib_1/xcond_1/report/gene_counts_subsampled.csv
+# Wrote 25 by 3 table to combined/xcond_1/report/gene_counts_subsampled.csv
+#2 SFR_SS_GENE_CT Row_1_of_27               hg38__sublib_0  hg38__sublib_1
+#2 SFR_SS_GENE_CT Row_2_of_27  subsample                                  
+#2 SFR_SS_GENE_CT Row_3_of_27  0.0000                  0.0             0.0
+#2 SFR_SS_GENE_CT Row_4_of_27  1000.0000             162.0           175.5
+#2 SFR_SS_GENE_CT Row_5_of_27  2000.0000             305.0           356.5
+#2 SFR_SS_GENE_CT Row_6_of_27  3000.0000             445.0           508.5
+#2 Read Dataframe: Dims 24 x 1, Mem 384B (384) from sublib_0/xcond_1/report/tscp_counts_subsampled.csv
+#2 Read Dataframe: Dims 20 x 1, Mem 320B (320) from sublib_1/xcond_1/report/tscp_counts_subsampled.csv
+# Wrote 25 by 3 table to combined/xcond_1/report/tscp_counts_subsampled.csv
+#2 SFR_SS_TSCP_CT Row_1_of_27               hg38__sublib_0  hg38__sublib_1
+#2 SFR_SS_TSCP_CT Row_2_of_27  subsample                                  
+#2 SFR_SS_TSCP_CT Row_3_of_27  0.0000                  0.0             0.0
+#2 SFR_SS_TSCP_CT Row_4_of_27  1000.0000             175.0           185.0
+#2 SFR_SS_TSCP_CT Row_5_of_27  2000.0000             331.0           399.0
+#2 SFR_SS_TSCP_CT Row_6_of_27  3000.0000             511.0           607.0
+SFR_TSCP_R1W
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_0/xcond_1/report/tscp_median_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_1/xcond_1/report/tscp_median_by_rnd1_well.csv
+# Wrote 12 by 4 table to combined/xcond_1/report/tscp_median_by_rnd1_well.csv
+#2 SFR_TSCP_R1W Row_1_of_14        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R1W Row_2_of_14  well                                         
+#2 SFR_TSCP_R1W Row_3_of_14  1     12396            14061             8739
+#2 SFR_TSCP_R1W Row_4_of_14  2     14733            17384             8910
+#2 SFR_TSCP_R1W Row_5_of_14  3         0                0                0
+#2 SFR_TSCP_R1W Row_6_of_14  4         0                0                0
+SFR_TSCP_R2W
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_1/report/tscp_median_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_1/report/tscp_median_by_rnd2_well.csv
+# Wrote 96 by 4 table to combined/xcond_1/report/tscp_median_by_rnd2_well.csv
+#2 SFR_TSCP_R2W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R2W Row_2_of_98  well                                         
+#2 SFR_TSCP_R2W Row_3_of_98  1         0                0                0
+#2 SFR_TSCP_R2W Row_4_of_98  2      2457                0             7857
+#2 SFR_TSCP_R2W Row_5_of_98  3         0                0                0
+#2 SFR_TSCP_R2W Row_6_of_98  4      7293            10613                0
+SFR_TSCP_R3W
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_1/report/tscp_median_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_1/report/tscp_median_by_rnd3_well.csv
+# Wrote 96 by 4 table to combined/xcond_1/report/tscp_median_by_rnd3_well.csv
+#2 SFR_TSCP_R3W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R3W Row_2_of_98  well                                         
+#2 SFR_TSCP_R3W Row_3_of_98  1     17371            14829            22956
+#2 SFR_TSCP_R3W Row_4_of_98  2         0                0                0
+#2 SFR_TSCP_R3W Row_5_of_98  3     10352            15065                0
+#2 SFR_TSCP_R3W Row_6_of_98  4     13922            17478             6111
+SFR_TSCP_CUTOFF
+#2 Read Dataframe: Dims 32 x 1, Mem 512B (512) from sublib_0/xcond_1/report/tscp_cutoff_calc.csv
+#2 Read Dataframe: Dims 32 x 1, Mem 512B (512) from sublib_1/xcond_1/report/tscp_cutoff_calc.csv
+# Wrote 32 by 4 table to combined/xcond_1/report/tscp_cutoff_calc.csv
+#2 SFR_TSCP_CUTOFF Row_1_of_34                               value  value__sublib_0  value__sublib_1
+#2 SFR_TSCP_CUTOFF Row_2_of_34  statistic                                                           
+#2 SFR_TSCP_CUTOFF Row_3_of_34  cell_call          get_tscp_cutoff  get_tscp_cutoff  get_tscp_cutoff
+#2 SFR_TSCP_CUTOFF Row_4_of_34  cell_tscp_cutoff       5180.123013             6198             2944
+#2 SFR_TSCP_CUTOFF Row_5_of_34  cnt_scale_fac                  1.0              1.0              1.0
+#2 SFR_TSCP_CUTOFF Row_6_of_34  cv_slope_win                  0.02             0.02             0.02
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_0/xcond_1/report/cell_counts_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_1/xcond_1/report/cell_counts_by_rnd1_well.csv
+# Wrote 12 by 4 table to combined/xcond_1/report/cell_counts_by_rnd1_well.csv
+#2 SFR_CELL_R1W Row_1_of_14        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R1W Row_2_of_14  well                                         
+#2 SFR_CELL_R1W Row_3_of_14  1        93               51               42
+#2 SFR_CELL_R1W Row_4_of_14  2        60               28               32
+#2 SFR_CELL_R1W Row_5_of_14  3         0                0                0
+#2 SFR_CELL_R1W Row_6_of_14  4         0                0                0
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_1/report/cell_counts_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_1/report/cell_counts_by_rnd2_well.csv
+# Wrote 96 by 4 table to combined/xcond_1/report/cell_counts_by_rnd2_well.csv
+#2 SFR_CELL_R2W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R2W Row_2_of_98  well                                         
+#2 SFR_CELL_R2W Row_3_of_98  1         0                0                0
+#2 SFR_CELL_R2W Row_4_of_98  2         1                0                1
+#2 SFR_CELL_R2W Row_5_of_98  3         0                0                0
+#2 SFR_CELL_R2W Row_6_of_98  4         1                1                0
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_1/report/cell_counts_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_1/report/cell_counts_by_rnd3_well.csv
+# Wrote 96 by 4 table to combined/xcond_1/report/cell_counts_by_rnd3_well.csv
+#2 SFR_CELL_R3W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R3W Row_2_of_98  well                                         
+#2 SFR_CELL_R3W Row_3_of_98  1         2                1                1
+#2 SFR_CELL_R3W Row_4_of_98  2         0                0                0
+#2 SFR_CELL_R3W Row_5_of_98  3         1                1                0
+#2 SFR_CELL_R3W Row_6_of_98  4         2                1                1
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_0/xcond_1/report/sample_mrtg_counts.csv
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_1/xcond_1/report/sample_mrtg_counts.csv
+# Wrote 6 by 4 table to combined/xcond_1/report/sample_mrtg_counts.csv
+#2 SFR_SAMP_MRTG_CT Row_1_of_8                       count  count__sublib_0  count__sublib_1
+#2 SFR_SAMP_MRTG_CT Row_2_of_8  statistic                                                   
+#2 SFR_SAMP_MRTG_CT Row_3_of_8  cell_gene_count      41725            22305            19420
+#2 SFR_SAMP_MRTG_CT Row_4_of_8  cell_mread_count   2929373          1981031           948342
+#2 SFR_SAMP_MRTG_CT Row_5_of_8  cell_tscp_count    2391720          1581882           809838
+#2 SFR_SAMP_MRTG_CT Row_6_of_8  total_gene_count     48273            25802            22471
+#2 Recalculating some merged stats
+#2 Read Dataframe: Dims 6 x 3, Mem 192B (192) from combined/xcond_1/report/sample_mrtg_counts.csv
+#2 Read Dataframe: Dims 153 x 11, Mem 14.3K (14688) from combined/xcond_1/DGE_filtered/cell_metadata.csv
+#2 Read Dataframe: Dims 6 x 3, Mem 192B (192) from combined/xcond_1/report/sample_mrtg_counts.csv
+# Wrote 50 by 4 table to combined/xcond_1/report/analysis_all_stats.csv
+#2 SFR_ALLSTATS Row_1_of_52                                    combined      sublib_0      sublib_1
+#2 SFR_ALLSTATS Row_2_of_52  statistic                                                             
+#2 SFR_ALLSTATS Row_3_of_52  bc1_Q30                       8.507438e-01  8.570000e-01  8.370000e-01
+#2 SFR_ALLSTATS Row_4_of_52  bc1_perfrac                   6.965591e-01  7.000000e-01  6.890000e-01
+#2 SFR_ALLSTATS Row_5_of_52  bc2_Q30                       8.844310e-01  8.910000e-01  8.700000e-01
+#2 SFR_ALLSTATS Row_6_of_52  bc2_perfrac                   7.838719e-01  7.870000e-01  7.770000e-01
+# Wrote 24 by 4 table to combined/xcond_1/report/analysis_summary.csv
+#2 SFR_ASUM_CSV Row_1_of_25                                    combined      sublib_0      sublib_1
+#2 SFR_ASUM_CSV Row_2_of_25  sample_well_count             4.000000e+00  2.000000e+00  2.000000e+00
+#2 SFR_ASUM_CSV Row_3_of_25  number_of_cells               1.530000e+02  7.900000e+01  7.400000e+01
+#2 SFR_ASUM_CSV Row_4_of_25  hg38_number_of_cells          1.530000e+02  7.900000e+01  7.400000e+01
+#2 SFR_ASUM_CSV Row_5_of_25  hg38_median_tscp_per_cell     1.183800e+04  1.475800e+04  8.825500e+03
+#2 SFR_ASUM_CSV Row_6_of_25  hg38_median_tscp_at50         3.293206e+04  3.759927e+04  3.079471e+04
+
+# DGE processing sample (2) xcond_2
+#2 MemStatus: DGE_samp_2  1.8G proc, 583.4M rss, 1.2G vms, 10.5% usd, 902.1G avail
+#2 Combining DGE files; DIR_S_DGE_N_F
+#2 DGE files from potentially 2 sublibs
+#2 Read Dataframe: Dims 2094 x 11, Mem 196.3K (201024) from sublib_0/xcond_2/DGE_filtered/cell_metadata.csv
+#2 Loaded 12756531 data from sublib_0/xcond_2/DGE_filtered/DGE.mtx
+#2 Processed cells 2094, 2094 total
+#2 Read Dataframe: Dims 1760 x 11, Mem 165.0K (168960) from sublib_1/xcond_2/DGE_filtered/cell_metadata.csv
+#2 Loaded 8041745 data from sublib_1/xcond_2/DGE_filtered/DGE.mtx
+#2 Processed cells 1760, 3854 total
+# Final combined DGE matrix has 20798275 elements
+#2 Copy genome/all_genes.csv to combined/xcond_2/DGE_filtered/all_genes.csv
+#2 Combining DGE files; DIR_S_DGE_N_UF
+#2 DGE files from potentially 2 sublibs
+#2 Read Dataframe: Dims 42370 x 11, Mem 3.9M (4067520) from sublib_0/xcond_2/DGE_unfiltered/cell_metadata.csv
+#2 Loaded 18849662 data from sublib_0/xcond_2/DGE_unfiltered/DGE.mtx
+#2 Processed cells 42370, 42370 total
+#2 Read Dataframe: Dims 41119 x 11, Mem 3.8M (3947424) from sublib_1/xcond_2/DGE_unfiltered/cell_metadata.csv
+#2 Loaded 11044035 data from sublib_1/xcond_2/DGE_unfiltered/DGE.mtx
+#2 Processed cells 41119, 83489 total
+# Final combined DGE matrix has 29893696 elements
+#2 Copy genome/all_genes.csv to combined/xcond_2/DGE_unfiltered/all_genes.csv
+#2 Read Dataframe: Dims 37855 x 4, Mem 1.4M (1514200) from sublib_0/xcond_2/report/expressed_genes.csv
+#2 Read Dataframe: Dims 34466 x 4, Mem 1.3M (1378640) from sublib_1/xcond_2/report/expressed_genes.csv
+# Wrote 39362 by 6 table to combined/xcond_2/report/expressed_genes.csv
+#2 SFR_EXPRESS_GENE Row_1_of_39364                                   gene_name genome  cell_count  cell_count__s1  cell_count__s2
+#2 SFR_EXPRESS_GENE Row_2_of_39364  gene_id                                                                                      
+#2 SFR_EXPRESS_GENE Row_3_of_39364  ENSG00000000003                     TSPAN6   hg38         514             338             176
+#2 SFR_EXPRESS_GENE Row_4_of_39364  ENSG00000000005                       TNMD   hg38           3               2               1
+#2 SFR_EXPRESS_GENE Row_5_of_39364  ENSG00000000419                       DPM1   hg38        1870            1190             680
+#2 SFR_EXPRESS_GENE Row_6_of_39364  ENSG00000000457                      SCYL3   hg38        1225             771             454
+#2 Merging combine-mode csv files
+#2 Read Dataframe: Dims 50 x 1, Mem 800B (800) from sublib_0/xcond_2/report/analysis_all_stats.csv
+#2 Read Dataframe: Dims 50 x 1, Mem 800B (800) from sublib_1/xcond_2/report/analysis_all_stats.csv
+#2 Read Dataframe: Dims 45195 x 1, Mem 706.2K (723120) from sublib_0/xcond_2/report/tscp_counts.csv
+#2 Read Dataframe: Dims 44374 x 1, Mem 693.3K (709984) from sublib_1/xcond_2/report/tscp_counts.csv
+# Wrote 89569 by 2 table to combined/xcond_2/report/tscp_counts.csv
+#2 SFR_TSCP_CT Row_1_of_89571                 count
+#2 SFR_TSCP_CT Row_2_of_89571  bc_wells            
+#2 SFR_TSCP_CT Row_3_of_89571  03_01_01__s1     123
+#2 SFR_TSCP_CT Row_4_of_89571  03_01_01__s2      69
+#2 SFR_TSCP_CT Row_5_of_89571  03_01_02__s1     120
+#2 SFR_TSCP_CT Row_6_of_89571  03_01_02__s2      75
+#2 Read Dataframe: Dims 2094 x 1, Mem 32.7K (33504) from sublib_0/xcond_2/report/species_tscp_counts.csv
+#2 Read Dataframe: Dims 1760 x 1, Mem 27.5K (28160) from sublib_1/xcond_2/report/species_tscp_counts.csv
+# Wrote 3854 by 2 table to combined/xcond_2/report/species_tscp_counts.csv
+#2 SFR_SPEC_TSCP_CT Row_1_of_3856                  hg38
+#2 SFR_SPEC_TSCP_CT Row_2_of_3856  bc_wells            
+#2 SFR_SPEC_TSCP_CT Row_3_of_3856  03_01_04__s1    9967
+#2 SFR_SPEC_TSCP_CT Row_4_of_3856  03_01_16__s1   94640
+#2 SFR_SPEC_TSCP_CT Row_5_of_3856  03_01_16__s2   16971
+#2 SFR_SPEC_TSCP_CT Row_6_of_3856  03_01_26__s2    3790
+#2 Read Dataframe: Dims 2094 x 1, Mem 32.7K (33504) from sublib_0/xcond_2/report/species_read_counts.csv
+#2 Read Dataframe: Dims 1760 x 1, Mem 27.5K (28160) from sublib_1/xcond_2/report/species_read_counts.csv
+# Wrote 3854 by 2 table to combined/xcond_2/report/species_read_counts.csv
+#2 SFR_SPEC_READ_CT Row_1_of_3856                  hg38
+#2 SFR_SPEC_READ_CT Row_2_of_3856  bc_wells            
+#2 SFR_SPEC_READ_CT Row_3_of_3856  03_01_04__s1   12308
+#2 SFR_SPEC_READ_CT Row_4_of_3856  03_01_16__s1  118716
+#2 SFR_SPEC_READ_CT Row_5_of_3856  03_01_16__s2   19800
+#2 SFR_SPEC_READ_CT Row_6_of_3856  03_01_26__s2    4390
+#2 Read Dataframe: Dims 23 x 1, Mem 368B (368) from sublib_0/xcond_2/report/gene_counts_subsampled.csv
+#2 Read Dataframe: Dims 18 x 1, Mem 288B (288) from sublib_1/xcond_2/report/gene_counts_subsampled.csv
+# Wrote 24 by 3 table to combined/xcond_2/report/gene_counts_subsampled.csv
+#2 SFR_SS_GENE_CT Row_1_of_26              hg38__sublib_0  hg38__sublib_1
+#2 SFR_SS_GENE_CT Row_2_of_26  subsample                                 
+#2 SFR_SS_GENE_CT Row_3_of_26  0.0000                 0.0             0.0
+#2 SFR_SS_GENE_CT Row_4_of_26  1000.0000            199.0           199.5
+#2 SFR_SS_GENE_CT Row_5_of_26  2000.0000            388.0           379.0
+#2 SFR_SS_GENE_CT Row_6_of_26  3000.0000            559.5           552.5
+#2 Read Dataframe: Dims 23 x 1, Mem 368B (368) from sublib_0/xcond_2/report/tscp_counts_subsampled.csv
+#2 Read Dataframe: Dims 18 x 1, Mem 288B (288) from sublib_1/xcond_2/report/tscp_counts_subsampled.csv
+# Wrote 24 by 3 table to combined/xcond_2/report/tscp_counts_subsampled.csv
+#2 SFR_SS_TSCP_CT Row_1_of_26              hg38__sublib_0  hg38__sublib_1
+#2 SFR_SS_TSCP_CT Row_2_of_26  subsample                                 
+#2 SFR_SS_TSCP_CT Row_3_of_26  0.0000                 0.0             0.0
+#2 SFR_SS_TSCP_CT Row_4_of_26  1000.0000            220.0           221.0
+#2 SFR_SS_TSCP_CT Row_5_of_26  2000.0000            448.5           438.0
+#2 SFR_SS_TSCP_CT Row_6_of_26  3000.0000            673.5           656.5
+SFR_TSCP_R1W
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_0/xcond_2/report/tscp_median_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_1/xcond_2/report/tscp_median_by_rnd1_well.csv
+# Wrote 12 by 4 table to combined/xcond_2/report/tscp_median_by_rnd1_well.csv
+#2 SFR_TSCP_R1W Row_1_of_14        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R1W Row_2_of_14  well                                         
+#2 SFR_TSCP_R1W Row_3_of_14  1         0                0                0
+#2 SFR_TSCP_R1W Row_4_of_14  2         0                0                0
+#2 SFR_TSCP_R1W Row_5_of_14  3     13507            15662             8452
+#2 SFR_TSCP_R1W Row_6_of_14  4     12493            14595             7561
+SFR_TSCP_R2W
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_2/report/tscp_median_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_2/report/tscp_median_by_rnd2_well.csv
+# Wrote 96 by 4 table to combined/xcond_2/report/tscp_median_by_rnd2_well.csv
+#2 SFR_TSCP_R2W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R2W Row_2_of_98  well                                         
+#2 SFR_TSCP_R2W Row_3_of_98  1     14637            15030            13717
+#2 SFR_TSCP_R2W Row_4_of_98  2     18463            20758            13078
+#2 SFR_TSCP_R2W Row_5_of_98  3      9255            10655             5971
+#2 SFR_TSCP_R2W Row_6_of_98  4      9801            12173             4234
+SFR_TSCP_R3W
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_2/report/tscp_median_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_2/report/tscp_median_by_rnd3_well.csv
+# Wrote 96 by 4 table to combined/xcond_2/report/tscp_median_by_rnd3_well.csv
+#2 SFR_TSCP_R3W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R3W Row_2_of_98  well                                         
+#2 SFR_TSCP_R3W Row_3_of_98  1     15383            18557             7936
+#2 SFR_TSCP_R3W Row_4_of_98  2      9234            11506             3904
+#2 SFR_TSCP_R3W Row_5_of_98  3     12604            15190             6537
+#2 SFR_TSCP_R3W Row_6_of_98  4     11578            14765             4101
+SFR_TSCP_CUTOFF
+#2 Read Dataframe: Dims 32 x 1, Mem 512B (512) from sublib_0/xcond_2/report/tscp_cutoff_calc.csv
+#2 Read Dataframe: Dims 32 x 1, Mem 512B (512) from sublib_1/xcond_2/report/tscp_cutoff_calc.csv
+# Wrote 32 by 4 table to combined/xcond_2/report/tscp_cutoff_calc.csv
+#2 SFR_TSCP_CUTOFF Row_1_of_34                               value  value__sublib_0  value__sublib_1
+#2 SFR_TSCP_CUTOFF Row_2_of_34  statistic                                                           
+#2 SFR_TSCP_CUTOFF Row_3_of_34  cell_call          get_tscp_cutoff  get_tscp_cutoff  get_tscp_cutoff
+#2 SFR_TSCP_CUTOFF Row_4_of_34  cell_tscp_cutoff       2614.774448             3019             1666
+#2 SFR_TSCP_CUTOFF Row_5_of_34  cnt_scale_fac                  1.0              1.0              1.0
+#2 SFR_TSCP_CUTOFF Row_6_of_34  cv_slope_win                  0.02             0.02             0.02
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_0/xcond_2/report/cell_counts_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_1/xcond_2/report/cell_counts_by_rnd1_well.csv
+# Wrote 12 by 4 table to combined/xcond_2/report/cell_counts_by_rnd1_well.csv
+#2 SFR_CELL_R1W Row_1_of_14        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R1W Row_2_of_14  well                                         
+#2 SFR_CELL_R1W Row_3_of_14  1         0                0                0
+#2 SFR_CELL_R1W Row_4_of_14  2         0                0                0
+#2 SFR_CELL_R1W Row_5_of_14  3       787              433              354
+#2 SFR_CELL_R1W Row_6_of_14  4       708              377              331
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_2/report/cell_counts_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_2/report/cell_counts_by_rnd2_well.csv
+# Wrote 96 by 4 table to combined/xcond_2/report/cell_counts_by_rnd2_well.csv
+#2 SFR_CELL_R2W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R2W Row_2_of_98  well                                         
+#2 SFR_CELL_R2W Row_3_of_98  1        28               19                9
+#2 SFR_CELL_R2W Row_4_of_98  2        31               20               11
+#2 SFR_CELL_R2W Row_5_of_98  3        33               20               13
+#2 SFR_CELL_R2W Row_6_of_98  4        43               24               19
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_2/report/cell_counts_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_2/report/cell_counts_by_rnd3_well.csv
+# Wrote 96 by 4 table to combined/xcond_2/report/cell_counts_by_rnd3_well.csv
+#2 SFR_CELL_R3W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R3W Row_2_of_98  well                                         
+#2 SFR_CELL_R3W Row_3_of_98  1        47               27               20
+#2 SFR_CELL_R3W Row_4_of_98  2        36               23               13
+#2 SFR_CELL_R3W Row_5_of_98  3        28               18               10
+#2 SFR_CELL_R3W Row_6_of_98  4        25               15               10
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_0/xcond_2/report/sample_mrtg_counts.csv
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_1/xcond_2/report/sample_mrtg_counts.csv
+# Wrote 6 by 4 table to combined/xcond_2/report/sample_mrtg_counts.csv
+#2 SFR_SAMP_MRTG_CT Row_1_of_8                         count  count__sublib_0  count__sublib_1
+#2 SFR_SAMP_MRTG_CT Row_2_of_8  statistic                                                     
+#2 SFR_SAMP_MRTG_CT Row_3_of_8  cell_gene_count        72321            37855            34466
+#2 SFR_SAMP_MRTG_CT Row_4_of_8  cell_mread_count    97115170         68372846         28742324
+#2 SFR_SAMP_MRTG_CT Row_5_of_8  cell_tscp_count     79104800         54575514         24529286
+#2 SFR_SAMP_MRTG_CT Row_6_of_8  total_gene_count       73563            38417            35146
+#2 Recalculating some merged stats
+#2 Read Dataframe: Dims 6 x 3, Mem 192B (192) from combined/xcond_2/report/sample_mrtg_counts.csv
+#2 Read Dataframe: Dims 3854 x 11, Mem 361.3K (369984) from combined/xcond_2/DGE_filtered/cell_metadata.csv
+#2 Read Dataframe: Dims 6 x 3, Mem 192B (192) from combined/xcond_2/report/sample_mrtg_counts.csv
+# Wrote 50 by 4 table to combined/xcond_2/report/analysis_all_stats.csv
+#2 SFR_ALLSTATS Row_1_of_52                                    combined      sublib_0      sublib_1
+#2 SFR_ALLSTATS Row_2_of_52  statistic                                                             
+#2 SFR_ALLSTATS Row_3_of_52  bc1_Q30                       8.510248e-01  8.570000e-01  8.370000e-01
+#2 SFR_ALLSTATS Row_4_of_52  bc1_perfrac                   6.967136e-01  7.000000e-01  6.890000e-01
+#2 SFR_ALLSTATS Row_5_of_52  bc2_Q30                       8.847260e-01  8.910000e-01  8.700000e-01
+#2 SFR_ALLSTATS Row_6_of_52  bc2_perfrac                   7.840124e-01  7.870000e-01  7.770000e-01
+# Wrote 24 by 4 table to combined/xcond_2/report/analysis_summary.csv
+#2 SFR_ASUM_CSV Row_1_of_25                                    combined      sublib_0      sublib_1
+#2 SFR_ASUM_CSV Row_2_of_25  sample_well_count             1.000000e+01  5.000000e+00  5.000000e+00
+#2 SFR_ASUM_CSV Row_3_of_25  number_of_cells               3.854000e+03  2.094000e+03  1.760000e+03
+#2 SFR_ASUM_CSV Row_4_of_25  hg38_number_of_cells          3.854000e+03  2.094000e+03  1.760000e+03
+#2 SFR_ASUM_CSV Row_5_of_25  hg38_median_tscp_per_cell     1.122200e+04  1.499750e+04  7.968500e+03
+#2 SFR_ASUM_CSV Row_6_of_25  hg38_median_tscp_at50         3.064188e+04  3.765122e+04  2.743104e+04
+
+# DGE processing sample (3) xcond_3
+#2 MemStatus: DGE_samp_3  1.8G proc, 564.1M rss, 1.2G vms, 10.5% usd, 902.1G avail
+#2 Combining DGE files; DIR_S_DGE_N_F
+#2 DGE files from potentially 2 sublibs
+#2 Read Dataframe: Dims 574 x 11, Mem 53.8K (55104) from sublib_0/xcond_3/DGE_filtered/cell_metadata.csv
+#2 Loaded 3713248 data from sublib_0/xcond_3/DGE_filtered/DGE.mtx
+#2 Processed cells 574, 574 total
+#2 Read Dataframe: Dims 484 x 11, Mem 45.4K (46464) from sublib_1/xcond_3/DGE_filtered/cell_metadata.csv
+#2 Loaded 2428162 data from sublib_1/xcond_3/DGE_filtered/DGE.mtx
+#2 Processed cells 484, 1058 total
+# Final combined DGE matrix has 6141409 elements
+#2 Copy genome/all_genes.csv to combined/xcond_3/DGE_filtered/all_genes.csv
+#2 Combining DGE files; DIR_S_DGE_N_UF
+#2 DGE files from potentially 2 sublibs
+#2 Read Dataframe: Dims 37920 x 11, Mem 3.5M (3640320) from sublib_0/xcond_3/DGE_unfiltered/cell_metadata.csv
+#2 Loaded 6901873 data from sublib_0/xcond_3/DGE_unfiltered/DGE.mtx
+#2 Processed cells 37920, 37920 total
+#2 Read Dataframe: Dims 29475 x 11, Mem 2.7M (2829600) from sublib_1/xcond_3/DGE_unfiltered/cell_metadata.csv
+#2 Loaded 3951890 data from sublib_1/xcond_3/DGE_unfiltered/DGE.mtx
+#2 Processed cells 29475, 67395 total
+# Final combined DGE matrix has 10853762 elements
+#2 Copy genome/all_genes.csv to combined/xcond_3/DGE_unfiltered/all_genes.csv
+#2 Read Dataframe: Dims 32783 x 4, Mem 1.3M (1311320) from sublib_0/xcond_3/report/expressed_genes.csv
+#2 Read Dataframe: Dims 28946 x 4, Mem 1.1M (1157840) from sublib_1/xcond_3/report/expressed_genes.csv
+# Wrote 34370 by 6 table to combined/xcond_3/report/expressed_genes.csv
+#2 SFR_EXPRESS_GENE Row_1_of_34372                                   gene_name genome  cell_count  cell_count__s1  cell_count__s2
+#2 SFR_EXPRESS_GENE Row_2_of_34372  gene_id                                                                                      
+#2 SFR_EXPRESS_GENE Row_3_of_34372  ENSG00000000003                     TSPAN6   hg38         259             168              91
+#2 SFR_EXPRESS_GENE Row_4_of_34372  ENSG00000000005                       TNMD   hg38           2               1               1
+#2 SFR_EXPRESS_GENE Row_5_of_34372  ENSG00000000419                       DPM1   hg38         535             329             206
+#2 SFR_EXPRESS_GENE Row_6_of_34372  ENSG00000000457                      SCYL3   hg38         368             237             131
+#2 Merging combine-mode csv files
+#2 Read Dataframe: Dims 50 x 1, Mem 800B (800) from sublib_0/xcond_3/report/analysis_all_stats.csv
+#2 Read Dataframe: Dims 50 x 1, Mem 800B (800) from sublib_1/xcond_3/report/analysis_all_stats.csv
+#2 Read Dataframe: Dims 43827 x 1, Mem 684.8K (701232) from sublib_0/xcond_3/report/tscp_counts.csv
+#2 Read Dataframe: Dims 42987 x 1, Mem 671.7K (687792) from sublib_1/xcond_3/report/tscp_counts.csv
+# Wrote 86814 by 2 table to combined/xcond_3/report/tscp_counts.csv
+#2 SFR_TSCP_CT Row_1_of_86816                 count
+#2 SFR_TSCP_CT Row_2_of_86816  bc_wells            
+#2 SFR_TSCP_CT Row_3_of_86816  08_01_01__s1      46
+#2 SFR_TSCP_CT Row_4_of_86816  08_01_01__s2      13
+#2 SFR_TSCP_CT Row_5_of_86816  08_01_02__s1      31
+#2 SFR_TSCP_CT Row_6_of_86816  08_01_02__s2      12
+#2 Read Dataframe: Dims 574 x 1, Mem 9.0K (9184) from sublib_0/xcond_3/report/species_tscp_counts.csv
+#2 Read Dataframe: Dims 484 x 1, Mem 7.6K (7744) from sublib_1/xcond_3/report/species_tscp_counts.csv
+# Wrote 1058 by 2 table to combined/xcond_3/report/species_tscp_counts.csv
+#2 SFR_SPEC_TSCP_CT Row_1_of_1060                  hg38
+#2 SFR_SPEC_TSCP_CT Row_2_of_1060  bc_wells            
+#2 SFR_SPEC_TSCP_CT Row_3_of_1060  08_01_17__s1   41095
+#2 SFR_SPEC_TSCP_CT Row_4_of_1060  08_01_27__s2   12319
+#2 SFR_SPEC_TSCP_CT Row_5_of_1060  08_01_40__s2    6169
+#2 SFR_SPEC_TSCP_CT Row_6_of_1060  08_01_51__s1   14628
+#2 Read Dataframe: Dims 574 x 1, Mem 9.0K (9184) from sublib_0/xcond_3/report/species_read_counts.csv
+#2 Read Dataframe: Dims 484 x 1, Mem 7.6K (7744) from sublib_1/xcond_3/report/species_read_counts.csv
+# Wrote 1058 by 2 table to combined/xcond_3/report/species_read_counts.csv
+#2 SFR_SPEC_READ_CT Row_1_of_1060                  hg38
+#2 SFR_SPEC_READ_CT Row_2_of_1060  bc_wells            
+#2 SFR_SPEC_READ_CT Row_3_of_1060  08_01_17__s1   51460
+#2 SFR_SPEC_READ_CT Row_4_of_1060  08_01_27__s2   14322
+#2 SFR_SPEC_READ_CT Row_5_of_1060  08_01_40__s2    7242
+#2 SFR_SPEC_READ_CT Row_6_of_1060  08_01_51__s1   18242
+#2 Read Dataframe: Dims 24 x 1, Mem 384B (384) from sublib_0/xcond_3/report/gene_counts_subsampled.csv
+#2 Read Dataframe: Dims 19 x 1, Mem 304B (304) from sublib_1/xcond_3/report/gene_counts_subsampled.csv
+# Wrote 25 by 3 table to combined/xcond_3/report/gene_counts_subsampled.csv
+#2 SFR_SS_GENE_CT Row_1_of_27              hg38__sublib_0  hg38__sublib_1
+#2 SFR_SS_GENE_CT Row_2_of_27  subsample                                 
+#2 SFR_SS_GENE_CT Row_3_of_27  0.0000                 0.0             0.0
+#2 SFR_SS_GENE_CT Row_4_of_27  1000.0000            195.5           193.5
+#2 SFR_SS_GENE_CT Row_5_of_27  2000.0000            371.0           378.0
+#2 SFR_SS_GENE_CT Row_6_of_27  3000.0000            536.5           562.0
+#2 Read Dataframe: Dims 24 x 1, Mem 384B (384) from sublib_0/xcond_3/report/tscp_counts_subsampled.csv
+#2 Read Dataframe: Dims 19 x 1, Mem 304B (304) from sublib_1/xcond_3/report/tscp_counts_subsampled.csv
+# Wrote 25 by 3 table to combined/xcond_3/report/tscp_counts_subsampled.csv
+#2 SFR_SS_TSCP_CT Row_1_of_27              hg38__sublib_0  hg38__sublib_1
+#2 SFR_SS_TSCP_CT Row_2_of_27  subsample                                 
+#2 SFR_SS_TSCP_CT Row_3_of_27  0.0000                 0.0             0.0
+#2 SFR_SS_TSCP_CT Row_4_of_27  1000.0000            218.0           215.0
+#2 SFR_SS_TSCP_CT Row_5_of_27  2000.0000            426.0           436.0
+#2 SFR_SS_TSCP_CT Row_6_of_27  3000.0000            640.0           649.5
+SFR_TSCP_R1W
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_0/xcond_3/report/tscp_median_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_1/xcond_3/report/tscp_median_by_rnd1_well.csv
+# Wrote 12 by 4 table to combined/xcond_3/report/tscp_median_by_rnd1_well.csv
+#2 SFR_TSCP_R1W Row_1_of_14        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R1W Row_2_of_14  well                                         
+#2 SFR_TSCP_R1W Row_3_of_14  1         0                0                0
+#2 SFR_TSCP_R1W Row_4_of_14  2         0                0                0
+#2 SFR_TSCP_R1W Row_5_of_14  3         0                0                0
+#2 SFR_TSCP_R1W Row_6_of_14  4         0                0                0
+SFR_TSCP_R2W
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_3/report/tscp_median_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_3/report/tscp_median_by_rnd2_well.csv
+# Wrote 96 by 4 table to combined/xcond_3/report/tscp_median_by_rnd2_well.csv
+#2 SFR_TSCP_R2W Row_1_of_98         count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R2W Row_2_of_98  well                                          
+#2 SFR_TSCP_R2W Row_3_of_98  1      14648            17591             8027
+#2 SFR_TSCP_R2W Row_4_of_98  2      29477             9269            74960
+#2 SFR_TSCP_R2W Row_5_of_98  3       9460            12585             2428
+#2 SFR_TSCP_R2W Row_6_of_98  4      10550            12467             6236
+SFR_TSCP_R3W
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_3/report/tscp_median_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_3/report/tscp_median_by_rnd3_well.csv
+# Wrote 96 by 4 table to combined/xcond_3/report/tscp_median_by_rnd3_well.csv
+#2 SFR_TSCP_R3W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R3W Row_2_of_98  well                                         
+#2 SFR_TSCP_R3W Row_3_of_98  1     17062            21443             7204
+#2 SFR_TSCP_R3W Row_4_of_98  2     13412            16982             5378
+#2 SFR_TSCP_R3W Row_5_of_98  3     12812            16018             5598
+#2 SFR_TSCP_R3W Row_6_of_98  4     21208            29217             3185
+SFR_TSCP_CUTOFF
+#2 Read Dataframe: Dims 32 x 1, Mem 512B (512) from sublib_0/xcond_3/report/tscp_cutoff_calc.csv
+#2 Read Dataframe: Dims 32 x 1, Mem 512B (512) from sublib_1/xcond_3/report/tscp_cutoff_calc.csv
+# Wrote 32 by 4 table to combined/xcond_3/report/tscp_cutoff_calc.csv
+#2 SFR_TSCP_CUTOFF Row_1_of_34                               value  value__sublib_0  value__sublib_1
+#2 SFR_TSCP_CUTOFF Row_2_of_34  statistic                                                           
+#2 SFR_TSCP_CUTOFF Row_3_of_34  cell_call          get_tscp_cutoff  get_tscp_cutoff  get_tscp_cutoff
+#2 SFR_TSCP_CUTOFF Row_4_of_34  cell_tscp_cutoff       3305.726041             3813             2164
+#2 SFR_TSCP_CUTOFF Row_5_of_34  cnt_scale_fac                  1.0              1.0              1.0
+#2 SFR_TSCP_CUTOFF Row_6_of_34  cv_slope_win                  0.02             0.02             0.02
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_0/xcond_3/report/cell_counts_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_1/xcond_3/report/cell_counts_by_rnd1_well.csv
+# Wrote 12 by 4 table to combined/xcond_3/report/cell_counts_by_rnd1_well.csv
+#2 SFR_CELL_R1W Row_1_of_14        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R1W Row_2_of_14  well                                         
+#2 SFR_CELL_R1W Row_3_of_14  1         0                0                0
+#2 SFR_CELL_R1W Row_4_of_14  2         0                0                0
+#2 SFR_CELL_R1W Row_5_of_14  3         0                0                0
+#2 SFR_CELL_R1W Row_6_of_14  4         0                0                0
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_3/report/cell_counts_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_3/report/cell_counts_by_rnd2_well.csv
+# Wrote 96 by 4 table to combined/xcond_3/report/cell_counts_by_rnd2_well.csv
+#2 SFR_CELL_R2W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R2W Row_2_of_98  well                                         
+#2 SFR_CELL_R2W Row_3_of_98  1         8                4                4
+#2 SFR_CELL_R2W Row_4_of_98  2         4                3                1
+#2 SFR_CELL_R2W Row_5_of_98  3         4                3                1
+#2 SFR_CELL_R2W Row_6_of_98  4        10                5                5
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/xcond_3/report/cell_counts_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/xcond_3/report/cell_counts_by_rnd3_well.csv
+# Wrote 96 by 4 table to combined/xcond_3/report/cell_counts_by_rnd3_well.csv
+#2 SFR_CELL_R3W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R3W Row_2_of_98  well                                         
+#2 SFR_CELL_R3W Row_3_of_98  1        16                9                7
+#2 SFR_CELL_R3W Row_4_of_98  2        12                4                8
+#2 SFR_CELL_R3W Row_5_of_98  3        10                4                6
+#2 SFR_CELL_R3W Row_6_of_98  4         6                5                1
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_0/xcond_3/report/sample_mrtg_counts.csv
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_1/xcond_3/report/sample_mrtg_counts.csv
+# Wrote 6 by 4 table to combined/xcond_3/report/sample_mrtg_counts.csv
+#2 SFR_SAMP_MRTG_CT Row_1_of_8                        count  count__sublib_0  count__sublib_1
+#2 SFR_SAMP_MRTG_CT Row_2_of_8  statistic                                                    
+#2 SFR_SAMP_MRTG_CT Row_3_of_8  cell_gene_count       61729            32783            28946
+#2 SFR_SAMP_MRTG_CT Row_4_of_8  cell_mread_count   27938317         19404802          8533515
+#2 SFR_SAMP_MRTG_CT Row_5_of_8  cell_tscp_count    22803462         15512596          7290866
+#2 SFR_SAMP_MRTG_CT Row_6_of_8  total_gene_count      64155            33967            30188
+#2 Recalculating some merged stats
+#2 Read Dataframe: Dims 6 x 3, Mem 192B (192) from combined/xcond_3/report/sample_mrtg_counts.csv
+#2 Read Dataframe: Dims 1058 x 11, Mem 99.2K (101568) from combined/xcond_3/DGE_filtered/cell_metadata.csv
+#2 Read Dataframe: Dims 6 x 3, Mem 192B (192) from combined/xcond_3/report/sample_mrtg_counts.csv
+# Wrote 50 by 4 table to combined/xcond_3/report/analysis_all_stats.csv
+#2 SFR_ALLSTATS Row_1_of_52                                    combined      sublib_0      sublib_1
+#2 SFR_ALLSTATS Row_2_of_52  statistic                                                             
+#2 SFR_ALLSTATS Row_3_of_52  bc1_Q30                       8.508475e-01  8.570000e-01  8.370000e-01
+#2 SFR_ALLSTATS Row_4_of_52  bc1_perfrac                   6.966161e-01  7.000000e-01  6.890000e-01
+#2 SFR_ALLSTATS Row_5_of_52  bc2_Q30                       8.845399e-01  8.910000e-01  8.700000e-01
+#2 SFR_ALLSTATS Row_6_of_52  bc2_perfrac                   7.839237e-01  7.870000e-01  7.770000e-01
+# Wrote 24 by 4 table to combined/xcond_3/report/analysis_summary.csv
+#2 SFR_ASUM_CSV Row_1_of_25                                    combined      sublib_0      sublib_1
+#2 SFR_ASUM_CSV Row_2_of_25  sample_well_count             1.000000e+01  5.000000e+00  5.000000e+00
+#2 SFR_ASUM_CSV Row_3_of_25  number_of_cells               1.058000e+03  5.740000e+02  4.840000e+02
+#2 SFR_ASUM_CSV Row_4_of_25  hg38_number_of_cells          1.058000e+03  5.740000e+02  4.840000e+02
+#2 SFR_ASUM_CSV Row_5_of_25  hg38_median_tscp_per_cell     1.255900e+04  1.633100e+04  9.231000e+03
+#2 SFR_ASUM_CSV Row_6_of_25  hg38_median_tscp_at50         3.470639e+04  4.139626e+04  3.204334e+04
+
+# DGE processing sample (4) all-well
+#2 MemStatus: DGE_samp_4  1.8G proc, 562.2M rss, 1.2G vms, 10.5% usd, 902.1G avail
+#2 Combining DGE files; DIR_S_DGE_N_F
+#2 DGE files from potentially 2 sublibs
+#2 Read Dataframe: Dims 2735 x 11, Mem 256.4K (262560) from sublib_0/all-well/DGE_filtered/cell_metadata.csv
+#2 Loaded 16942658 data from sublib_0/all-well/DGE_filtered/DGE.mtx
+#2 Processed cells 2735, 2735 total
+#2 Read Dataframe: Dims 2313 x 11, Mem 216.8K (222048) from sublib_1/all-well/DGE_filtered/cell_metadata.csv
+#2 Loaded 10809043 data from sublib_1/all-well/DGE_filtered/DGE.mtx
+#2 Processed cells 2313, 5048 total
+# Final combined DGE matrix has 27751700 elements
+#2 Copy genome/all_genes.csv to combined/all-well/DGE_filtered/all_genes.csv
+#2 Combining DGE files; DIR_S_DGE_N_UF
+#2 DGE files from potentially 2 sublibs
+#2 Read Dataframe: Dims 92410 x 11, Mem 8.5M (8871360) from sublib_0/all-well/DGE_unfiltered/cell_metadata.csv
+#2 Loaded 27422449 data from sublib_0/all-well/DGE_unfiltered/DGE.mtx
+#2 Processed cells 92410, 92410 total
+#2 Read Dataframe: Dims 77275 x 11, Mem 7.1M (7418400) from sublib_1/all-well/DGE_unfiltered/cell_metadata.csv
+#2 Loaded 15868614 data from sublib_1/all-well/DGE_unfiltered/DGE.mtx
+#2 Processed cells 77275, 169685 total
+# Final combined DGE matrix has 43291062 elements
+#2 Copy genome/all_genes.csv to combined/all-well/DGE_unfiltered/all_genes.csv
+#2 Read Dataframe: Dims 39105 x 4, Mem 1.5M (1564200) from sublib_0/all-well/report/expressed_genes.csv
+#2 Read Dataframe: Dims 35702 x 4, Mem 1.4M (1428080) from sublib_1/all-well/report/expressed_genes.csv
+# Wrote 40573 by 6 table to combined/all-well/report/expressed_genes.csv
+#2 SFR_EXPRESS_GENE Row_1_of_40575                                   gene_name genome  cell_count  cell_count__s1  cell_count__s2
+#2 SFR_EXPRESS_GENE Row_2_of_40575  gene_id                                                                                      
+#2 SFR_EXPRESS_GENE Row_3_of_40575  ENSG00000000003                     TSPAN6   hg38         821             535             286
+#2 SFR_EXPRESS_GENE Row_4_of_40575  ENSG00000000005                       TNMD   hg38           5               3               2
+#2 SFR_EXPRESS_GENE Row_5_of_40575  ENSG00000000419                       DPM1   hg38        2479            1560             919
+#2 SFR_EXPRESS_GENE Row_6_of_40575  ENSG00000000457                      SCYL3   hg38        1631            1029             602
+#2 Merging combine-mode csv files
+#2 Read Dataframe: Dims 50 x 1, Mem 800B (800) from sublib_0/all-well/report/analysis_all_stats.csv
+#2 Read Dataframe: Dims 50 x 1, Mem 800B (800) from sublib_1/all-well/report/analysis_all_stats.csv
+#2 Read Dataframe: Dims 106263 x 1, Mem 1.6M (1700208) from sublib_0/all-well/report/tscp_counts.csv
+#2 Read Dataframe: Dims 104127 x 1, Mem 1.6M (1666032) from sublib_1/all-well/report/tscp_counts.csv
+# Wrote 210390 by 2 table to combined/all-well/report/tscp_counts.csv
+#2 SFR_TSCP_CT Row_1_of_210392                 count
+#2 SFR_TSCP_CT Row_2_of_210392  bc_wells            
+#2 SFR_TSCP_CT Row_3_of_210392  01_01_01__s1       9
+#2 SFR_TSCP_CT Row_4_of_210392  01_01_01__s2       9
+#2 SFR_TSCP_CT Row_5_of_210392  01_01_02__s1       8
+#2 SFR_TSCP_CT Row_6_of_210392  01_01_02__s2       5
+#2 Read Dataframe: Dims 2735 x 1, Mem 42.7K (43760) from sublib_0/all-well/report/species_tscp_counts.csv
+#2 Read Dataframe: Dims 2313 x 1, Mem 36.1K (37008) from sublib_1/all-well/report/species_tscp_counts.csv
+# Wrote 5048 by 2 table to combined/all-well/report/species_tscp_counts.csv
+#2 SFR_SPEC_TSCP_CT Row_1_of_5050                  hg38
+#2 SFR_SPEC_TSCP_CT Row_2_of_5050  bc_wells            
+#2 SFR_SPEC_TSCP_CT Row_3_of_5050  01_02_73__s2    7857
+#2 SFR_SPEC_TSCP_CT Row_4_of_5050  01_04_38__s1   10613
+#2 SFR_SPEC_TSCP_CT Row_5_of_5050  01_05_77__s1   26401
+#2 SFR_SPEC_TSCP_CT Row_6_of_5050  01_07_01__s1   14829
+#2 Read Dataframe: Dims 2735 x 1, Mem 42.7K (43760) from sublib_0/all-well/report/species_read_counts.csv
+#2 Read Dataframe: Dims 2313 x 1, Mem 36.1K (37008) from sublib_1/all-well/report/species_read_counts.csv
+# Wrote 5048 by 2 table to combined/all-well/report/species_read_counts.csv
+#2 SFR_SPEC_READ_CT Row_1_of_5050                  hg38
+#2 SFR_SPEC_READ_CT Row_2_of_5050  bc_wells            
+#2 SFR_SPEC_READ_CT Row_3_of_5050  01_02_73__s2    9223
+#2 SFR_SPEC_READ_CT Row_4_of_5050  01_04_38__s1   13237
+#2 SFR_SPEC_READ_CT Row_5_of_5050  01_05_77__s1   32902
+#2 SFR_SPEC_READ_CT Row_6_of_5050  01_07_01__s1   18502
+#2 Read Dataframe: Dims 23 x 1, Mem 368B (368) from sublib_0/all-well/report/gene_counts_subsampled.csv
+#2 Read Dataframe: Dims 19 x 1, Mem 304B (304) from sublib_1/all-well/report/gene_counts_subsampled.csv
+# Wrote 24 by 3 table to combined/all-well/report/gene_counts_subsampled.csv
+#2 SFR_SS_GENE_CT Row_1_of_26              hg38__sublib_0  hg38__sublib_1
+#2 SFR_SS_GENE_CT Row_2_of_26  subsample                                 
+#2 SFR_SS_GENE_CT Row_3_of_26  0.0000                 0.0             0.0
+#2 SFR_SS_GENE_CT Row_4_of_26  1000.0000            199.0           196.0
+#2 SFR_SS_GENE_CT Row_5_of_26  2000.0000            381.0           378.0
+#2 SFR_SS_GENE_CT Row_6_of_26  3000.0000            553.0           552.0
+#2 Read Dataframe: Dims 23 x 1, Mem 368B (368) from sublib_0/all-well/report/tscp_counts_subsampled.csv
+#2 Read Dataframe: Dims 19 x 1, Mem 304B (304) from sublib_1/all-well/report/tscp_counts_subsampled.csv
+# Wrote 24 by 3 table to combined/all-well/report/tscp_counts_subsampled.csv
+#2 SFR_SS_TSCP_CT Row_1_of_26              hg38__sublib_0  hg38__sublib_1
+#2 SFR_SS_TSCP_CT Row_2_of_26  subsample                                 
+#2 SFR_SS_TSCP_CT Row_3_of_26  0.0000                 0.0             0.0
+#2 SFR_SS_TSCP_CT Row_4_of_26  1000.0000            221.0           220.0
+#2 SFR_SS_TSCP_CT Row_5_of_26  2000.0000            441.0           436.0
+#2 SFR_SS_TSCP_CT Row_6_of_26  3000.0000            654.0           651.0
+SFR_TSCP_R1W
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_0/all-well/report/tscp_median_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_1/all-well/report/tscp_median_by_rnd1_well.csv
+# Wrote 12 by 4 table to combined/all-well/report/tscp_median_by_rnd1_well.csv
+#2 SFR_TSCP_R1W Row_1_of_14        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R1W Row_2_of_14  well                                         
+#2 SFR_TSCP_R1W Row_3_of_14  1     12034            13456             8739
+#2 SFR_TSCP_R1W Row_4_of_14  2     11339            13004             7481
+#2 SFR_TSCP_R1W Row_5_of_14  3     13676            15869             8593
+#2 SFR_TSCP_R1W Row_6_of_14  4     12617            14783             7598
+SFR_TSCP_R2W
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/all-well/report/tscp_median_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/all-well/report/tscp_median_by_rnd2_well.csv
+# Wrote 96 by 4 table to combined/all-well/report/tscp_median_by_rnd2_well.csv
+#2 SFR_TSCP_R2W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R2W Row_2_of_98  well                                         
+#2 SFR_TSCP_R2W Row_3_of_98  1     13479            15030             9886
+#2 SFR_TSCP_R2W Row_4_of_98  2     14980            15801            13078
+#2 SFR_TSCP_R2W Row_5_of_98  3      9970            11696             5971
+#2 SFR_TSCP_R2W Row_6_of_98  4      9818            11540             5827
+SFR_TSCP_R3W
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/all-well/report/tscp_median_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/all-well/report/tscp_median_by_rnd3_well.csv
+# Wrote 96 by 4 table to combined/all-well/report/tscp_median_by_rnd3_well.csv
+#2 SFR_TSCP_R3W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_TSCP_R3W Row_2_of_98  well                                         
+#2 SFR_TSCP_R3W Row_3_of_98  1     15363            18557             7958
+#2 SFR_TSCP_R3W Row_4_of_98  2      9671            11579             5248
+#2 SFR_TSCP_R3W Row_5_of_98  3     12346            15065             6042
+#2 SFR_TSCP_R3W Row_6_of_98  4     13447            17478             4101
+SFR_TSCP_CUTOFF
+#2 Read Dataframe: Dims 32 x 1, Mem 512B (512) from sublib_0/all-well/report/tscp_cutoff_calc.csv
+#2 Read Dataframe: Dims 32 x 1, Mem 512B (512) from sublib_1/all-well/report/tscp_cutoff_calc.csv
+# Wrote 32 by 4 table to combined/all-well/report/tscp_cutoff_calc.csv
+#2 SFR_TSCP_CUTOFF Row_1_of_34                               value  value__sublib_0  value__sublib_1
+#2 SFR_TSCP_CUTOFF Row_2_of_34  statistic                                                           
+#2 SFR_TSCP_CUTOFF Row_3_of_34  cell_call          get_tscp_cutoff  get_tscp_cutoff  get_tscp_cutoff
+#2 SFR_TSCP_CUTOFF Row_4_of_34  cell_tscp_cutoff       2974.171537             3459             1850
+#2 SFR_TSCP_CUTOFF Row_5_of_34  cnt_scale_fac                  1.0              1.0              1.0
+#2 SFR_TSCP_CUTOFF Row_6_of_34  cv_slope_win                  0.02             0.02             0.02
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_0/all-well/report/cell_counts_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 1, Mem 192B (192) from sublib_1/all-well/report/cell_counts_by_rnd1_well.csv
+# Wrote 12 by 4 table to combined/all-well/report/cell_counts_by_rnd1_well.csv
+#2 SFR_CELL_R1W Row_1_of_14        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R1W Row_2_of_14  well                                         
+#2 SFR_CELL_R1W Row_3_of_14  1        97               55               42
+#2 SFR_CELL_R1W Row_4_of_14  2        81               41               40
+#2 SFR_CELL_R1W Row_5_of_14  3       775              426              349
+#2 SFR_CELL_R1W Row_6_of_14  4       698              371              327
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/all-well/report/cell_counts_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/all-well/report/cell_counts_by_rnd2_well.csv
+# Wrote 96 by 4 table to combined/all-well/report/cell_counts_by_rnd2_well.csv
+#2 SFR_CELL_R2W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R2W Row_2_of_98  well                                         
+#2 SFR_CELL_R2W Row_3_of_98  1        36               23               13
+#2 SFR_CELL_R2W Row_4_of_98  2        36               23               13
+#2 SFR_CELL_R2W Row_5_of_98  3        35               22               13
+#2 SFR_CELL_R2W Row_6_of_98  4        53               30               23
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_0/all-well/report/cell_counts_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 1, Mem 1.5K (1536) from sublib_1/all-well/report/cell_counts_by_rnd3_well.csv
+# Wrote 96 by 4 table to combined/all-well/report/cell_counts_by_rnd3_well.csv
+#2 SFR_CELL_R3W Row_1_of_98        count  count__sublib_0  count__sublib_1
+#2 SFR_CELL_R3W Row_2_of_98  well                                         
+#2 SFR_CELL_R3W Row_3_of_98  1        65               37               28
+#2 SFR_CELL_R3W Row_4_of_98  2        47               27               20
+#2 SFR_CELL_R3W Row_5_of_98  3        39               23               16
+#2 SFR_CELL_R3W Row_6_of_98  4        33               21               12
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_0/all-well/report/sample_mrtg_counts.csv
+#2 Read Dataframe: Dims 6 x 1, Mem 96B (96) from sublib_1/all-well/report/sample_mrtg_counts.csv
+# Wrote 6 by 4 table to combined/all-well/report/sample_mrtg_counts.csv
+#2 SFR_SAMP_MRTG_CT Row_1_of_8                         count  count__sublib_0  count__sublib_1
+#2 SFR_SAMP_MRTG_CT Row_2_of_8  statistic                                                     
+#2 SFR_SAMP_MRTG_CT Row_3_of_8  cell_gene_count        74807            39105            35702
+#2 SFR_SAMP_MRTG_CT Row_4_of_8  cell_mread_count   127968399         89746521         38221878
+#2 SFR_SAMP_MRTG_CT Row_5_of_8  cell_tscp_count    104287262         71659440         32627822
+#2 SFR_SAMP_MRTG_CT Row_6_of_8  total_gene_count       76409            39845            36564
+#2 Recalculating some merged stats
+#2 Read Dataframe: Dims 6 x 3, Mem 192B (192) from combined/all-well/report/sample_mrtg_counts.csv
+#2 Read Dataframe: Dims 5048 x 11, Mem 473.2K (484608) from combined/all-well/DGE_filtered/cell_metadata.csv
+#2 Read Dataframe: Dims 6 x 3, Mem 192B (192) from combined/all-well/report/sample_mrtg_counts.csv
+# Wrote 50 by 4 table to combined/all-well/report/analysis_all_stats.csv
+#2 SFR_ALLSTATS Row_1_of_52                                    combined      sublib_0      sublib_1
+#2 SFR_ALLSTATS Row_2_of_52  statistic                                                             
+#2 SFR_ALLSTATS Row_3_of_52  bc1_Q30                       8.509735e-01  8.570000e-01  8.370000e-01
+#2 SFR_ALLSTATS Row_4_of_52  bc1_perfrac                   6.966854e-01  7.000000e-01  6.890000e-01
+#2 SFR_ALLSTATS Row_5_of_52  bc2_Q30                       8.846722e-01  8.910000e-01  8.700000e-01
+#2 SFR_ALLSTATS Row_6_of_52  bc2_perfrac                   7.839868e-01  7.870000e-01  7.770000e-01
+# Wrote 24 by 4 table to combined/all-well/report/analysis_summary.csv
+#2 SFR_ASUM_CSV Row_1_of_25                                    combined      sublib_0      sublib_1
+#2 SFR_ASUM_CSV Row_2_of_25  sample_well_count             2.400000e+01  1.200000e+01  1.200000e+01
+#2 SFR_ASUM_CSV Row_3_of_25  number_of_cells               5.048000e+03  2.735000e+03  2.313000e+03
+#2 SFR_ASUM_CSV Row_4_of_25  hg38_number_of_cells          5.048000e+03  2.735000e+03  2.313000e+03
+#2 SFR_ASUM_CSV Row_5_of_25  hg38_median_tscp_per_cell     1.163700e+04  1.522400e+04  8.369000e+03
+#2 SFR_ASUM_CSV Row_6_of_25  hg38_median_tscp_at50         3.188418e+04  3.832396e+04  2.888095e+04
+# Aggregating sample analysis_summary csv files
+#2 Read Dataframe: Dims 24 x 3, Mem 768B (768) from combined/xcond_1/report/analysis_summary.csv
+#2 Read Dataframe: Dims 24 x 3, Mem 768B (768) from combined/xcond_2/report/analysis_summary.csv
+#2 Read Dataframe: Dims 24 x 3, Mem 768B (768) from combined/xcond_3/report/analysis_summary.csv
+#2 Read Dataframe: Dims 24 x 3, Mem 768B (768) from combined/all-well/report/analysis_summary.csv
+# Wrote 24 by 5 table to combined/agg_samp_ana_summary.csv
+#2 SF_AGG_ASUM_CSV Row_1_of_25                                     xcond_1       xcond_2       xcond_3      all-well
+#2 SF_AGG_ASUM_CSV Row_2_of_25  sample_well_count             4.000000e+00  1.000000e+01  1.000000e+01  2.400000e+01
+#2 SF_AGG_ASUM_CSV Row_3_of_25  number_of_cells               1.530000e+02  3.854000e+03  1.058000e+03  5.048000e+03
+#2 SF_AGG_ASUM_CSV Row_4_of_25  hg38_number_of_cells          1.530000e+02  3.854000e+03  1.058000e+03  5.048000e+03
+#2 SF_AGG_ASUM_CSV Row_5_of_25  hg38_median_tscp_per_cell     1.183800e+04  1.122200e+04  1.255900e+04  1.163700e+04
+#2 SF_AGG_ASUM_CSV Row_6_of_25  hg38_median_tscp_at50         3.293206e+04  3.064188e+04  3.470639e+04  3.188418e+04
+#2 MemStatus: DGE  1.8G proc, 575.1M rss, 1.2G vms, 10.5% usd, 902.1G avail
+#2 DskStatus: DGE  '/ombined/' 10.0T total, 1.7T (17.11%) used, 8.3T (82.89%) free
+# << Running DGE; Status True; Duration 0:01:44.25
+
+# Time	Before Analysis	2023-05-26 03:19:54.474710+0
+# >> Running Analysis
+#2 MemStatus: Analysis  1.8G proc, 575.1M rss, 1.2G vms, 10.5% usd, 902.1G avail
+#2 DskStatus: Analysis  '/ombined/' 10.0T total, 1.7T (17.11%) used, 8.3T (82.89%) free
+# 
+# Analysis processing sample (1 of 4) xcond_1
+#2 MemStatus: Analysis_samp_1  1.8G proc, 575.1M rss, 1.2G vms, 10.5% usd, 902.1G avail
+Matrix 153 X 62710, cell 153, gene 62710 so transposing
+#2 Loaded anndata (153, 62710) combined/xcond_1/DGE_filtered/
+#2 Calling Scanpy to cluster (adata shape (153, 62710))
+#2 MemStatus: SCA_(153,_62710)_function_scanpy_cluster_anndata_start,_rseed=4824  1.8G proc, 582.7M rss, 1.3G vms, 10.5% usd, 902.0G avail
+#2 MemStatus: SCA_(153,_17701)_After_filter_genes_3  1.8G proc, 585.6M rss, 1.3G vms, 10.5% usd, 902.0G avail
+#2 MemStatus: SCA_(153,_17701)_After_normalize_total_target_sum=10000.0  1.8G proc, 585.6M rss, 1.3G vms, 10.5% usd, 902.0G avail
+#2 MemStatus: SCA_(153,_17701)_After_log1p  1.8G proc, 585.6M rss, 1.3G vms, 10.5% usd, 902.0G avail
+#2 MemStatus: SCA_(153,_17701)_After_highly_variable_genes  1.8G proc, 600.9M rss, 1.3G vms, 10.5% usd, 902.0G avail
+#2 MemStatus: SCA_(153,_17701)_After_scale_(max=10.0,_zero_center=False)  1.8G proc, 600.9M rss, 1.3G vms, 10.5% usd, 902.0G avail
+#2 PCA using 4117 highly variable genes
+#2 PCA irlbpy, n_comps 50
+#2 PCA via irlbpy, input shape (153, 4117), n_comps=50, use_hv=True, zero_center=True
+>> lanczos A=(153, 4117), nval=50, tol=1e-05, maxit=200
+++ lanczos center=(1, 4117), scale=None
+<< lanczos it=24 mprod=284
+#2 MemStatus: SCA_(153,_17701)_After_irlbpy;_Next_neighbors  1.9G proc, 610.6M rss, 1.3G vms, 10.5% usd, 902.0G avail
+/gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/lib/python3.9/site-packages/umap/distances.py:1063: NumbaDeprecationWarning: The 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  @numba.jit()
+/gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/lib/python3.9/site-packages/umap/distances.py:1071: NumbaDeprecationWarning: The 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  @numba.jit()
+/gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/lib/python3.9/site-packages/umap/distances.py:1086: NumbaDeprecationWarning: The 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  @numba.jit()
+/gpfs/gibbs/project/reilly/mcn26/conda_envs/spipe/lib/python3.9/site-packages/umap/umap_.py:660: NumbaDeprecationWarning: The 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  @numba.jit()
+#2 MemStatus: SCA_(153,_17701)_After_neighbors,_n_neighbors=50;_Next_umap  2.1G proc, 635.4M rss, 1.4G vms, 10.5% usd, 902.0G avail
+#2 MemStatus: SCA_(153,_17701)_After_umap,_min_dist=0.5  2.1G proc, 635.9M rss, 1.5G vms, 10.5% usd, 902.0G avail
+#2 Clustering (leiden)
+#2 MemStatus: SCA_(153,_17701)_After_clustering_leiden,_done  2.1G proc, 636.2M rss, 1.5G vms, 10.5% usd, 902.0G avail
+#2 Wrote anndata: combined/xcond_1/DGE_filtered/anndata.h5ad
+# Wrote 153 by 2 table to combined/xcond_1/report/cluster_assignment.csv
+#2 SFR_CLUST_ASSIGN Row_1_of_155                cluster
+#2 SFR_CLUST_ASSIGN Row_2_of_155  bc_wells             
+#2 SFR_CLUST_ASSIGN Row_3_of_155  01_02_73__s2        3
+#2 SFR_CLUST_ASSIGN Row_4_of_155  01_04_38__s1        2
+#2 SFR_CLUST_ASSIGN Row_5_of_155  01_05_77__s1        1
+#2 SFR_CLUST_ASSIGN Row_6_of_155  01_07_01__s1        1
+# Wrote 153 by 3 table to combined/xcond_1/report/cluster_umap.csv
+#2 SFR_CLUST_UMAP Row_1_of_155                 umap_X     umap_Y
+#2 SFR_CLUST_UMAP Row_2_of_155  bc_wells                        
+#2 SFR_CLUST_UMAP Row_3_of_155  01_02_73__s2   6.9999  15.957300
+#2 SFR_CLUST_UMAP Row_4_of_155  01_04_38__s1   9.6712  12.562500
+#2 SFR_CLUST_UMAP Row_5_of_155  01_05_77__s1  10.2213  14.722800
+#2 SFR_CLUST_UMAP Row_6_of_155  01_07_01__s1  10.9964  16.099199
+# Getting gene enrichment table, 4 clusters, top 20 genes each
+#3 Collecting, cluster 0
+#3 Collecting, cluster 1
+#3 Collecting, cluster 2
+#3 Collecting, cluster 3
+#3 Calculating, cluster 0
+#3 Calculating, cluster 1
+#3 Calculating, cluster 2
+#3 Calculating, cluster 3
+# Wrote 80 by 9 table to combined/xcond_1/report/cluster_diff_exp.csv
+#2 SFR_CLUST_DIFF_EXP Row_1_of_81      cluster          gene_id        gene_name genome    score  log2_FC   pct1   pct2   pval_adj
+#2 SFR_CLUST_DIFF_EXP Row_2_of_81  0         1  ENSG00000171551            ECEL1   hg38   64.998    5.525  0.118  0.000  1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_3_of_81  1         1  ENSG00000176571            CNBD1   hg38   59.688    4.349  0.137  0.010  1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_4_of_81  2         1  ENSG00000272558  ENSG00000272558   hg38   54.605    5.570  0.098  0.000  1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_5_of_81  3         1  ENSG00000257529   RPL36A-HNRNPH2   hg38   53.638    3.908  0.137  0.010  1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_6_of_81  4         1  ENSG00000258986          TMEM179   hg38   50.798    4.318  0.118  0.010  1.000e+00
+# 
+# Analysis processing sample (2 of 4) xcond_2
+#2 MemStatus: Analysis_samp_2  2.2G proc, 658.4M rss, 1.5G vms, 10.5% usd, 902.0G avail
+Matrix 3854 X 62710, cell 3854, gene 62710 so transposing
+#2 Loaded anndata (3854, 62710) combined/xcond_2/DGE_filtered/
+#2 Calling Scanpy to cluster (adata shape (3854, 62710))
+#2 MemStatus: SCA_(3854,_62710)_function_scanpy_cluster_anndata_start,_rseed=4824  2.6G proc, 899.0M rss, 1.8G vms, 10.5% usd, 901.7G avail
+#2 MemStatus: SCA_(3854,_33236)_After_filter_genes_3  2.6G proc, 904.1M rss, 1.8G vms, 10.5% usd, 901.7G avail
+#2 MemStatus: SCA_(3854,_33236)_After_normalize_total_target_sum=10000.0  2.9G proc, 1.0G rss, 1.9G vms, 10.5% usd, 901.5G avail
+#2 MemStatus: SCA_(3854,_33236)_After_log1p  2.9G proc, 1.0G rss, 1.9G vms, 10.5% usd, 901.5G avail
+#2 MemStatus: SCA_(3854,_33236)_After_highly_variable_genes  2.5G proc, 824.8M rss, 1.7G vms, 10.5% usd, 901.7G avail
+#2 MemStatus: SCA_(3854,_33236)_After_scale_(max=10.0,_zero_center=False)  2.5G proc, 824.8M rss, 1.7G vms, 10.5% usd, 901.7G avail
+#2 PCA using 4996 highly variable genes
+#2 PCA irlbpy, n_comps 50
+#2 PCA via irlbpy, input shape (3854, 4996), n_comps=50, use_hv=True, zero_center=True
+>> lanczos A=(3854, 4996), nval=50, tol=1e-05, maxit=200
+++ lanczos center=(1, 4996), scale=None
+<< lanczos it=47 mprod=422
+#2 MemStatus: SCA_(3854,_33236)_After_irlbpy;_Next_neighbors  2.6G proc, 869.7M rss, 1.7G vms, 10.5% usd, 901.7G avail
+#2 MemStatus: SCA_(3854,_33236)_After_neighbors,_n_neighbors=50;_Next_umap  2.6G proc, 872.1M rss, 1.7G vms, 10.5% usd, 901.7G avail
+#2 MemStatus: SCA_(3854,_33236)_After_umap,_min_dist=0.5  2.6G proc, 874.1M rss, 1.8G vms, 10.5% usd, 901.7G avail
+#2 Clustering (leiden)
+#2 MemStatus: SCA_(3854,_33236)_After_clustering_leiden,_done  2.6G proc, 875.2M rss, 1.8G vms, 10.5% usd, 901.7G avail
+#2 Wrote anndata: combined/xcond_2/DGE_filtered/anndata.h5ad
+# Wrote 3854 by 2 table to combined/xcond_2/report/cluster_assignment.csv
+#2 SFR_CLUST_ASSIGN Row_1_of_3856                cluster
+#2 SFR_CLUST_ASSIGN Row_2_of_3856  bc_wells             
+#2 SFR_CLUST_ASSIGN Row_3_of_3856  03_01_04__s1        2
+#2 SFR_CLUST_ASSIGN Row_4_of_3856  03_01_16__s1        7
+#2 SFR_CLUST_ASSIGN Row_5_of_3856  03_01_16__s2        4
+#2 SFR_CLUST_ASSIGN Row_6_of_3856  03_01_26__s2        3
+# Wrote 3854 by 3 table to combined/xcond_2/report/cluster_umap.csv
+#2 SFR_CLUST_UMAP Row_1_of_3856                   umap_X   umap_Y
+#2 SFR_CLUST_UMAP Row_2_of_3856  bc_wells                        
+#2 SFR_CLUST_UMAP Row_3_of_3856  03_01_04__s1   5.248800   6.6690
+#2 SFR_CLUST_UMAP Row_4_of_3856  03_01_16__s1   8.936000   0.6921
+#2 SFR_CLUST_UMAP Row_5_of_3856  03_01_16__s2  11.883400   0.7888
+#2 SFR_CLUST_UMAP Row_6_of_3856  03_01_26__s2   3.217100  -3.7123
+# Getting gene enrichment table, 13 clusters, top 20 genes each
+#3 Collecting, cluster 0
+#3 Collecting, cluster 1
+#3 Collecting, cluster 2
+#3 Collecting, cluster 3
+#3 Collecting, cluster 4
+#3 Collecting, cluster 5
+#3 Collecting, cluster 6
+#3 Collecting, cluster 7
+#3 Collecting, cluster 8
+#3 Collecting, cluster 9
+#3 Collecting, cluster 10
+#3 Collecting, cluster 11
+#3 Collecting, cluster 12
+#3 Calculating, cluster 0
+#3 Calculating, cluster 1
+#3 Calculating, cluster 2
+#3 Calculating, cluster 3
+#3 Calculating, cluster 4
+#3 Calculating, cluster 5
+#3 Calculating, cluster 6
+#3 Calculating, cluster 7
+#3 Calculating, cluster 8
+#3 Calculating, cluster 9
+#3 Calculating, cluster 10
+#3 Calculating, cluster 11
+#3 Calculating, cluster 12
+# Wrote 260 by 9 table to combined/xcond_2/report/cluster_diff_exp.csv
+#2 SFR_CLUST_DIFF_EXP Row_1_of_261       cluster          gene_id        gene_name genome    score  log2_FC   pct1   pct2    pval_adj
+#2 SFR_CLUST_DIFF_EXP Row_2_of_261  0          1  ENSG00000189127         ANKRD34B   hg38   15.915    3.089  0.058  0.011   1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_3_of_261  1          1  ENSG00000175874            CREG2   hg38   15.286    3.123  0.049  0.008   1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_4_of_261  2          1  ENSG00000105996            HOXA2   hg38   14.627    3.010  0.067  0.014   1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_5_of_261  3          1  ENSG00000135917          SLC19A3   hg38   12.717    2.962  0.087  0.020   9.199e-01
+#2 SFR_CLUST_DIFF_EXP Row_6_of_261  4          1  ENSG00000164128            NPY1R   hg38   11.776    2.874  0.056  0.014   1.000e+00
+# 
+# Analysis processing sample (3 of 4) xcond_3
+#2 MemStatus: Analysis_samp_3  2.6G proc, 858.2M rss, 1.7G vms, 10.5% usd, 901.7G avail
+Matrix 1058 X 62710, cell 1058, gene 62710 so transposing
+#2 Loaded anndata (1058, 62710) combined/xcond_3/DGE_filtered/
+#2 Calling Scanpy to cluster (adata shape (1058, 62710))
+#2 MemStatus: SCA_(1058,_62710)_function_scanpy_cluster_anndata_start,_rseed=4824  2.8G proc, 976.0M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 MemStatus: SCA_(1058,_27583)_After_filter_genes_3  2.8G proc, 976.0M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 MemStatus: SCA_(1058,_27583)_After_normalize_total_target_sum=10000.0  2.8G proc, 976.0M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 MemStatus: SCA_(1058,_27583)_After_log1p  2.8G proc, 976.0M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 MemStatus: SCA_(1058,_27583)_After_highly_variable_genes  2.8G proc, 976.4M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 MemStatus: SCA_(1058,_27583)_After_scale_(max=10.0,_zero_center=False)  2.8G proc, 976.5M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 PCA using 4717 highly variable genes
+#2 PCA irlbpy, n_comps 50
+#2 PCA via irlbpy, input shape (1058, 4717), n_comps=50, use_hv=True, zero_center=True
+>> lanczos A=(1058, 4717), nval=50, tol=1e-05, maxit=200
+++ lanczos center=(1, 4717), scale=None
+<< lanczos it=50 mprod=442
+#2 MemStatus: SCA_(1058,_27583)_After_irlbpy;_Next_neighbors  2.8G proc, 976.3M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 MemStatus: SCA_(1058,_27583)_After_neighbors,_n_neighbors=50;_Next_umap  2.8G proc, 976.3M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 MemStatus: SCA_(1058,_27583)_After_umap,_min_dist=0.5  2.5G proc, 817.9M rss, 1.7G vms, 10.5% usd, 901.7G avail
+#2 Clustering (leiden)
+#2 MemStatus: SCA_(1058,_27583)_After_clustering_leiden,_done  2.5G proc, 817.9M rss, 1.7G vms, 10.5% usd, 901.7G avail
+#2 Wrote anndata: combined/xcond_3/DGE_filtered/anndata.h5ad
+# Wrote 1058 by 2 table to combined/xcond_3/report/cluster_assignment.csv
+#2 SFR_CLUST_ASSIGN Row_1_of_1060                cluster
+#2 SFR_CLUST_ASSIGN Row_2_of_1060  bc_wells             
+#2 SFR_CLUST_ASSIGN Row_3_of_1060  08_01_17__s1        8
+#2 SFR_CLUST_ASSIGN Row_4_of_1060  08_01_27__s2        4
+#2 SFR_CLUST_ASSIGN Row_5_of_1060  08_01_40__s2        6
+#2 SFR_CLUST_ASSIGN Row_6_of_1060  08_01_51__s1        2
+# Wrote 1058 by 3 table to combined/xcond_3/report/cluster_umap.csv
+#2 SFR_CLUST_UMAP Row_1_of_1060                 umap_X   umap_Y
+#2 SFR_CLUST_UMAP Row_2_of_1060  bc_wells                      
+#2 SFR_CLUST_UMAP Row_3_of_1060  08_01_17__s1   5.3170   6.9588
+#2 SFR_CLUST_UMAP Row_4_of_1060  08_01_27__s2   0.0111   0.3942
+#2 SFR_CLUST_UMAP Row_5_of_1060  08_01_40__s2   0.4437   6.9141
+#2 SFR_CLUST_UMAP Row_6_of_1060  08_01_51__s1   8.3788   5.3518
+# Getting gene enrichment table, 9 clusters, top 20 genes each
+#3 Collecting, cluster 0
+#3 Collecting, cluster 1
+#3 Collecting, cluster 2
+#3 Collecting, cluster 3
+#3 Collecting, cluster 4
+#3 Collecting, cluster 5
+#3 Collecting, cluster 6
+#3 Collecting, cluster 7
+#3 Collecting, cluster 8
+#3 Calculating, cluster 0
+#3 Calculating, cluster 1
+#3 Calculating, cluster 2
+#3 Calculating, cluster 3
+#3 Calculating, cluster 4
+#3 Calculating, cluster 5
+#3 Calculating, cluster 6
+#3 Calculating, cluster 7
+#3 Calculating, cluster 8
+# Wrote 180 by 9 table to combined/xcond_3/report/cluster_diff_exp.csv
+#2 SFR_CLUST_DIFF_EXP Row_1_of_181       cluster          gene_id        gene_name genome    score  log2_FC   pct1   pct2   pval_adj
+#2 SFR_CLUST_DIFF_EXP Row_2_of_181  0          1  ENSG00000262503  ENSG00000262503   hg38   45.513    2.902  0.205  0.013  2.862e-03
+#2 SFR_CLUST_DIFF_EXP Row_3_of_181  1          1  ENSG00000286843  ENSG00000286843   hg38   44.103    4.310  0.102  0.002  1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_4_of_181  2          1  ENSG00000287094  ENSG00000287094   hg38   43.118    4.415  0.098  0.001  1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_5_of_181  3          1  ENSG00000177432           NAP1L5   hg38   35.219    3.786  0.093  0.004  1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_6_of_181  4          1  ENSG00000271736        LINC02772   hg38   34.771    2.265  0.153  0.009  2.179e-01
+# 
+# Analysis processing sample (4 of 4) all-well
+#2 MemStatus: Analysis_samp_4  2.4G proc, 793.6M rss, 1.7G vms, 10.5% usd, 901.7G avail
+Matrix 5048 X 62710, cell 5048, gene 62710 so transposing
+#2 Loaded anndata (5048, 62710) combined/all-well/DGE_filtered/
+#2 Calling Scanpy to cluster (adata shape (5048, 62710))
+#2 MemStatus: SCA_(5048,_62710)_function_scanpy_cluster_anndata_start,_rseed=4824  3.1G proc, 1.1G rss, 2.0G vms, 10.5% usd, 901.4G avail
+#2 MemStatus: SCA_(5048,_34546)_After_filter_genes_3  3.1G proc, 1.1G rss, 2.0G vms, 10.5% usd, 901.4G avail
+#2 MemStatus: SCA_(5048,_34546)_After_normalize_total_target_sum=10000.0  3.5G proc, 1.3G rss, 2.2G vms, 10.6% usd, 901.2G avail
+#2 MemStatus: SCA_(5048,_34546)_After_log1p  3.5G proc, 1.3G rss, 2.2G vms, 10.6% usd, 901.2G avail
+#2 MemStatus: SCA_(5048,_34546)_After_highly_variable_genes  2.9G proc, 1005.3M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 MemStatus: SCA_(5048,_34546)_After_scale_(max=10.0,_zero_center=False)  2.9G proc, 1005.3M rss, 1.9G vms, 10.5% usd, 901.6G avail
+#2 PCA using 4753 highly variable genes
+#2 PCA irlbpy, n_comps 50
+#2 PCA via irlbpy, input shape (5048, 4753), n_comps=50, use_hv=True, zero_center=True
+>> lanczos A=(5048, 4753), nval=50, tol=1e-05, maxit=200
+++ lanczos center=(1, 4753), scale=None
+<< lanczos it=42 mprod=392
+#2 MemStatus: SCA_(5048,_34546)_After_irlbpy;_Next_neighbors  2.9G proc, 1016.0M rss, 1.9G vms, 10.5% usd, 901.4G avail
+#2 MemStatus: SCA_(5048,_34546)_After_neighbors,_n_neighbors=50;_Next_umap  2.9G proc, 1016.2M rss, 1.9G vms, 10.5% usd, 901.5G avail
+#2 MemStatus: SCA_(5048,_34546)_After_umap,_min_dist=0.5  2.9G proc, 1016.2M rss, 1.9G vms, 10.5% usd, 901.5G avail
+#2 Clustering (leiden)
+#2 MemStatus: SCA_(5048,_34546)_After_clustering_leiden,_done  2.9G proc, 1016.9M rss, 1.9G vms, 10.5% usd, 901.5G avail
+#2 Wrote anndata: combined/all-well/DGE_filtered/anndata.h5ad
+# Wrote 5048 by 2 table to combined/all-well/report/cluster_assignment.csv
+#2 SFR_CLUST_ASSIGN Row_1_of_5050                cluster
+#2 SFR_CLUST_ASSIGN Row_2_of_5050  bc_wells             
+#2 SFR_CLUST_ASSIGN Row_3_of_5050  01_02_73__s2        1
+#2 SFR_CLUST_ASSIGN Row_4_of_5050  01_04_38__s1        1
+#2 SFR_CLUST_ASSIGN Row_5_of_5050  01_05_77__s1        1
+#2 SFR_CLUST_ASSIGN Row_6_of_5050  01_07_01__s1        1
+# Wrote 5048 by 3 table to combined/all-well/report/cluster_umap.csv
+#2 SFR_CLUST_UMAP Row_1_of_5050                 umap_X   umap_Y
+#2 SFR_CLUST_UMAP Row_2_of_5050  bc_wells                      
+#2 SFR_CLUST_UMAP Row_3_of_5050  01_02_73__s2   2.1912  10.9339
+#2 SFR_CLUST_UMAP Row_4_of_5050  01_04_38__s1   1.5089   8.3725
+#2 SFR_CLUST_UMAP Row_5_of_5050  01_05_77__s1   3.8461   8.2535
+#2 SFR_CLUST_UMAP Row_6_of_5050  01_07_01__s1   3.4681   7.8814
+# Getting gene enrichment table, 13 clusters, top 20 genes each
+#3 Collecting, cluster 0
+#3 Collecting, cluster 1
+#3 Collecting, cluster 2
+#3 Collecting, cluster 3
+#3 Collecting, cluster 4
+#3 Collecting, cluster 5
+#3 Collecting, cluster 6
+#3 Collecting, cluster 7
+#3 Collecting, cluster 8
+#3 Collecting, cluster 9
+#3 Collecting, cluster 10
+#3 Collecting, cluster 11
+#3 Collecting, cluster 12
+#3 Calculating, cluster 0
+#3 Calculating, cluster 1
+#3 Calculating, cluster 2
+#3 Calculating, cluster 3
+#3 Calculating, cluster 4
+#3 Calculating, cluster 5
+#3 Calculating, cluster 6
+#3 Calculating, cluster 7
+#3 Calculating, cluster 8
+#3 Calculating, cluster 9
+#3 Calculating, cluster 10
+#3 Calculating, cluster 11
+#3 Calculating, cluster 12
+# Wrote 260 by 9 table to combined/all-well/report/cluster_diff_exp.csv
+#2 SFR_CLUST_DIFF_EXP Row_1_of_261       cluster          gene_id        gene_name genome    score  log2_FC   pct1   pct2    pval_adj
+#2 SFR_CLUST_DIFF_EXP Row_2_of_261  0          1  ENSG00000135917          SLC19A3   hg38   10.223    2.555  0.100  0.025   8.010e-02
+#2 SFR_CLUST_DIFF_EXP Row_3_of_261  1          1  ENSG00000141750            STAC2   hg38   10.140    2.645  0.038  0.009   1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_4_of_261  2          1  ENSG00000112183            RBM24   hg38   10.044    2.495  0.061  0.015   1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_5_of_261  3          1  ENSG00000272692  ENSG00000272692   hg38    9.768    2.410  0.041  0.010   1.000e+00
+#2 SFR_CLUST_DIFF_EXP Row_6_of_261  4          1  ENSG00000164128            NPY1R   hg38    9.460    2.592  0.059  0.016   1.000e+00
+#2 MemStatus: Analysis  3.0G proc, 1.0G rss, 1.9G vms, 10.5% usd, 901.5G avail
+#2 DskStatus: Analysis  '/ombined/' 10.0T total, 1.7T (17.12%) used, 8.3T (82.88%) free
+# << Running Analysis; Status True; Duration 0:02:24.24
+
+# Time	Before Reports	2023-05-26 03:22:18.738360+0
+# >> Running Reports
+#2 MemStatus: Reports  3.0G proc, 1.0G rss, 1.9G vms, 10.5% usd, 901.5G avail
+#2 DskStatus: Reports  '/ombined/' 10.0T total, 1.7T (17.12%) used, 8.3T (82.88%) free
+# 
+# Report processing sample (1 of 4) xcond_1
+#2 MemStatus: Report_samp_1  3.0G proc, 1.0G rss, 1.9G vms, 10.5% usd, 901.5G avail
+#2 Loaded anndata (153, 17701) from combined/xcond_1/DGE_filtered/
+#2 Read Dataframe: Dims 50 x 3, Mem 1.6K (1600) from combined/xcond_1/report/analysis_all_stats.csv
+#2 Collecting stats to report
+#2 Generating plate figures
+#2 Read Dataframe: Dims 12 x 3, Mem 384B (384) from combined/xcond_1/report/tscp_median_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 3, Mem 384B (384) from combined/xcond_1/report/cell_counts_by_rnd1_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_1/report/tscp_median_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_1/report/cell_counts_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_1/report/tscp_median_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_1/report/cell_counts_by_rnd3_well.csv
+#2 Generating subsample plots
+#2 Read Dataframe: Dims 25 x 2, Mem 600B (600) from combined/xcond_1/report/tscp_counts_subsampled.csv
+#2 Read Dataframe: Dims 25 x 2, Mem 600B (600) from combined/xcond_1/report/gene_counts_subsampled.csv
+#2 Generating tscp cell count figure
+#2 Read Dataframe: Dims 34007 x 1, Mem 531.4K (544112) from combined/xcond_1/report/tscp_counts.csv
+non-focal row number_of_cells
+plot_bc_rank n_top, n_bot 135 188
+BBB lens 34007 34007
+BBB top 135 bot 188
+#2 Rendering gene enrichment table (pb)
+#2 Read Dataframe: Dims 80 x 9, Mem 5.8K (5888) from combined/xcond_1/report/cluster_diff_exp.csv
+#2 No cell subsampling for gex plots; All 153
+#2 Read Dataframe: Dims 153 x 2, Mem 3.6K (3672) from combined/xcond_1/report/cluster_umap.csv
+# Wrote 153 by 4 table to combined/xcond_1/report/cluster_umap.csv
+#2 SFR_CLUST_UMAP Row_1_of_155                 umap_X   umap_Y  in_plot_ss
+#2 SFR_CLUST_UMAP Row_2_of_155  bc_wells                                  
+#2 SFR_CLUST_UMAP Row_3_of_155  01_02_73__s2   6.9999  15.9573        True
+#2 SFR_CLUST_UMAP Row_4_of_155  01_04_38__s1   9.6712  12.5625        True
+#2 SFR_CLUST_UMAP Row_5_of_155  01_05_77__s1  10.2213  14.7228        True
+#2 SFR_CLUST_UMAP Row_6_of_155  01_07_01__s1  10.9964  16.0992        True
+#2 Generating 4 umap cluster plot figures
+#2 Generating and saving umap cluster plot leiden
+#2 Generating and saving umap cluster plot gene_count
+#2 Generating and saving umap cluster plot mread_count
+>> get_umap_gex_lines GGG 
+#2 Packaging gene expression data for plots (17701 genes, 153 cells)
+#2 Using 4 threads for multiprocessing
+ packaged 3539	19.99%
+ packaged 1769	9.99%
+ packaged 5309	29.99%
+ packaged 7079	39.99%
+ packaged 8849	49.99%
+ packaged 10619	59.99%
+ packaged 12389	69.99%
+ packaged 14159	79.99%
+ packaged 15929	89.99%
+ packaged 17699	99.99%
+<< get_umap_gex_lines 17701
+>> get_umap_count_lines 
+<< get_umap_count_lines 3
+# New report html: combined/xcond_1_analysis_summary.html
+# 
+# Report processing sample (2 of 4) xcond_2
+#2 MemStatus: Report_samp_2  2.8G proc, 874.4M rss, 1.9G vms, 10.5% usd, 901.7G avail
+#2 Loaded anndata (3854, 33236) from combined/xcond_2/DGE_filtered/
+#2 Read Dataframe: Dims 50 x 3, Mem 1.6K (1600) from combined/xcond_2/report/analysis_all_stats.csv
+#2 Collecting stats to report
+#2 Generating plate figures
+#2 Read Dataframe: Dims 12 x 3, Mem 384B (384) from combined/xcond_2/report/tscp_median_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 3, Mem 384B (384) from combined/xcond_2/report/cell_counts_by_rnd1_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_2/report/tscp_median_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_2/report/cell_counts_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_2/report/tscp_median_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_2/report/cell_counts_by_rnd3_well.csv
+#2 Generating subsample plots
+#2 Read Dataframe: Dims 24 x 2, Mem 576B (576) from combined/xcond_2/report/tscp_counts_subsampled.csv
+#2 Read Dataframe: Dims 24 x 2, Mem 576B (576) from combined/xcond_2/report/gene_counts_subsampled.csv
+#2 Generating tscp cell count figure
+#2 Read Dataframe: Dims 89569 x 1, Mem 1.4M (1433104) from combined/xcond_2/report/tscp_counts.csv
+non-focal row number_of_cells
+plot_bc_rank n_top, n_bot 3678 4140
+BBB lens 89569 89569
+BBB top 3678 bot 4140
+#2 Rendering gene enrichment table (pb)
+#2 Read Dataframe: Dims 260 x 9, Mem 18.4K (18848) from combined/xcond_2/report/cluster_diff_exp.csv
+#2 No cell subsampling for gex plots; All 3854
+#2 Read Dataframe: Dims 3854 x 2, Mem 90.3K (92496) from combined/xcond_2/report/cluster_umap.csv
+# Wrote 3854 by 4 table to combined/xcond_2/report/cluster_umap.csv
+#2 SFR_CLUST_UMAP Row_1_of_3856                 umap_X   umap_Y  in_plot_ss
+#2 SFR_CLUST_UMAP Row_2_of_3856  bc_wells                                  
+#2 SFR_CLUST_UMAP Row_3_of_3856  03_01_04__s1   5.2488   6.6690        True
+#2 SFR_CLUST_UMAP Row_4_of_3856  03_01_16__s1   8.9360   0.6921        True
+#2 SFR_CLUST_UMAP Row_5_of_3856  03_01_16__s2  11.8834   0.7888        True
+#2 SFR_CLUST_UMAP Row_6_of_3856  03_01_26__s2   3.2171  -3.7123        True
+#2 Generating 4 umap cluster plot figures
+#2 Generating and saving umap cluster plot leiden
+#2 Generating and saving umap cluster plot gene_count
+#2 Generating and saving umap cluster plot mread_count
+>> get_umap_gex_lines GGG 
+#2 Packaging gene expression data for plots (33236 genes, 3854 cells)
+#2 Using 4 threads for multiprocessing
+ packaged 6645	19.99%
+ packaged 3322	10.0%
+ packaged 9968	29.99%
+ packaged 13291	39.99%
+ packaged 16614	49.99%
+ packaged 19937	59.99%
+ packaged 23260	69.98%
+ packaged 26583	79.98%
+ packaged 29906	89.98%
+ packaged 33229	99.98%
+<< get_umap_gex_lines 33236
+>> get_umap_count_lines 
+<< get_umap_count_lines 3
+# New report html: combined/xcond_2_analysis_summary.html
+# 
+# Report processing sample (3 of 4) xcond_3
+#2 MemStatus: Report_samp_3  3.5G proc, 1.2G rss, 2.3G vms, 10.5% usd, 901.3G avail
+#2 Loaded anndata (1058, 27583) from combined/xcond_3/DGE_filtered/
+#2 Read Dataframe: Dims 50 x 3, Mem 1.6K (1600) from combined/xcond_3/report/analysis_all_stats.csv
+#2 Collecting stats to report
+#2 Generating plate figures
+#2 Read Dataframe: Dims 12 x 3, Mem 384B (384) from combined/xcond_3/report/tscp_median_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 3, Mem 384B (384) from combined/xcond_3/report/cell_counts_by_rnd1_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_3/report/tscp_median_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_3/report/cell_counts_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_3/report/tscp_median_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/xcond_3/report/cell_counts_by_rnd3_well.csv
+#2 Generating subsample plots
+#2 Read Dataframe: Dims 25 x 2, Mem 600B (600) from combined/xcond_3/report/tscp_counts_subsampled.csv
+#2 Read Dataframe: Dims 25 x 2, Mem 600B (600) from combined/xcond_3/report/gene_counts_subsampled.csv
+#2 Generating tscp cell count figure
+#2 Read Dataframe: Dims 86814 x 1, Mem 1.3M (1389024) from combined/xcond_3/report/tscp_counts.csv
+non-focal row number_of_cells
+plot_bc_rank n_top, n_bot 1014 1137
+BBB lens 86814 86814
+BBB top 1014 bot 1137
+#2 Rendering gene enrichment table (pb)
+#2 Read Dataframe: Dims 180 x 9, Mem 12.8K (13088) from combined/xcond_3/report/cluster_diff_exp.csv
+#2 No cell subsampling for gex plots; All 1058
+#2 Read Dataframe: Dims 1058 x 2, Mem 24.8K (25392) from combined/xcond_3/report/cluster_umap.csv
+# Wrote 1058 by 4 table to combined/xcond_3/report/cluster_umap.csv
+#2 SFR_CLUST_UMAP Row_1_of_1060                 umap_X   umap_Y  in_plot_ss
+#2 SFR_CLUST_UMAP Row_2_of_1060  bc_wells                                  
+#2 SFR_CLUST_UMAP Row_3_of_1060  08_01_17__s1   5.3170   6.9588        True
+#2 SFR_CLUST_UMAP Row_4_of_1060  08_01_27__s2   0.0111   0.3942        True
+#2 SFR_CLUST_UMAP Row_5_of_1060  08_01_40__s2   0.4437   6.9141        True
+#2 SFR_CLUST_UMAP Row_6_of_1060  08_01_51__s1   8.3788   5.3518        True
+#2 Generating 4 umap cluster plot figures
+#2 Generating and saving umap cluster plot leiden
+#2 Generating and saving umap cluster plot gene_count
+#2 Generating and saving umap cluster plot mread_count
+>> get_umap_gex_lines GGG 
+#2 Packaging gene expression data for plots (27583 genes, 1058 cells)
+#2 Using 4 threads for multiprocessing
+ packaged 5515	19.99%
+ packaged 2757	10.0%
+ packaged 8273	29.99%
+ packaged 11031	39.99%
+ packaged 16547	59.99%
+ packaged 19305	69.99%
+ packaged 13789	49.99%
+ packaged 24821	89.99%
+ packaged 22063	79.99%
+ packaged 27579	99.99%
+<< get_umap_gex_lines 27583
+>> get_umap_count_lines 
+<< get_umap_count_lines 3
+# New report html: combined/xcond_3_analysis_summary.html
+# 
+# Report processing sample (4 of 4) all-well
+#2 MemStatus: Report_samp_4  3.1G proc, 1.1G rss, 2.0G vms, 10.5% usd, 901.5G avail
+#2 Loaded anndata (5048, 34546) from combined/all-well/DGE_filtered/
+#2 Read Dataframe: Dims 50 x 3, Mem 1.6K (1600) from combined/all-well/report/analysis_all_stats.csv
+#2 Collecting stats to report
+#2 Generating plate figures
+#2 Read Dataframe: Dims 12 x 3, Mem 384B (384) from combined/all-well/report/tscp_median_by_rnd1_well.csv
+#2 Read Dataframe: Dims 12 x 3, Mem 384B (384) from combined/all-well/report/cell_counts_by_rnd1_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/all-well/report/tscp_median_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/all-well/report/cell_counts_by_rnd2_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/all-well/report/tscp_median_by_rnd3_well.csv
+#2 Read Dataframe: Dims 96 x 3, Mem 3.0K (3072) from combined/all-well/report/cell_counts_by_rnd3_well.csv
+#2 Generating subsample plots
+#2 Read Dataframe: Dims 24 x 2, Mem 576B (576) from combined/all-well/report/tscp_counts_subsampled.csv
+#2 Read Dataframe: Dims 24 x 2, Mem 576B (576) from combined/all-well/report/gene_counts_subsampled.csv
+#2 Generating tscp cell count figure
+#2 Read Dataframe: Dims 210390 x 1, Mem 3.2M (3366240) from combined/all-well/report/tscp_counts.csv
+non-focal row number_of_cells
+plot_bc_rank n_top, n_bot 4768 5480
+BBB lens 210390 210390
+BBB top 4768 bot 5480
+#2 Rendering gene enrichment table (pb)
+#2 Read Dataframe: Dims 260 x 9, Mem 18.4K (18848) from combined/all-well/report/cluster_diff_exp.csv
+#2 No cell subsampling for gex plots; All 5048
+#2 Read Dataframe: Dims 5048 x 2, Mem 118.3K (121152) from combined/all-well/report/cluster_umap.csv
+# Wrote 5048 by 4 table to combined/all-well/report/cluster_umap.csv
+#2 SFR_CLUST_UMAP Row_1_of_5050                 umap_X   umap_Y  in_plot_ss
+#2 SFR_CLUST_UMAP Row_2_of_5050  bc_wells                                  
+#2 SFR_CLUST_UMAP Row_3_of_5050  01_02_73__s2   2.1912  10.9339        True
+#2 SFR_CLUST_UMAP Row_4_of_5050  01_04_38__s1   1.5089   8.3725        True
+#2 SFR_CLUST_UMAP Row_5_of_5050  01_05_77__s1   3.8461   8.2535        True
+#2 SFR_CLUST_UMAP Row_6_of_5050  01_07_01__s1   3.4681   7.8814        True
+#2 Generating 4 umap cluster plot figures
+#2 Generating and saving umap cluster plot leiden
+#2 Generating and saving umap cluster plot sample
+#2 Generating and saving umap cluster plot gene_count
+#2 Generating and saving umap cluster plot mread_count
+>> get_umap_gex_lines GGG 
+#2 Packaging gene expression data for plots (34546 genes, 5048 cells)
+#2 Using 4 threads for multiprocessing
+ packaged 6907	19.99%
+ packaged 3453	10.0%
+ packaged 13815	39.99%
+ packaged 10361	29.99%
+ packaged 17269	49.99%
+ packaged 24177	69.98%
+ packaged 20723	59.99%
+ packaged 31085	89.98%
+ packaged 27631	79.98%
+ packaged 34539	99.98%
+<< get_umap_gex_lines 34546
+>> get_umap_count_lines 
+<< get_umap_count_lines 3
+# New report html: combined/all-well_analysis_summary.html
+#2 MemStatus: Reports  3.7G proc, 1.4G rss, 2.4G vms, 10.6% usd, 901.1G avail
+#2 DskStatus: Reports  '/ombined/' 10.0T total, 1.7T (17.13%) used, 8.3T (82.87%) free
+# << Running Reports; Status True; Duration 0:01:50.32
+
+# Time	Before Clean	2023-05-26 03:24:09.081169+0
+# >> Running Clean
+#2 MemStatus: Clean  3.7G proc, 1.4G rss, 2.4G vms, 10.6% usd, 901.1G avail
+#2 DskStatus: Clean  '/ombined/' 10.0T total, 1.7T (17.13%) used, 8.3T (82.87%) free
+# Created new zip archive: combined/all_summaries.zip
+#2 Checking to remove 5 files
+#2   Removed 5
+#2 Not compressing temp files
+#2 MemStatus: Clean  3.7G proc, 1.4G rss, 2.4G vms, 10.6% usd, 901.1G avail
+#2 DskStatus: Clean  '/ombined/' 10.0T total, 1.7T (17.13%) used, 8.3T (82.87%) free
+# << Running Clean; Status True; Duration 0:00:04.30
+
+# Finished successfully (0 problems)
+
+# Time	Total elapsed 	0:06:03.27
+# Time	All done	2023-05-26 03:24:13.405379+0
+# Closing down SplitPipe
+New file: combined/split-pipe_v1_0_6p.log
+# Total time 0:06:10.64
