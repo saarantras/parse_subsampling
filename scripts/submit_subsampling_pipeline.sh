@@ -26,6 +26,8 @@ if ! command -v sbatch >/dev/null 2>&1; then
   exit 1
 fi
 
+sbatch_common=(--chdir "${PROJECT_ROOT}" --export "ALL,PROJECT_ROOT=${PROJECT_ROOT}")
+
 submission_log="${RESULTS_DIR}/job_submission_$(date +%Y%m%d_%H%M%S).tsv"
 echo -e "run_id\tfraction\treplicate\tjob_all_0\tjob_all_1\tjob_combine\tjob_score\tstatus" > "${submission_log}"
 
@@ -64,6 +66,7 @@ while IFS=$'\t' read -r run_id fraction replicate seed is_reference; do
   fi
 
   jid0="$(sbatch --parsable --requeue \
+    "${sbatch_common[@]}" \
     --partition "${ALL_PARTITION}" \
     --cpus-per-task "${ALL_CPUS}" \
     --mem "${ALL_MEM}" \
@@ -73,6 +76,7 @@ while IFS=$'\t' read -r run_id fraction replicate seed is_reference; do
     "${run_id}" "0" "${fraction}" "${seed}" "${is_reference}")"
 
   jid1="$(sbatch --parsable --requeue \
+    "${sbatch_common[@]}" \
     --partition "${ALL_PARTITION}" \
     --cpus-per-task "${ALL_CPUS}" \
     --mem "${ALL_MEM}" \
@@ -82,6 +86,7 @@ while IFS=$'\t' read -r run_id fraction replicate seed is_reference; do
     "${run_id}" "1" "${fraction}" "${seed}" "${is_reference}")"
 
   jidc="$(sbatch --parsable --requeue \
+    "${sbatch_common[@]}" \
     --dependency "afterok:${jid0}:${jid1}" \
     --partition "${COMBINE_PARTITION}" \
     --cpus-per-task "${COMBINE_CPUS}" \
@@ -101,6 +106,7 @@ while IFS=$'\t' read -r run_id fraction replicate seed is_reference; do
   fi
 
   jids="$(sbatch --parsable --requeue \
+    "${sbatch_common[@]}" \
     --dependency "${score_dep}" \
     --partition "${SCORE_PARTITION}" \
     --cpus-per-task "${SCORE_CPUS}" \
@@ -121,6 +127,7 @@ if [[ "${#score_job_ids[@]}" -gt 0 ]]; then
 fi
 
 jid_agg="$(sbatch --parsable --requeue \
+  "${sbatch_common[@]}" \
   "${agg_dependency[@]}" \
   --partition "${AGG_PARTITION}" \
   --cpus-per-task "${AGG_CPUS}" \

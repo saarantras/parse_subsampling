@@ -10,7 +10,10 @@ if ! command -v sbatch >/dev/null 2>&1; then
   exit 1
 fi
 
+sbatch_common=(--chdir "${PROJECT_ROOT}" --export "ALL,PROJECT_ROOT=${PROJECT_ROOT}")
+
 jid="$(sbatch --parsable --requeue \
+  "${sbatch_common[@]}" \
   --partition "${BUILD_PARTITION}" \
   --cpus-per-task "${BUILD_CPUS}" \
   --mem "${BUILD_MEM}" \

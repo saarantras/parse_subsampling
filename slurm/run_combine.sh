@@ -13,8 +13,19 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+COMMON_SH="${SCRIPT_DIR}/common.sh"
+if [[ ! -f "${COMMON_SH}" ]]; then
+  root_hint="${PROJECT_ROOT:-${SLURM_SUBMIT_DIR:-}}"
+  if [[ -n "${root_hint}" ]]; then
+    COMMON_SH="${root_hint}/slurm/common.sh"
+  fi
+fi
+if [[ ! -f "${COMMON_SH}" ]]; then
+  echo "Could not locate slurm/common.sh. Set PROJECT_ROOT or submit from repo root." >&2
+  exit 1
+fi
 # shellcheck source=/dev/null
-source "${SCRIPT_DIR}/common.sh"
+source "${COMMON_SH}"
 
 if [[ "$#" -ne 1 ]]; then
   echo "Usage: $0 <run_id>" >&2
