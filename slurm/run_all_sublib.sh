@@ -76,7 +76,26 @@ in_fq1="${run_dir}/input/sublib_${sublib_idx}/R1.fastq.gz"
 in_fq2="${run_dir}/input/sublib_${sublib_idx}/R2.fastq.gz"
 stats_tsv="${run_dir}/sampling/sublib_${sublib_idx}.tsv"
 
+need_sampling=0
 if [[ ! -f "${stats_tsv}" ]]; then
+  need_sampling=1
+fi
+
+if [[ "${need_sampling}" -eq 0 ]]; then
+  # Cached stats can exist while staged files are missing or point to old source paths.
+  if [[ ! -r "${in_fq1}" || ! -r "${in_fq2}" ]]; then
+    need_sampling=1
+  else
+    cached_fq1="$(awk -F '\t' 'NR==2 {print $1}' "${stats_tsv}")"
+    cached_fq2="$(awk -F '\t' 'NR==2 {print $2}' "${stats_tsv}")"
+    if [[ "${cached_fq1}" != "${orig_fq1}" || "${cached_fq2}" != "${orig_fq2}" ]]; then
+      need_sampling=1
+    fi
+  fi
+fi
+
+if [[ "${need_sampling}" -eq 1 ]]; then
+  rm -f "${in_fq1}" "${in_fq2}" "${stats_tsv}"
   if [[ "${is_reference}" == "1" ]]; then
     python "${PROJECT_ROOT}/scripts/subsample_fastq_pairs.py" \
       --fq1 "${orig_fq1}" \
