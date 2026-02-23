@@ -132,6 +132,7 @@ split-pipe \
   --mode all \
   --chemistry v2 \
   --kit WT \
+  --nthreads "${SLURM_CPUS_PER_TASK:-1}" \
   --genome_dir "${GENOME_DIR}" \
   --fq1 "${in_fq1}" \
   --fq2 "${in_fq2}" \

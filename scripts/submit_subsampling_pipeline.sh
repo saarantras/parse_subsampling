@@ -28,6 +28,21 @@ fi
 
 sbatch_common=(--chdir "${PROJECT_ROOT}" --export "ALL,PROJECT_ROOT=${PROJECT_ROOT}")
 
+all_cpus="${ALL_CPUS}"
+all_mem="${ALL_MEM}"
+score_cpus="${SCORE_CPUS}"
+score_mem="${SCORE_MEM}"
+agg_cpus="${AGG_CPUS}"
+agg_mem="${AGG_MEM}"
+if [[ "${smoke_mode}" -eq 1 ]]; then
+  all_cpus="${SMOKE_ALL_CPUS}"
+  all_mem="${SMOKE_ALL_MEM}"
+  score_cpus="${SMOKE_SCORE_CPUS}"
+  score_mem="${SMOKE_SCORE_MEM}"
+  agg_cpus="${SMOKE_AGG_CPUS}"
+  agg_mem="${SMOKE_AGG_MEM}"
+fi
+
 submission_log="${RESULTS_DIR}/job_submission_$(date +%Y%m%d_%H%M%S).tsv"
 echo -e "run_id\tfraction\treplicate\tjob_all_0\tjob_all_1\tjob_combine\tjob_score\tstatus" > "${submission_log}"
 
@@ -68,8 +83,8 @@ while IFS=$'\t' read -r run_id fraction replicate seed is_reference; do
   jid0="$(sbatch --parsable --requeue \
     "${sbatch_common[@]}" \
     --partition "${ALL_PARTITION}" \
-    --cpus-per-task "${ALL_CPUS}" \
-    --mem "${ALL_MEM}" \
+    --cpus-per-task "${all_cpus}" \
+    --mem "${all_mem}" \
     --time "${ALL_TIME}" \
     --job-name "pss_a0_${run_id}" \
     "${PROJECT_ROOT}/slurm/run_all_sublib.sh" \
@@ -92,8 +107,8 @@ while IFS=$'\t' read -r run_id fraction replicate seed is_reference; do
     "${sbatch_common[@]}" \
     --dependency "${score_dep}" \
     --partition "${SCORE_PARTITION}" \
-    --cpus-per-task "${SCORE_CPUS}" \
-    --mem "${SCORE_MEM}" \
+    --cpus-per-task "${score_cpus}" \
+    --mem "${score_mem}" \
     --time "${SCORE_TIME}" \
     --job-name "pss_s_${run_id}" \
     "${PROJECT_ROOT}/slurm/run_score.sh" \
@@ -113,8 +128,8 @@ jid_agg="$(sbatch --parsable --requeue \
   "${sbatch_common[@]}" \
   "${agg_dependency[@]}" \
   --partition "${AGG_PARTITION}" \
-  --cpus-per-task "${AGG_CPUS}" \
-  --mem "${AGG_MEM}" \
+  --cpus-per-task "${agg_cpus}" \
+  --mem "${agg_mem}" \
   --time "${AGG_TIME}" \
   --job-name "pss_aggregate" \
   "${PROJECT_ROOT}/slurm/run_aggregate.sh")"
