@@ -117,28 +117,52 @@ def sampled_read_pairs(sampling_dir: Path) -> int:
     return total
 
 
+def analysis_dir(run_dir: Path) -> Path:
+    combined = run_dir / "combined"
+    if combined.exists():
+        return combined
+    sublib0 = run_dir / "sublib_0"
+    if sublib0.exists():
+        return sublib0
+    raise FileNotFoundError(f"missing analysis output under {run_dir} (expected combined/ or sublib_0/)")
+
+
+def count_cells(cell_meta_path: Path) -> int:
+    if not cell_meta_path.exists():
+        raise FileNotFoundError(f"missing cell metadata: {cell_meta_path}")
+    return sum(1 for _ in open(cell_meta_path)) - 1
+
+
 def called_cells_total(run_dir: Path) -> int:
-    path = run_dir / "combined" / "all-well" / "DGE_filtered" / "cell_metadata.csv"
-    if not path.exists():
-        raise FileNotFoundError(f"missing called-cell metadata: {path}")
-    return sum(1 for _ in open(path)) - 1
+    root = analysis_dir(run_dir)
+    all_well = root / "all-well" / "DGE_filtered" / "cell_metadata.csv"
+    if all_well.exists():
+        return count_cells(all_well)
+
+    # Single-input runs may not have a combined all-well sample; sum called cells across xcond outputs.
+    return sum(
+        count_cells(root / sample_name / "DGE_filtered" / "cell_metadata.csv")
+        for sample_name in SAMPLE_TO_CLASS
+    )
 
 
 def build_reference_centroids(reference_run_dir: Path, target_sum: float) -> dict[str, np.ndarray]:
+    ref_root = analysis_dir(reference_run_dir)
     centroids: dict[str, np.ndarray] = {}
     for sample_name, class_name in SAMPLE_TO_CLASS.items():
-        ref_x = load_dge_filtered(reference_run_dir / "combined" / sample_name)
+        ref_x = load_dge_filtered(ref_root / sample_name)
         ref_x = normalize_log1p(ref_x, target_sum)
         centroids[class_name] = centroid_from_matrix(ref_x)
     return centroids
 
 
 def classify_run(run_dir: Path, centroids: dict[str, np.ndarray], target_sum: float) -> tuple[np.ndarray, dict[str, float], int]:
+    run_root = analysis_dir(run_dir)
     confusion = np.zeros((len(CLASS_ORDER), len(CLASS_ORDER)), dtype=int)
     total_cells = 0
 
     for sample_name, true_class in SAMPLE_TO_CLASS.items():
-        run_x = load_dge_filtered(run_dir / "combined" / sample_name)
+        run_x = load_dge_filtered(run_root / sample_name)
         run_x = normalize_log1p(run_x, target_sum)
 
         score_cols = []

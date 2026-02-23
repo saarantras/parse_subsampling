@@ -32,7 +32,7 @@ submission_log="${RESULTS_DIR}/job_submission_$(date +%Y%m%d_%H%M%S).tsv"
 echo -e "run_id\tfraction\treplicate\tjob_all_0\tjob_all_1\tjob_combine\tjob_score\tstatus" > "${submission_log}"
 
 declare -a score_job_ids=()
-reference_combine_job=""
+reference_all_job=""
 
 auto_include_run() {
   local run_id="$1"
@@ -55,11 +55,11 @@ while IFS=$'\t' read -r run_id fraction replicate seed is_reference; do
   score_done="${run_dir}/.done/score.done"
   if [[ "${force_mode}" -eq 0 && -f "${score_done}" ]]; then
     if [[ "${run_id}" == "ref_full" ]]; then
-      if [[ ! -d "${run_dir}/combined" ]]; then
-        echo "ref_full score marker exists but combined output is missing: ${run_dir}/combined" >&2
+      if [[ ! -d "${run_dir}/sublib_0" && ! -d "${run_dir}/combined" ]]; then
+        echo "ref_full score marker exists but analysis output is missing: ${run_dir}/sublib_0 (or combined)" >&2
         exit 1
       fi
-      reference_combine_job=""
+      reference_all_job=""
     fi
     echo -e "${run_id}\t${fraction}\t${replicate}\tNA\tNA\tNA\tNA\talready_done" >> "${submission_log}"
     continue
@@ -75,34 +75,17 @@ while IFS=$'\t' read -r run_id fraction replicate seed is_reference; do
     "${PROJECT_ROOT}/slurm/run_all_sublib.sh" \
     "${run_id}" "0" "${fraction}" "${seed}" "${is_reference}")"
 
-  jid1="$(sbatch --parsable --requeue \
-    "${sbatch_common[@]}" \
-    --partition "${ALL_PARTITION}" \
-    --cpus-per-task "${ALL_CPUS}" \
-    --mem "${ALL_MEM}" \
-    --time "${ALL_TIME}" \
-    --job-name "pss_a1_${run_id}" \
-    "${PROJECT_ROOT}/slurm/run_all_sublib.sh" \
-    "${run_id}" "1" "${fraction}" "${seed}" "${is_reference}")"
+  jid1="NA"
 
-  jidc="$(sbatch --parsable --requeue \
-    "${sbatch_common[@]}" \
-    --dependency "afterok:${jid0}:${jid1}" \
-    --partition "${COMBINE_PARTITION}" \
-    --cpus-per-task "${COMBINE_CPUS}" \
-    --mem "${COMBINE_MEM}" \
-    --time "${COMBINE_TIME}" \
-    --job-name "pss_c_${run_id}" \
-    "${PROJECT_ROOT}/slurm/run_combine.sh" \
-    "${run_id}")"
+  jidc="NA"
 
   if [[ "${run_id}" == "ref_full" ]]; then
-    reference_combine_job="${jidc}"
+    reference_all_job="${jid0}"
   fi
 
-  score_dep="afterok:${jidc}"
-  if [[ "${run_id}" != "ref_full" && -n "${reference_combine_job}" ]]; then
-    score_dep="afterok:${jidc}:${reference_combine_job}"
+  score_dep="afterok:${jid0}"
+  if [[ "${run_id}" != "ref_full" && -n "${reference_all_job}" ]]; then
+    score_dep="afterok:${jid0}:${reference_all_job}"
   fi
 
   jids="$(sbatch --parsable --requeue \

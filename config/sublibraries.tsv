@@ -1,3 +1,2 @@
 sublib_idx	fq1	fq2
-0	data/ryan-sublib-1_L1_ds.6cea746bf1ed4d7a8266237195f20760/ryan-sublib-1_S1_L001_R1_001.fastq.gz	data/ryan-sublib-1_L1_ds.6cea746bf1ed4d7a8266237195f20760/ryan-sublib-1_S1_L001_R2_001.fastq.gz
-1	data/ryan-sublib-2_L1_ds.696133ab3cd34034bbaaea07e4dab17f/ryan-sublib-2_S2_L001_R1_001.fastq.gz	data/ryan-sublib-2_L1_ds.696133ab3cd34034bbaaea07e4dab17f/ryan-sublib-2_S2_L001_R2_001.fastq.gz
+0	data/Undetermined_S0_R1_001.fastq.gz	data/Undetermined_S0_R2_001.fastq.gz

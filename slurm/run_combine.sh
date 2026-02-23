@@ -45,14 +45,23 @@ if [[ -f "${done_flag}" ]]; then
   exit 0
 fi
 
-if [[ ! -d "${run_dir}/sublib_0" || ! -d "${run_dir}/sublib_1" ]]; then
-  echo "Missing sublibrary outputs for ${run_id}" >&2
+if [[ ! -d "${run_dir}/sublib_0" ]]; then
+  echo "Missing analysis output for ${run_id}: expected ${run_dir}/sublib_0" >&2
+  exit 1
+fi
+if [[ -d "${run_dir}/sublib_1" ]]; then
+  echo "Unexpected ${run_dir}/sublib_1 found; this pipeline now expects a single paired-end input only." >&2
   exit 1
 fi
 
+# Single paired-end input: expose sublib_0 as combined/ for downstream tools that still read combined/.
+if [[ -e "${run_dir}/combined" && ! -L "${run_dir}/combined" ]]; then
+  echo "combined exists and is not a symlink: ${run_dir}/combined" >&2
+  exit 1
+fi
 (
   cd "${run_dir}"
-  split-pipe --mode combine --sublibraries sublib_0 sublib_1 --output_dir combined
+  ln -sfn "sublib_0" "combined"
 )
 
 if ! ls "${run_dir}/combined"/*_analysis_summary.html >/dev/null 2>&1; then
