@@ -105,6 +105,7 @@ if [[ "${need_sampling}" -eq 1 ]]; then
       --stats-out "${stats_tsv}" \
       --fraction "${fraction}" \
       --seed "${seed}" \
+      --threads "${SLURM_CPUS_PER_TASK:-1}" \
       --check-prefix 10000 \
       --passthrough
   else
@@ -116,6 +117,7 @@ if [[ "${need_sampling}" -eq 1 ]]; then
       --stats-out "${stats_tsv}" \
       --fraction "${fraction}" \
       --seed "${seed}" \
+      --threads "${SLURM_CPUS_PER_TASK:-1}" \
       --check-prefix 10000
   fi
 fi
@@ -135,6 +137,7 @@ split-pipe \
   --fq2 "${in_fq2}" \
   --output_dir "${out_dir}" \
   --chem_score_skip \
+  --kit_score_skip \
   --sample xcond_1 A1-B4 \
   --sample xcond_2 B5-C8 \
   --sample xcond_3 C9-D12
