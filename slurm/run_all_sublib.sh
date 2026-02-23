@@ -134,6 +134,7 @@ split-pipe \
   --fq1 "${in_fq1}" \
   --fq2 "${in_fq2}" \
   --output_dir "${out_dir}" \
+  --chem_score_skip \
   --sample xcond_1 A1-B4 \
   --sample xcond_2 B5-C8 \
   --sample xcond_3 C9-D12
