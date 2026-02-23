@@ -1,6 +1,6 @@
 # Parse Split-Pipe Subsampling Analysis
 
-This repository implements a FASTQ-level read-depth subsampling workflow for Parse Biosciences split-pool scRNA-seq data to estimate how many reads per cell are required to recover cell identity. Data from `initial_parse_analysis_dw02aaQXFLuCidCjhGcm28ZUOVLeaelJ`
+This repository implements a FASTQ-level read-depth subsampling workflow for Parse Biosciences split-pool scRNA-seq data to estimate how many reads per cell are required to recover cell identity. Data from `single_cell_iXd75a0jCZ6MNZL88FTcHoTI4L9r51p5`
 
 ## Implemented Plan
 
