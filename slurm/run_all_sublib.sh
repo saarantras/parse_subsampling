@@ -110,6 +110,7 @@ out_dir="${run_dir}/sublib_${sublib_idx}"
 split-pipe \
   --mode all \
   --chemistry v2 \
+  --kit WT \
   --genome_dir "${GENOME_DIR}" \
   --fq1 "${in_fq1}" \
   --fq2 "${in_fq2}" \
