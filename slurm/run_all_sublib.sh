@@ -134,9 +134,9 @@ split-pipe \
   --fq1 "${in_fq1}" \
   --fq2 "${in_fq2}" \
   --output_dir "${out_dir}" \
-  --sample xcond_1 A1-A2 \
-  --sample xcond_2 A3-A7 \
-  --sample xcond_3 A8-A12
+  --sample xcond_1 A1-B4 \
+  --sample xcond_2 B5-C8 \
+  --sample xcond_3 C9-D12
 
 if ! ls "${out_dir}"/*_analysis_summary.html >/dev/null 2>&1; then
   echo "Expected split-pipe report HTML files not found in ${out_dir}" >&2
