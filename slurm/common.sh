@@ -62,8 +62,26 @@ BUILD_CPUS="${BUILD_CPUS:-5}"
 BUILD_MEM="${BUILD_MEM:-120G}"
 BUILD_TIME="${BUILD_TIME:-04:00:00}"
 
+ensure_one_dir() {
+  local dir="$1"
+
+  # Accept an existing directory or a symlink that resolves to a directory.
+  if [[ -d "${dir}" ]]; then
+    return 0
+  fi
+
+  if [[ -L "${dir}" ]]; then
+    echo "Path exists but is not a usable directory (broken symlink?): ${dir}" >&2
+    return 1
+  fi
+
+  mkdir -p "${dir}"
+}
+
 ensure_dirs() {
-  mkdir -p "${RUNS_DIR}" "${RESULTS_DIR}" "${FIGURES_DIR}"
+  ensure_one_dir "${RUNS_DIR}"
+  ensure_one_dir "${RESULTS_DIR}"
+  ensure_one_dir "${FIGURES_DIR}"
 }
 
 activate_conda_env() {
