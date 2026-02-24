@@ -130,15 +130,13 @@ fi
 out_dir="${run_dir}/sublib_${sublib_idx}"
 split-pipe \
   --mode all \
-  --chemistry v2 \
+  --chemistry v3 \
   --kit WT \
   --nthreads "${SLURM_CPUS_PER_TASK:-1}" \
   --genome_dir "${GENOME_DIR}" \
   --fq1 "${in_fq1}" \
   --fq2 "${in_fq2}" \
   --output_dir "${out_dir}" \
-  --chem_score_skip \
-  --kit_score_skip \
   --sample xcond_1 A1-B4 \
   --sample xcond_2 B5-C8 \
   --sample xcond_3 C9-D12
