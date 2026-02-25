@@ -79,9 +79,11 @@ All jobs use `--requeue` and run-level done markers in `runs/<run_id>/.done/` fo
 - `figures/reads_vs_identity_accuracy_by_class.png`
 - `figures/umap_sample_gallery.html` (optional helper artifact)
   - Self-contained Plotly gallery of per-run UMAPs in `Samples` mode (data extracted and baked in at generation time)
+  - Publication-style layout currently displays one sublibrary UMAP per run (using the `sublib_0` report when present; `sublib_1` is omitted from the figure grid)
   - Can be opened directly via `file://` (no local web server required)
 - `figures/umap_sample_gallery.svg` (optional publication helper artifact)
   - Static vector export arranged as fraction rows × replicate columns for Illustrator/publication assembly
+  - Uses the same `sublib_0`-based gallery selection as the HTML output
   - Uses full point density from extracted UMAP coordinates (larger file, but directly editable as vector)
 - Per-run confusion matrices:
   - `runs/<run_id>/score_confusion_counts.tsv`
@@ -99,7 +101,7 @@ python3 scripts/build_umap_sample_gallery.py
 ```
 
 This script:
-- scans `runs/<run_id>/sublib_*/all-sample_analysis_summary.html`
+- scans `runs/<run_id>/sublib_*/all-sample_analysis_summary.html` and builds the publication matrix from one sublibrary UMAP per run (currently `sublib_0` when present)
 - extracts `umap_x`, `umap_y`, and `samples_raw` from the embedded split-pipe JavaScript
 - re-renders only the UMAP scatter plots (no embedded full report pages)
 - relabels sample classes `xcond_1/2/3` as `K562`, `SK-N-SH`, `HEPG2`
@@ -110,6 +112,7 @@ This script:
 
 Notes:
 - The generated file is intended for visual comparison and figure prep; regenerate it after rerunning analysis outputs.
+- The subsampling pipeline itself still runs/combines both sublibraries; the gallery is a visualization convenience and intentionally does not show a separate `sublib_1` panel.
 - The SVG export is full-density (no point downsampling), so file size can grow with the number of cells.
 - Current implementation targets Parse split-pipe report structure used here (tested with pipeline `v1.6.4` report HTMLs).
 - The gallery HTML still loads Plotly from the CDN, but it does not require access to the original report HTML files when viewing.
