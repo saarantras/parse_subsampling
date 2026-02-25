@@ -168,6 +168,11 @@ def extract_umap_sample_traces(report_path: Path) -> List[dict]:
         "xcond_2": "#ff7f0e",
         "xcond_3": "#2ca02c",
     }
+    sample_name_map = {
+        "xcond_1": "K562",
+        "xcond_2": "SK-N-SH",
+        "xcond_3": "HEPG2",
+    }
 
     grouped: "OrderedDict[str, tuple[list[float], list[float]]]" = OrderedDict()
     for x, y, sample in zip(xs, ys, samples):
@@ -179,15 +184,16 @@ def extract_umap_sample_traces(report_path: Path) -> List[dict]:
 
     traces: List[dict] = []
     for sample, (gx, gy) in grouped.items():
+        display_name = sample_name_map.get(sample, sample)
         traces.append(
             {
                 "type": "scattergl",
                 "mode": "markers",
-                "name": sample,
+                "name": display_name,
                 "x": gx,
                 "y": gy,
                 "marker": {"size": 3, "opacity": 0.85, "color": color_map.get(sample)},
-                "hovertemplate": f"<b>{sample}</b><extra></extra>",
+                "hovertemplate": f"<b>{display_name}</b><extra></extra>",
             }
         )
     return traces
@@ -268,9 +274,56 @@ def build_html(panels: List[dict]) -> str:
     button:hover { border-color: var(--accent); color: var(--accent); }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(680px, 1fr));
       gap: 14px;
       align-items: start;
+    }
+    .matrix-scroll {
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .matrix-grid {
+      --rows-head: 92px;
+      --rep-cols: 3;
+      --cell-min: 520px;
+      display: grid;
+      gap: 12px;
+      align-items: start;
+      grid-template-columns: var(--rows-head) repeat(var(--rep-cols), minmax(var(--cell-min), 1fr));
+      min-width: calc(var(--rows-head) + var(--rep-cols) * var(--cell-min) + (var(--rep-cols)) * 12px);
+    }
+    .matrix-colhead,
+    .matrix-rowhead {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: color-mix(in oklab, var(--panel) 82%, white);
+      box-shadow: var(--shadow);
+      color: var(--muted);
+      font-size: 12px;
+      display: grid;
+      place-items: center;
+      min-height: 52px;
+      text-align: center;
+      padding: 8px;
+    }
+    .matrix-colhead strong,
+    .matrix-rowhead strong { color: var(--ink); font-size: 13px; }
+    .matrix-corner {
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      min-height: 52px;
+      background: rgba(255,255,255,0.4);
+    }
+    .matrix-empty {
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.65);
+      min-height: 640px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      padding: 12px;
     }
     .card {
       background: var(--panel);
@@ -328,9 +381,6 @@ def build_html(panels: List[dict]) -> str:
     <h1 class=\"title\">UMAP Sample Gallery</h1>
     <p class=\"subtitle\">Standalone UMAP plots extracted at build time from split-pipe reports (Samples mode only). No local server is required to view this file.</p>
     <div class=\"stats\" id=\"stats\"></div>
-    <div class=\"actions\">
-      <button id=\"single-col\" type=\"button\">Toggle Single Column</button>
-    </div>
   </section>
 
   <main class=\"grid\" id=\"gallery\"></main>
@@ -387,13 +437,53 @@ def build_html(panels: List[dict]) -> str:
       const runCount = new Set(panels.map(p => p.run_id)).size;
       const panelCount = panels.length;
       const totalPoints = panels.reduce((n, p) => n + (p.n_points || 0), 0);
+      const nonRef = panels.filter(p => !p.is_reference);
+      const repCount = new Set(nonRef.map(p => p.replicate)).size;
+      const fracCount = new Set(nonRef.map(p => String(p.fraction))).size;
       stats.replaceChildren(
         chip(`${runCount} runs`),
         chip(`${panelCount} panels`),
         chip(`${totalPoints.toLocaleString()} points`),
+        chip(`${fracCount} fraction rows × ${repCount} replicate cols`),
         chip('mode: Samples only'),
         chip('self-contained (report data baked in)')
       );
+    }
+
+    function makePanelCard(p, i) {
+      const card = document.createElement('section');
+      card.className = 'card';
+
+      const head = document.createElement('div');
+      head.className = 'card-head';
+      const left = document.createElement('div');
+
+      const runline = document.createElement('div');
+      runline.className = 'runline';
+      runline.textContent = `${p.run_id}${p.sublib ? ` (${p.sublib})` : ''}`;
+
+      const metaline = document.createElement('div');
+      metaline.className = 'metaline';
+      const refText = p.is_reference ? 'reference full depth • ' : '';
+      metaline.textContent = `${refText}fraction=${fmtFraction(p.fraction)} • replicate=${p.replicate} • ${p.n_points.toLocaleString()} cells`;
+
+      left.append(runline, metaline);
+
+      const status = document.createElement('div');
+      status.className = 'status';
+      status.textContent = 'rendering';
+
+      head.append(left, status);
+
+      const wrap = document.createElement('div');
+      wrap.className = 'plot-wrap';
+      const host = document.createElement('div');
+      host.className = 'plot-host';
+      host.id = `plot-${i}`;
+      wrap.append(host);
+
+      card.append(head, wrap);
+      return card;
     }
 
     async function renderAll() {
@@ -403,43 +493,71 @@ def build_html(panels: List[dict]) -> str:
       }
       setStats();
 
-      const frag = document.createDocumentFragment();
+      const nonRefPanels = panels.filter(p => !p.is_reference);
+      const refPanels = panels.filter(p => p.is_reference);
+      const replicates = [...new Set(nonRefPanels.map(p => p.replicate))].sort((a, b) => a - b);
+      const fractions = [...new Set(nonRefPanels.map(p => p.fraction))].sort((a, b) => a - b);
+      const matrixByKey = new Map();
       for (let i = 0; i < panels.length; i++) {
         const p = panels[i];
-        const card = document.createElement('section');
-        card.className = 'card';
-
-        const head = document.createElement('div');
-        head.className = 'card-head';
-        const left = document.createElement('div');
-
-        const runline = document.createElement('div');
-        runline.className = 'runline';
-        runline.textContent = `${p.run_id} (${p.sublib})`;
-
-        const metaline = document.createElement('div');
-        metaline.className = 'metaline';
-        const refText = p.is_reference ? 'reference full depth • ' : '';
-        metaline.textContent = `${refText}fraction=${fmtFraction(p.fraction)} • replicate=${p.replicate} • ${p.n_points.toLocaleString()} cells`;
-
-        left.append(runline, metaline);
-
-        const status = document.createElement('div');
-        status.className = 'status';
-        status.textContent = 'rendering';
-
-        head.append(left, status);
-
-        const wrap = document.createElement('div');
-        wrap.className = 'plot-wrap';
-        const host = document.createElement('div');
-        host.className = 'plot-host';
-        host.id = `plot-${i}`;
-        wrap.append(host);
-
-        card.append(head, wrap);
-        frag.append(card);
+        p.__idx = i;
+        if (!p.is_reference) {
+          const key = `${p.fraction}|${p.replicate}`;
+          if (!matrixByKey.has(key)) {
+            matrixByKey.set(key, p);
+          }
+        }
       }
+
+      const frag = document.createDocumentFragment();
+
+      if (refPanels.length) {
+        const refSection = document.createElement('div');
+        refSection.className = 'grid';
+        refSection.style.gridTemplateColumns = `repeat(${Math.max(1, refPanels.length)}, minmax(680px, 1fr))`;
+        for (const p of refPanels) {
+          refSection.append(makePanelCard(p, p.__idx));
+        }
+        frag.append(refSection);
+      }
+
+      const matrixScroll = document.createElement('div');
+      matrixScroll.className = 'matrix-scroll';
+      const matrix = document.createElement('div');
+      matrix.className = 'matrix-grid';
+      matrix.style.setProperty('--rep-cols', String(Math.max(1, replicates.length)));
+
+      const corner = document.createElement('div');
+      corner.className = 'matrix-corner';
+      matrix.append(corner);
+      for (const rep of replicates) {
+        const ch = document.createElement('div');
+        ch.className = 'matrix-colhead';
+        ch.innerHTML = `<div><strong>Replicate ${rep}</strong></div>`;
+        matrix.append(ch);
+      }
+
+      for (const frac of fractions) {
+        const rh = document.createElement('div');
+        rh.className = 'matrix-rowhead';
+        rh.innerHTML = `<div><strong>f = ${fmtFraction(frac)}</strong></div>`;
+        matrix.append(rh);
+
+        for (const rep of replicates) {
+          const key = `${frac}|${rep}`;
+          const p = matrixByKey.get(key);
+          if (p) {
+            matrix.append(makePanelCard(p, p.__idx));
+          } else {
+            const empty = document.createElement('div');
+            empty.className = 'matrix-empty';
+            empty.textContent = `No panel for fraction ${fmtFraction(frac)}, replicate ${rep}`;
+            matrix.append(empty);
+          }
+        }
+      }
+      matrixScroll.append(matrix);
+      frag.append(matrixScroll);
       gallery.replaceChildren(frag);
 
       for (let i = 0; i < panels.length; i++) {
@@ -462,11 +580,6 @@ def build_html(panels: List[dict]) -> str:
         }
       }
     }
-
-    document.getElementById('single-col').addEventListener('click', () => {
-      const oneCol = gallery.style.gridTemplateColumns === '1fr';
-      gallery.style.gridTemplateColumns = oneCol ? '' : '1fr';
-    });
 
     renderAll();
   </script>
