@@ -129,14 +129,15 @@ def build_html(entries: List[GalleryEntry]) -> str:
 
     payload_json = json.dumps(payload, indent=2)
 
-    return f"""<!doctype html>
+    template = """<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>UMAP Sample Gallery</title>
+  <script src="https://cdn.plot.ly/plotly-3.1.0.min.js"></script>
   <style>
-    :root {{
+    :root {
       --bg: #f4f0e8;
       --panel: #fffaf1;
       --ink: #1f1c17;
@@ -144,11 +145,11 @@ def build_html(entries: List[GalleryEntry]) -> str:
       --line: #d8cfbe;
       --accent: #1f6f78;
       --shadow: 0 10px 24px rgba(40, 32, 18, 0.08);
-    }}
-    * {{ box-sizing: border-box; }}
-    html, body {{ margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: Georgia, "Times New Roman", serif; }}
-    body {{ padding: 20px; }}
-    .topbar {{
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: Georgia, "Times New Roman", serif; }
+    body { padding: 20px; }
+    .topbar {
       position: sticky; top: 0; z-index: 20;
       background: color-mix(in oklab, var(--bg) 88%, white);
       border: 1px solid var(--line);
@@ -157,12 +158,12 @@ def build_html(entries: List[GalleryEntry]) -> str:
       margin-bottom: 16px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(6px);
-    }}
-    .title {{ font-size: 20px; font-weight: 700; margin: 0 0 4px; }}
-    .subtitle {{ font-size: 13px; color: var(--muted); margin: 0; }}
-    .stats {{ margin-top: 8px; font-size: 12px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }}
-    .actions {{ margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }}
-    button {{
+    }
+    .title { font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+    .subtitle { font-size: 13px; color: var(--muted); margin: 0; }
+    .stats { margin-top: 8px; font-size: 12px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }
+    .actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+    button {
       border: 1px solid var(--line);
       background: white;
       color: var(--ink);
@@ -171,22 +172,22 @@ def build_html(entries: List[GalleryEntry]) -> str:
       cursor: pointer;
       font: inherit;
       font-size: 12px;
-    }}
-    button:hover {{ border-color: var(--accent); color: var(--accent); }}
-    .grid {{
+    }
+    button:hover { border-color: var(--accent); color: var(--accent); }
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(680px, 1fr));
       gap: 14px;
       align-items: start;
-    }}
-    .card {{
+    }
+    .card {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 14px;
       overflow: hidden;
       box-shadow: var(--shadow);
-    }}
-    .card-head {{
+    }
+    .card-head {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 8px;
@@ -196,10 +197,10 @@ def build_html(entries: List[GalleryEntry]) -> str:
       background:
         linear-gradient(135deg, rgba(31,111,120,0.08), rgba(31,111,120,0) 45%),
         linear-gradient(0deg, rgba(255,255,255,0.7), rgba(255,255,255,0.7));
-    }}
-    .runline {{ font-size: 13px; font-weight: 700; }}
-    .metaline {{ font-size: 12px; color: var(--muted); }}
-    .status {{
+    }
+    .runline { font-size: 13px; font-weight: 700; }
+    .metaline { font-size: 12px; color: var(--muted); }
+    .status {
       font-size: 11px;
       color: var(--muted);
       border: 1px solid var(--line);
@@ -207,69 +208,118 @@ def build_html(entries: List[GalleryEntry]) -> str:
       padding: 2px 8px;
       white-space: nowrap;
       align-self: center;
-    }}
-    .frame-wrap {{ padding: 0; background: #fff; }}
-    iframe {{
-      width: 100%;
-      height: 700px;
+    }
+    .plot-wrap { background: #fff; padding: 8px; }
+    .plot-host {
+      min-height: 560px;
+      border-radius: 10px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(31,111,120,0.05), transparent 30%),
+        linear-gradient(#fff, #fff);
+      border: 1px solid #efe8da;
+    }
+    .plot-placeholder {
+      height: 560px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    #worker-frame {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      left: -9999px;
+      top: -9999px;
       border: 0;
-      display: block;
-      background: white;
-    }}
-    .hint {{
+      opacity: 0;
+      pointer-events: none;
+    }
+    .hint {
       margin-top: 14px;
       font-size: 12px;
       color: var(--muted);
       line-height: 1.35;
-    }}
-    .mono {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }}
-    @media (max-width: 760px) {{
-      body {{ padding: 10px; }}
-      .grid {{ grid-template-columns: 1fr; }}
-    }}
+    }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    @media (max-width: 760px) {
+      body { padding: 10px; }
+      .grid { grid-template-columns: 1fr; }
+      .plot-host, .plot-placeholder { min-height: 480px; height: 480px; }
+    }
   </style>
 </head>
 <body>
   <section class="topbar">
     <h1 class="title">UMAP Sample Gallery</h1>
-    <p class="subtitle">Embedded split-pipe reports auto-switched to Clustering → Samples. Each panel is labeled by subsample fraction and replicate.</p>
+    <p class="subtitle">Standalone UMAP plots extracted from split-pipe reports (Clustering → Samples only). Each panel is labeled by subsample fraction and replicate.</p>
     <div class="stats" id="stats"></div>
     <div class="actions">
-      <button id="reload-all" type="button">Re-apply UMAP View</button>
+      <button id="reload-all" type="button">Rebuild All Panels</button>
       <button id="single-col" type="button">Toggle Single Column</button>
     </div>
   </section>
 
   <main class="grid" id="gallery"></main>
+  <iframe id="worker-frame" title="umap-worker"></iframe>
 
   <p class="hint">
-    If panels stay on the Summary page or show a cross-origin error, serve this repo over HTTP (for example:
-    <span class="mono">python -m http.server</span> from the repo root) and open
+    This page extracts UMAP traces from each source report and re-renders them here. It still needs same-origin access to the report HTMLs:
+    serve the repo over HTTP (for example <span class="mono">python3 -m http.server</span> from repo root) and open
     <span class="mono">/figures/umap_sample_gallery.html</span>.
   </p>
 
-  <script type="application/json" id="gallery-data">{payload_json}</script>
+  <script type="application/json" id="gallery-data">__PAYLOAD_JSON__</script>
   <script>
     const data = JSON.parse(document.getElementById("gallery-data").textContent);
     const gallery = document.getElementById("gallery");
     const stats = document.getElementById("stats");
+    const workerFrame = document.getElementById("worker-frame");
 
-    function fmtFraction(x) {{
+    let queue = [];
+    let queuePos = 0;
+    let activeIdx = null;
+    let workerBusy = false;
+
+    function fmtFraction(x) {
       return Number(x).toFixed(3).replace(/0+$/, "").replace(/\\.$/, "");
-    }}
+    }
 
-    function buildCards() {{
+    function chip(text) {
+      const el = document.createElement("span");
+      el.textContent = text;
+      return el;
+    }
+
+    function setStats() {
       stats.innerHTML = "";
       const runCount = new Set(data.map(d => d.run_id)).size;
       const panelCount = data.length;
       stats.append(
-        chip(`${{runCount}} runs`),
-        chip(`${{panelCount}} panels`),
-        chip(`report: all-sample_analysis_summary.html`)
+        chip(`${runCount} runs`),
+        chip(`${panelCount} panels`),
+        chip(`mode: extracted UMAP (Samples)`),
+        chip(`source: all-sample_analysis_summary.html`)
       );
+    }
 
+    function statusByIdx(idx) {
+      return document.getElementById(`status-${idx}`);
+    }
+
+    function hostByIdx(idx) {
+      return document.getElementById(`plot-${idx}`);
+    }
+
+    function setStatus(idx, text) {
+      const el = statusByIdx(idx);
+      if (el) el.textContent = text;
+    }
+
+    function buildCards() {
+      setStats();
       const frag = document.createDocumentFragment();
-      data.forEach((d, idx) => {{
+      data.forEach((d, idx) => {
         const card = document.createElement("section");
         card.className = "card";
         card.dataset.runId = d.run_id;
@@ -278,207 +328,226 @@ def build_html(entries: List[GalleryEntry]) -> str:
         const head = document.createElement("div");
         head.className = "card-head";
         const left = document.createElement("div");
+
         const runline = document.createElement("div");
         runline.className = "runline";
-        runline.textContent = d.is_reference
-          ? `${{d.run_id}} (${{
-              d.sublib
-            }})`
-          : `${{d.run_id}} (${{d.sublib}})`;
+        runline.textContent = `${d.run_id} (${d.sublib})`;
 
         const metaline = document.createElement("div");
         metaline.className = "metaline";
         metaline.textContent = d.is_reference
-          ? `reference full depth • fraction=${{fmtFraction(d.fraction)}} • replicate=${{d.replicate}}`
-          : `fraction=${{fmtFraction(d.fraction)}} • replicate=${{d.replicate}}`;
+          ? `reference full depth • fraction=${fmtFraction(d.fraction)} • replicate=${d.replicate}`
+          : `fraction=${fmtFraction(d.fraction)} • replicate=${d.replicate}`;
         left.append(runline, metaline);
 
         const status = document.createElement("div");
         status.className = "status";
-        status.textContent = "loading";
-        status.id = `status-${{idx}}`;
+        status.id = `status-${idx}`;
+        status.textContent = "queued";
 
         head.append(left, status);
 
         const wrap = document.createElement("div");
-        wrap.className = "frame-wrap";
-        const iframe = document.createElement("iframe");
-        iframe.loading = "lazy";
-        iframe.src = d.src;
-        iframe.dataset.statusId = status.id;
-        iframe.dataset.index = String(idx);
-        iframe.title = `UMAP samples view: ${{d.run_id}} ${{d.sublib}}`;
-        iframe.addEventListener("load", () => {{
-          status.textContent = "loaded; applying view";
-          scheduleApply(iframe, 0);
-          // Re-apply after Plotly scripts finish in the embedded page.
-          [250, 800, 1800, 3500].forEach(ms => setTimeout(() => scheduleApply(iframe, 0), ms));
-        }});
-        wrap.appendChild(iframe);
+        wrap.className = "plot-wrap";
+        const host = document.createElement("div");
+        host.className = "plot-host";
+        host.id = `plot-${idx}`;
+        const ph = document.createElement("div");
+        ph.className = "plot-placeholder";
+        ph.textContent = "Waiting to extract UMAP…";
+        host.appendChild(ph);
+        wrap.appendChild(host);
 
         card.append(head, wrap);
         frag.appendChild(card);
-      }});
+      });
       gallery.replaceChildren(frag);
-    }}
+    }
 
-    function chip(text) {{
-      const el = document.createElement("span");
-      el.textContent = text;
-      return el;
-    }}
+    function resetQueue() {
+      queue = data.map((_, idx) => idx);
+      queuePos = 0;
+      activeIdx = null;
+      workerBusy = false;
+      for (const idx of queue) {
+        setStatus(idx, "queued");
+        const host = hostByIdx(idx);
+        if (!host) continue;
+        if (window.Plotly && host.classList.contains("js-plotly-plot")) {
+          Plotly.purge(host);
+        } else if (window.Plotly && host.querySelector(".js-plotly-plot")) {
+          const nested = host.querySelector(".js-plotly-plot");
+          Plotly.purge(nested);
+        }
+        host.innerHTML = '<div class="plot-placeholder">Waiting to extract UMAP…</div>';
+      }
+    }
 
-    function statusEl(frame) {{
-      return document.getElementById(frame.dataset.statusId);
-    }}
+    function startQueue() {
+      if (!window.Plotly) {
+        console.error("Plotly failed to load");
+        return;
+      }
+      pumpQueue();
+    }
 
-    function setStatus(frame, msg) {{
-      const el = statusEl(frame);
-      if (el) el.textContent = msg;
-    }}
+    function pumpQueue() {
+      if (workerBusy) return;
+      if (queuePos >= queue.length) return;
 
-    function injectIframeStyle(doc) {{
-      if (doc.getElementById("codex-umap-gallery-style")) return;
-      const style = doc.createElement("style");
-      style.id = "codex-umap-gallery-style";
-      style.textContent = `
-        html, body {{
-          margin: 0 !important;
-          padding: 0 !important;
-          background: #fff !important;
-          overflow: hidden !important;
-        }}
-        nav, footer, #Page1, #Page3, #Page4 {{
-          display: none !important;
-        }}
-        #Page2 {{
-          display: block !important;
-          margin: 0 !important;
-          padding: 0 !important;
-        }}
-        #Page2 > nav {{
-          display: none !important;
-        }}
-        #Page2 > .container {{
-          width: auto !important;
-          margin: 0 !important;
-          padding: 0 !important;
-        }}
-        #filter-col {{
-          display: none !important;
-        }}
-        #Page2 #plotly-parent-div {{
-          float: none !important;
-          width: 100% !important;
-          max-width: none !important;
-          margin: 0 !important;
-          padding: 0 !important;
-        }}
-        #Page2 #plotly-parent-div > div:first-child {{
-          display: none !important;
-        }}
-        #Page2 #plotly-parent-div .container {{
-          width: auto !important;
-          margin: 0 !important;
-          padding: 0 !important;
-          box-shadow: none !important;
-          border: 0 !important;
-        }}
-        #Page2 #plotly-child-div {{
-          margin: 0 !important;
-          padding: 8px 8px 0 8px !important;
-        }}
-        #Page2 #plotly-tabs {{
-          margin-bottom: 6px !important;
-        }}
-        #Page2 #pg2-plotly-umap {{
-          margin: 0 auto !important;
-        }}
-      `;
-      doc.head.appendChild(style);
-    }}
+      activeIdx = queue[queuePos++];
+      workerBusy = true;
+      const entry = data[activeIdx];
+      setStatus(activeIdx, "loading report");
+      workerFrame.src = entry.src;
+    }
 
-    function clickSafe(el) {{
+    workerFrame.addEventListener("load", () => {
+      if (activeIdx == null) return;
+      tryExtract(activeIdx, 0);
+    });
+
+    function clickSafe(el) {
       if (!el) return false;
-      try {{
+      try {
         el.click();
         return true;
-      }} catch {{
+      } catch (err) {
+        console.warn("click failed", err);
         return false;
-      }}
-    }}
+      }
+    }
 
-    function fitFrameToPlot(frame, doc) {{
-      const root = doc.getElementById("plotly-parent-div") || doc.getElementById("pg2-plotly-umap") || doc.body;
-      if (!root) return;
-      const rect = root.getBoundingClientRect();
-      if (rect && rect.height > 100) {{
-        const target = Math.ceil(rect.height + 8);
-        frame.style.height = `${{Math.max(580, Math.min(target, 1200))}}px`;
-      }}
-    }}
+    function clonePlotState(gd) {
+      const data = JSON.parse(JSON.stringify(gd.data || []));
+      const layout = JSON.parse(JSON.stringify(gd.layout || {}));
+      const config = {
+        displayModeBar: false,
+        responsive: true,
+        scrollZoom: false,
+      };
+      if (!layout.margin) layout.margin = {};
+      layout.autosize = true;
+      delete layout.width;
+      layout.height = 540;
+      layout.margin.l = layout.margin.l ?? 20;
+      layout.margin.r = layout.margin.r ?? 20;
+      layout.margin.b = layout.margin.b ?? 20;
+      layout.margin.t = layout.margin.t ?? 56;
+      layout.title = { text: "Samples", x: 0.5 };
+      layout.paper_bgcolor = "white";
+      layout.plot_bgcolor = "white";
+      return { data, layout, config };
+    }
 
-    function scheduleApply(frame, tries) {{
-      try {{
-        const win = frame.contentWindow;
-        const doc = frame.contentDocument || (win && win.document);
-        if (!win || !doc) {{
-          setStatus(frame, "waiting for iframe document");
-          if (tries < 8) setTimeout(() => scheduleApply(frame, tries + 1), 300);
-          return;
-        }}
+    function renderExtractedPlot(idx, state) {
+      const host = hostByIdx(idx);
+      if (!host) return Promise.reject(new Error("host missing"));
+      host.innerHTML = "";
+      return Plotly.newPlot(host, state.data, state.layout, state.config)
+        .then(() => {
+          setStatus(idx, "ready");
+        });
+    }
 
-        injectIframeStyle(doc);
+    function finishCurrent() {
+      workerBusy = false;
+      activeIdx = null;
+      setTimeout(pumpQueue, 0);
+    }
 
-        if (typeof win.show_page === "function") {{
-          win.show_page("Page2");
-        }}
+    function failCurrent(idx, message) {
+      setStatus(idx, message);
+      const host = hostByIdx(idx);
+      if (host && !host.querySelector(".plot-placeholder")) {
+        host.innerHTML = `<div class="plot-placeholder">${message}</div>`;
+      }
+      finishCurrent();
+    }
 
-        const sampleBtn = doc.getElementById("pg2-plotly-sample-btn");
+    function tryExtract(idx, tries) {
+      const entry = data[idx];
+      try {
+        const win = workerFrame.contentWindow;
+        const doc = workerFrame.contentDocument || (win && win.document);
+        if (!win || !doc) {
+          setStatus(idx, "waiting for report DOM");
+          if (tries < 12) return setTimeout(() => tryExtract(idx, tries + 1), 250);
+          return failCurrent(idx, "worker load timeout");
+        }
+
+        if (typeof win.show_page !== "function") {
+          setStatus(idx, "waiting for report scripts");
+          if (tries < 16) return setTimeout(() => tryExtract(idx, tries + 1), 250);
+          return failCurrent(idx, "report JS not ready");
+        }
+
+        win.show_page("Page2");
         const clusterBtn = doc.getElementById("pg2-plotly-cluster-btn");
+        const sampleBtn = doc.getElementById("pg2-plotly-sample-btn");
         const umap = doc.getElementById("pg2-plotly-umap");
+        if (!umap || !clusterBtn || !sampleBtn) {
+          setStatus(idx, "waiting for UMAP controls");
+          if (tries < 16) return setTimeout(() => tryExtract(idx, tries + 1), 250);
+          return failCurrent(idx, "UMAP controls not found");
+        }
 
-        // Ensure UMAP exists and plot is initialized before switching.
-        if (!umap) {{
-          setStatus(frame, "UMAP container not found");
-          if (tries < 8) setTimeout(() => scheduleApply(frame, tries + 1), 400);
-          return;
-        }}
-
-        // Cluster first (idempotent), then sample; split-pipe initializes on cluster.
         clickSafe(clusterBtn);
+        if (typeof win.cur_cmap_focus !== "undefined") {
+          win.cur_cmap_focus = "sample";
+        }
         clickSafe(sampleBtn);
+        if (typeof win.update_umap_plot === "function") {
+          try { win.update_umap_plot(); } catch (e) { /* ignore */ }
+        }
 
-        fitFrameToPlot(frame, doc);
+        const hasData = Array.isArray(umap.data) && umap.data.length > 0;
+        const titleText =
+          (umap.layout && umap.layout.title && umap.layout.title.text) ||
+          (umap.querySelector(".gtitle") && umap.querySelector(".gtitle").textContent) ||
+          "";
+        const sampleReady = /sample/i.test(String(titleText));
 
-        const title = umap.querySelector(".gtitle");
-        const looksLikeSample = !!title && /sample/i.test(title.textContent || "");
-        setStatus(frame, looksLikeSample ? "Samples view ready" : "view applied");
+        if (!hasData || !sampleReady) {
+          setStatus(idx, !hasData ? "waiting for Plotly traces" : "switching to Samples");
+          if (tries < 20) return setTimeout(() => tryExtract(idx, tries + 1), 300);
+          if (!hasData) return failCurrent(idx, "no UMAP traces");
+        }
 
-        if (!looksLikeSample && tries < 6) {{
-          setTimeout(() => scheduleApply(frame, tries + 1), 500);
-        }}
-      }} catch (err) {{
-        setStatus(frame, "cross-origin blocked; use local http server");
-        console.warn("iframe control failed", frame.src, err);
-      }}
-    }}
+        setStatus(idx, "extracting traces");
+        const state = clonePlotState(umap);
+        renderExtractedPlot(idx, state)
+          .catch((err) => {
+            console.warn("plot render failed", entry.src, err);
+            failCurrent(idx, "Plotly render failed");
+          })
+          .finally(() => {
+            if (activeIdx === idx) finishCurrent();
+          });
+      } catch (err) {
+        console.warn("extract failed", entry.src, err);
+        failCurrent(idx, "cross-origin blocked; use local http server");
+      }
+    }
 
-    document.getElementById("reload-all").addEventListener("click", () => {{
-      document.querySelectorAll("iframe").forEach((frame) => scheduleApply(frame, 0));
-    }});
+    document.getElementById("reload-all").addEventListener("click", () => {
+      resetQueue();
+      startQueue();
+    });
 
-    document.getElementById("single-col").addEventListener("click", () => {{
-      const grid = document.getElementById("gallery");
-      const oneCol = grid.style.gridTemplateColumns === "1fr";
-      grid.style.gridTemplateColumns = oneCol ? "" : "1fr";
-    }});
+    document.getElementById("single-col").addEventListener("click", () => {
+      const oneCol = gallery.style.gridTemplateColumns === "1fr";
+      gallery.style.gridTemplateColumns = oneCol ? "" : "1fr";
+    });
 
     buildCards();
+    resetQueue();
+    startQueue();
   </script>
 </body>
 </html>
 """
+    return template.replace("__PAYLOAD_JSON__", payload_json)
 
 
 def main() -> None:
