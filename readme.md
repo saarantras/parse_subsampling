@@ -61,7 +61,7 @@ All jobs use `--requeue` and run-level done markers in `runs/<run_id>/.done/` fo
 - `scripts/submit_subsampling_pipeline.sh`: main SLURM submitter
 - `scripts/submit_smoke_test.sh`: smoke-test submitter
 - `scripts/validate_outputs.py`: schema/pairing/sanity checks
-- `scripts/build_umap_sample_gallery.py`: builds a self-contained HTML gallery of `Samples`-colored UMAPs extracted from split-pipe report HTMLs
+- `scripts/build_umap_sample_gallery.py`: builds a self-contained HTML gallery plus static SVG export of `Samples`-colored UMAPs extracted from split-pipe report HTMLs
 - `slurm/run_all_sublib.sh`: worker for sublibrary all-mode run
 - `slurm/run_combine.sh`: worker for combine run
 - `slurm/run_score.sh`: worker for scoring run
@@ -80,6 +80,9 @@ All jobs use `--requeue` and run-level done markers in `runs/<run_id>/.done/` fo
 - `figures/umap_sample_gallery.html` (optional helper artifact)
   - Self-contained Plotly gallery of per-run UMAPs in `Samples` mode (data extracted and baked in at generation time)
   - Can be opened directly via `file://` (no local web server required)
+- `figures/umap_sample_gallery.svg` (optional publication helper artifact)
+  - Static vector export arranged as fraction rows × replicate columns for Illustrator/publication assembly
+  - Uses full point density from extracted UMAP coordinates (larger file, but directly editable as vector)
 - Per-run confusion matrices:
   - `runs/<run_id>/score_confusion_counts.tsv`
   - `runs/<run_id>/score_confusion_rowfrac.tsv`
@@ -99,10 +102,15 @@ This script:
 - scans `runs/<run_id>/sublib_*/all-sample_analysis_summary.html`
 - extracts `umap_x`, `umap_y`, and `samples_raw` from the embedded split-pipe JavaScript
 - re-renders only the UMAP scatter plots (no embedded full report pages)
-- writes a self-contained HTML file at `figures/umap_sample_gallery.html`
+- relabels sample classes `xcond_1/2/3` as `K562`, `SK-N-SH`, `HEPG2`
+- arranges non-reference panels as fraction rows × replicate columns (reference shown separately)
+- writes:
+  - `figures/umap_sample_gallery.html` (interactive Plotly)
+  - `figures/umap_sample_gallery.svg` (static vector export for Illustrator)
 
 Notes:
 - The generated file is intended for visual comparison and figure prep; regenerate it after rerunning analysis outputs.
+- The SVG export is full-density (no point downsampling), so file size can grow with the number of cells.
 - Current implementation targets Parse split-pipe report structure used here (tested with pipeline `v1.6.4` report HTMLs).
 - The gallery HTML still loads Plotly from the CDN, but it does not require access to the original report HTML files when viewing.
 

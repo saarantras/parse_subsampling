@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import html as html_mod
 import json
 import os
 import re
@@ -42,6 +43,21 @@ class GalleryEntry:
 
 
 _JS_STRING_RE_TEMPLATE = r"const\s+{var}\s*=\s*{func}\(\s*'((?:\\'|[^'])*)'\s*\);"
+SAMPLE_COLOR_MAP = {
+    "xcond_1": "#1f77b4",
+    "xcond_2": "#ff7f0e",
+    "xcond_3": "#2ca02c",
+}
+SAMPLE_NAME_MAP = {
+    "xcond_1": "K562",
+    "xcond_2": "SK-N-SH",
+    "xcond_3": "HEPG2",
+}
+DISPLAY_COLOR_MAP = {
+    "K562": "#1f77b4",
+    "SK-N-SH": "#ff7f0e",
+    "HEPG2": "#2ca02c",
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -49,6 +65,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--grid", type=Path, default=Path("config/subsample_grid.tsv"))
     p.add_argument("--runs-dir", type=Path, default=Path("runs"))
     p.add_argument("--output", type=Path, default=Path("figures/umap_sample_gallery.html"))
+    p.add_argument(
+        "--svg-output",
+        type=Path,
+        default=Path("figures/umap_sample_gallery.svg"),
+        help="Static SVG export for publication/Illustrator (default: %(default)s)",
+    )
     p.add_argument(
         "--report-name",
         default="all-sample_analysis_summary.html",
@@ -113,6 +135,10 @@ def _sort_key(entry: GalleryEntry):
     return (0 if entry.is_reference else 1, entry.fraction, entry.replicate, entry.sublib)
 
 
+def fmt_fraction(x: float) -> str:
+    return f"{x:.3f}".rstrip("0").rstrip(".")
+
+
 def _extract_js_single_quoted(text: str, var_name: str, func_name: str) -> str:
     pattern = _JS_STRING_RE_TEMPLATE.format(var=re.escape(var_name), func=re.escape(func_name))
     m = re.search(pattern, text, flags=re.S)
@@ -163,17 +189,6 @@ def extract_umap_sample_traces(report_path: Path) -> List[dict]:
             f"UMAP length mismatch in {report_path}: x={len(xs)} y={len(ys)} samples={len(samples)}"
         )
 
-    color_map = {
-        "xcond_1": "#1f77b4",
-        "xcond_2": "#ff7f0e",
-        "xcond_3": "#2ca02c",
-    }
-    sample_name_map = {
-        "xcond_1": "K562",
-        "xcond_2": "SK-N-SH",
-        "xcond_3": "HEPG2",
-    }
-
     grouped: "OrderedDict[str, tuple[list[float], list[float]]]" = OrderedDict()
     for x, y, sample in zip(xs, ys, samples):
         if sample not in grouped:
@@ -184,7 +199,7 @@ def extract_umap_sample_traces(report_path: Path) -> List[dict]:
 
     traces: List[dict] = []
     for sample, (gx, gy) in grouped.items():
-        display_name = sample_name_map.get(sample, sample)
+        display_name = SAMPLE_NAME_MAP.get(sample, sample)
         traces.append(
             {
                 "type": "scattergl",
@@ -192,7 +207,7 @@ def extract_umap_sample_traces(report_path: Path) -> List[dict]:
                 "name": display_name,
                 "x": gx,
                 "y": gy,
-                "marker": {"size": 3, "opacity": 0.85, "color": color_map.get(sample)},
+                "marker": {"size": 3, "opacity": 0.85, "color": SAMPLE_COLOR_MAP.get(sample)},
                 "hovertemplate": f"<b>{display_name}</b><extra></extra>",
             }
         )
@@ -460,7 +475,7 @@ def build_html(panels: List[dict]) -> str:
 
       const runline = document.createElement('div');
       runline.className = 'runline';
-      runline.textContent = `${p.run_id}${p.sublib ? ` (${p.sublib})` : ''}`;
+      runline.textContent = p.run_id;
 
       const metaline = document.createElement('div');
       metaline.className = 'metaline';
@@ -589,10 +604,265 @@ def build_html(panels: List[dict]) -> str:
     return template.replace("__PAYLOAD_JSON__", payload_json)
 
 
+def _iter_panel_points(panels: Sequence[dict]):
+    for panel in panels:
+        for trace in panel.get("traces", []):
+            for x, y in zip(trace.get("x", []), trace.get("y", [])):
+                yield float(x), float(y)
+
+
+def _global_square_bounds(panels: Sequence[dict]) -> tuple[float, float, float, float]:
+    min_x = min_y = float("inf")
+    max_x = max_y = float("-inf")
+    seen = False
+    for x, y in _iter_panel_points(panels):
+        seen = True
+        if x < min_x:
+            min_x = x
+        if x > max_x:
+            max_x = x
+        if y < min_y:
+            min_y = y
+        if y > max_y:
+            max_y = y
+    if not seen:
+        return (-1.0, 1.0, -1.0, 1.0)
+
+    span_x = max_x - min_x
+    span_y = max_y - min_y
+    span = max(span_x, span_y, 1.0)
+    pad = span * 0.04
+    cx = (min_x + max_x) / 2.0
+    cy = (min_y + max_y) / 2.0
+    half = (span / 2.0) + pad
+    return (cx - half, cx + half, cy - half, cy + half)
+
+
+def _svg_rect(
+    x: float,
+    y: float,
+    w: float,
+    h: float,
+    klass: str = "",
+    rx: float = 0.0,
+    ry: float = 0.0,
+) -> str:
+    klass_attr = f' class="{klass}"' if klass else ""
+    round_attr = f' rx="{rx:.2f}" ry="{ry:.2f}"' if (rx or ry) else ""
+    return (
+        f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}"'
+        f"{round_attr}{klass_attr} />"
+    )
+
+
+def _svg_text(x: float, y: float, text: str, klass: str = "", anchor: str = "start") -> str:
+    klass_attr = f' class="{klass}"' if klass else ""
+    return (
+        f'<text x="{x:.2f}" y="{y:.2f}" text-anchor="{anchor}"{klass_attr}>'
+        f"{html_mod.escape(text)}</text>"
+    )
+
+
+def _svg_panel(
+    panel: dict,
+    x0: float,
+    y0: float,
+    panel_w: float,
+    panel_h: float,
+    bounds: tuple[float, float, float, float],
+    clip_id: str,
+) -> str:
+    header_h = 34.0
+    pad = 10.0
+    plot_x = x0 + pad
+    plot_y = y0 + header_h + 6.0
+    plot_w = panel_w - 2.0 * pad
+    plot_h = panel_h - header_h - 6.0 - pad
+    min_x, max_x, min_y, max_y = bounds
+    span_x = max(max_x - min_x, 1e-9)
+    span_y = max(max_y - min_y, 1e-9)
+    scale = min(plot_w / span_x, plot_h / span_y)
+    used_w = span_x * scale
+    used_h = span_y * scale
+    x_off = plot_x + (plot_w - used_w) / 2.0
+    y_off = plot_y + (plot_h - used_h) / 2.0
+
+    parts: List[str] = []
+    parts.append('<g class="panel">')
+    parts.append(_svg_rect(x0, y0, panel_w, panel_h, "card", rx=10, ry=10))
+    parts.append(_svg_rect(x0, y0, panel_w, header_h, "cardHead", rx=10, ry=10))
+    parts.append(_svg_rect(x0, y0 + header_h - 10.0, panel_w, 10.0, "cardHeadFill"))
+    parts.append(_svg_text(x0 + 10.0, y0 + 15.0, str(panel["run_id"]), "runline"))
+    meta = (
+        ("reference full depth | " if panel.get("is_reference") else "")
+        + f"f={fmt_fraction(float(panel['fraction']))} | rep={panel['replicate']} | "
+        + f"{int(panel['n_points']):,} cells"
+    )
+    parts.append(_svg_text(x0 + 10.0, y0 + 28.0, meta, "metaline"))
+
+    parts.append(_svg_rect(plot_x, plot_y, plot_w, plot_h, "plotBg", rx=8, ry=8))
+    parts.append(_svg_rect(plot_x, plot_y, plot_w, plot_h, "plotFrame", rx=8, ry=8))
+
+    parts.append("<defs>")
+    parts.append(
+        f'<clipPath id="{clip_id}">'
+        + _svg_rect(plot_x + 1.0, plot_y + 1.0, plot_w - 2.0, plot_h - 2.0, rx=7, ry=7)
+        + "</clipPath>"
+    )
+    parts.append("</defs>")
+    parts.append(f'<g clip-path="url(#{clip_id})">')
+    for trace in panel.get("traces", []):
+        color = trace.get("marker", {}).get("color") or DISPLAY_COLOR_MAP.get(trace.get("name", ""), "#666")
+        parts.append(f'<g fill="{html_mod.escape(str(color))}" fill-opacity="0.45" stroke="none">')
+        xs = trace.get("x", [])
+        ys = trace.get("y", [])
+        for x, y in zip(xs, ys):
+            px = x_off + (float(x) - min_x) * scale
+            py = y_off + (max_y - float(y)) * scale
+            parts.append(f'<circle cx="{px:.2f}" cy="{py:.2f}" r="0.95" />')
+        parts.append("</g>")
+    parts.append("</g>")
+    parts.append("</g>")
+    return "".join(parts)
+
+
+def build_svg(panels: List[dict]) -> str:
+    ref_panels = [p for p in panels if p.get("is_reference")]
+    non_ref_panels = [p for p in panels if not p.get("is_reference")]
+    replicates = sorted({int(p["replicate"]) for p in non_ref_panels})
+    fractions = sorted({float(p["fraction"]) for p in non_ref_panels})
+    panel_by_key = {(float(p["fraction"]), int(p["replicate"])): p for p in non_ref_panels}
+    bounds = _global_square_bounds(panels)
+
+    margin = 18.0
+    top_h = 42.0
+    legend_h = 28.0
+    section_gap = 14.0
+    gap = 10.0
+    row_head_w = 88.0
+    col_head_h = 34.0
+    panel_w = 300.0
+    panel_h = 300.0
+
+    ref_label_h = 20.0 if ref_panels else 0.0
+    ref_row_h = panel_h if ref_panels else 0.0
+    ref_row_gap = 8.0 if ref_panels else 0.0
+    ref_row_w = (len(ref_panels) * panel_w) + (max(0, len(ref_panels) - 1) * gap)
+
+    matrix_w = row_head_w + (len(replicates) * panel_w) + (max(0, len(replicates) - 1) * gap)
+    total_w = max(660.0, margin * 2.0 + max(matrix_w, (row_head_w + ref_row_w if ref_panels else 0.0)))
+    matrix_h = col_head_h + (len(fractions) * panel_h) + (max(0, len(fractions) - 1) * gap)
+    total_h = (
+        margin
+        + top_h
+        + legend_h
+        + section_gap
+        + (ref_label_h + ref_row_h + ref_row_gap + section_gap if ref_panels else 0.0)
+        + matrix_h
+        + margin
+    )
+
+    parts: List[str] = []
+    parts.append('<?xml version="1.0" encoding="UTF-8"?>')
+    parts.append(
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{int(total_w)}" height="{int(total_h)}" '
+        f'viewBox="0 0 {int(total_w)} {int(total_h)}">'
+    )
+    parts.append("<style><![CDATA[")
+    parts.append("svg{background:#f4f0e8}")
+    parts.append(".title{font:700 18px Georgia,'Times New Roman',serif;fill:#1f1c17}")
+    parts.append(".subtitle{font:12px Georgia,'Times New Roman',serif;fill:#6f6658}")
+    parts.append(".legendText,.footer{font:11px Georgia,'Times New Roman',serif;fill:#1f1c17}")
+    parts.append(".footer{font-size:10px;fill:#6f6658}")
+    parts.append(".sectionLabel,.colheadText,.rowheadText{font:700 12px Georgia,'Times New Roman',serif;fill:#1f1c17}")
+    parts.append(".colhead,.rowhead{fill:#fffaf1;stroke:#d8cfbe;stroke-width:1}")
+    parts.append(".card{fill:#fffaf1;stroke:#d8cfbe;stroke-width:1}")
+    parts.append(".cardHead{fill:#f4ede0;stroke:#d8cfbe;stroke-width:1}")
+    parts.append(".cardHeadFill{fill:#f4ede0;stroke:none}")
+    parts.append(".runline{font:700 12px Georgia,'Times New Roman',serif;fill:#1f1c17}")
+    parts.append(".metaline{font:11px Georgia,'Times New Roman',serif;fill:#6f6658}")
+    parts.append(".plotBg{fill:#fff;stroke:none}")
+    parts.append(".plotFrame{fill:none;stroke:#efe8da;stroke-width:1}")
+    parts.append("]]></style>")
+
+    y = margin
+    parts.append(_svg_text(margin, y + 16.0, "UMAP Sample Gallery (SVG)", "title"))
+    parts.append(
+        _svg_text(
+            margin,
+            y + 31.0,
+            "Rows = subsample fraction; columns = replicate; samples-only UMAPs (full point density).",
+            "subtitle",
+        )
+    )
+    y += top_h
+
+    legend_y = y + 12.0
+    lx = margin
+    for name in ("K562", "SK-N-SH", "HEPG2"):
+        color = DISPLAY_COLOR_MAP[name]
+        parts.append(
+            f'<circle cx="{lx + 4.0:.2f}" cy="{legend_y:.2f}" r="4" fill="{color}" fill-opacity="0.75" />'
+        )
+        parts.append(_svg_text(lx + 14.0, legend_y + 4.0, name, "legendText"))
+        lx += 80.0 if name == "K562" else (110.0 if name == "SK-N-SH" else 90.0)
+    y += legend_h + section_gap
+
+    clip_counter = 0
+    if ref_panels:
+        parts.append(_svg_text(margin, y + 12.0, "Reference (full depth)", "sectionLabel"))
+        y += ref_label_h
+        ref_x = margin + row_head_w
+        for i, panel in enumerate(ref_panels):
+            clip_counter += 1
+            x0 = ref_x + i * (panel_w + gap)
+            parts.append(_svg_panel(panel, x0, y, panel_w, panel_h, bounds, f"umapclip{clip_counter}"))
+        y += ref_row_h + ref_row_gap + section_gap
+
+    matrix_x = margin
+    matrix_y = y
+    parts.append(_svg_rect(matrix_x, matrix_y, row_head_w, col_head_h, "colhead", rx=8, ry=8))
+    parts.append(_svg_text(matrix_x + row_head_w / 2.0, matrix_y + 21.0, "f / rep", "subtitle", anchor="middle"))
+    for c, rep in enumerate(replicates):
+        xh = matrix_x + row_head_w + c * (panel_w + gap)
+        parts.append(_svg_rect(xh, matrix_y, panel_w, col_head_h, "colhead", rx=8, ry=8))
+        parts.append(
+            _svg_text(xh + panel_w / 2.0, matrix_y + 21.0, f"Replicate {rep}", "colheadText", anchor="middle")
+        )
+
+    for r, frac in enumerate(fractions):
+        yr = matrix_y + col_head_h + r * (panel_h + gap)
+        parts.append(_svg_rect(matrix_x, yr, row_head_w, panel_h, "rowhead", rx=8, ry=8))
+        parts.append(
+            _svg_text(matrix_x + row_head_w / 2.0, yr + 18.0, f"f = {fmt_fraction(frac)}", "rowheadText", anchor="middle")
+        )
+        for c, rep in enumerate(replicates):
+            xp = matrix_x + row_head_w + c * (panel_w + gap)
+            panel = panel_by_key.get((frac, rep))
+            if panel is None:
+                parts.append(_svg_rect(xp, yr, panel_w, panel_h, "card", rx=10, ry=10))
+                parts.append(_svg_text(xp + panel_w / 2.0, yr + panel_h / 2.0, "missing", "metaline", anchor="middle"))
+                continue
+            clip_counter += 1
+            parts.append(_svg_panel(panel, xp, yr, panel_w, panel_h, bounds, f"umapclip{clip_counter}"))
+
+    parts.append(
+        _svg_text(
+            margin,
+            total_h - 8.0,
+            "Generated by scripts/build_umap_sample_gallery.py for Illustrator/publication import.",
+            "footer",
+        )
+    )
+    parts.append("</svg>")
+    return "".join(parts)
+
+
 def main() -> None:
     args = parse_args()
     grid_meta = load_grid(args.grid)
     args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.svg_output.parent.mkdir(parents=True, exist_ok=True)
 
     entries = collect_entries(
         runs_dir=args.runs_dir,
@@ -609,8 +879,11 @@ def main() -> None:
     panels = build_panel_payload(entries, args.runs_dir, args.report_name)
     html = build_html(panels)
     args.output.write_text(html, encoding="utf-8")
+    svg = build_svg(panels)
+    args.svg_output.write_text(svg, encoding="utf-8")
     total_points = sum(p["n_points"] for p in panels)
-    print(f"Wrote gallery: {args.output} ({len(panels)} panels, {total_points} points)")
+    print(f"Wrote gallery HTML: {args.output} ({len(panels)} panels, {total_points} points)")
+    print(f"Wrote gallery SVG: {args.svg_output} (full point density)")
 
 
 if __name__ == "__main__":

@@ -7,3 +7,5 @@ __pycache__/
 !runs/.gitkeep
 !results/.gitkeep
 !figures/.gitkeep
+!figures/umap_sample_gallery.html
+!figures/umap_sample_gallery.svg
