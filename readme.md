@@ -130,6 +130,36 @@ cp config/pipeline.env.example config/pipeline.env
 - Defaults assume `splitpipe` conda env for both split-pipe and Python analysis steps.
 - SLURM workers load miniconda and activate the requested conda env before invoking Python/split-pipe.
 
+## Conda Environment (Documented Run)
+
+Default env names in `config/pipeline.env.example`:
+- `SPLIT_PIPE_CONDA_ENV=splitpipe`
+- `ANALYSIS_CONDA_ENV=splitpipe` (defaults to the same env if unset)
+
+Recorded from `runs/ref_full/run_meta.json` (captured during pipeline execution):
+- Conda env name: `splitpipe`
+- Conda prefix: `/home/mcn26/.conda/envs/splitpipe`
+- Python: `3.13.12`
+- `split-pipe --version`: `split-pipe v1.6.4`
+
+Core Python packages used by this repository's analysis scripts (`score_identity.py`, `aggregate_metrics.py`):
+- `numpy` `2.2.6` (installed as a direct wheel reference in `pip freeze`)
+- `scipy` `1.16.3`
+- `pandas` `2.3.3`
+- `matplotlib` `3.10.8`
+
+Additional packages present in the recorded `splitpipe` env and relevant to the Parse/scanpy stack:
+- `scanpy` `1.12`
+- `anndata` `0.12.10`
+- `scikit-learn` `1.8.0`
+- `seaborn` `0.13.2`
+- `umap-learn` `0.5.11`
+
+Notes:
+- `scripts/build_umap_sample_gallery.py` itself uses only the Python standard library.
+- `figures/umap_sample_gallery.html` loads Plotly from the CDN (`plotly-3.1.0.min.js`) at view time; Plotly is not required in the conda env for generation.
+- Runtime metadata capture includes `pip freeze` and command versions in each `runs/<run_id>/run_meta.json` for reproducibility.
+
 ## Build Genome (One-Time, Separate)
 
 The subsampling pipeline does **not** run `split-pipe --mode mkref` automatically.
