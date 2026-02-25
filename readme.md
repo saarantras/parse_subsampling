@@ -61,6 +61,7 @@ All jobs use `--requeue` and run-level done markers in `runs/<run_id>/.done/` fo
 - `scripts/submit_subsampling_pipeline.sh`: main SLURM submitter
 - `scripts/submit_smoke_test.sh`: smoke-test submitter
 - `scripts/validate_outputs.py`: schema/pairing/sanity checks
+- `scripts/build_umap_sample_gallery.py`: builds a self-contained HTML gallery of `Samples`-colored UMAPs extracted from split-pipe report HTMLs
 - `slurm/run_all_sublib.sh`: worker for sublibrary all-mode run
 - `slurm/run_combine.sh`: worker for combine run
 - `slurm/run_score.sh`: worker for scoring run
@@ -76,12 +77,34 @@ All jobs use `--requeue` and run-level done markers in `runs/<run_id>/.done/` fo
   - Columns: `reads_per_cell,mean_fraction_correct,sd_fraction_correct,n_reps`
 - `figures/reads_vs_identity_accuracy.png`
 - `figures/reads_vs_identity_accuracy_by_class.png`
+- `figures/umap_sample_gallery.html` (optional helper artifact)
+  - Self-contained Plotly gallery of per-run UMAPs in `Samples` mode (data extracted and baked in at generation time)
+  - Can be opened directly via `file://` (no local web server required)
 - Per-run confusion matrices:
   - `runs/<run_id>/score_confusion_counts.tsv`
   - `runs/<run_id>/score_confusion_rowfrac.tsv`
 
 Run-level artifacts are stored under `runs/<run_id>/`.
 All split-pipe run outputs are retained under each run directory, including report HTML visualizations for sublibrary and combined outputs.
+
+## UMAP Gallery (Publication Helper)
+
+To compare `Samples`-colored UMAPs across runs in one document, generate the standalone gallery:
+
+```bash
+python3 scripts/build_umap_sample_gallery.py
+```
+
+This script:
+- scans `runs/<run_id>/sublib_*/all-sample_analysis_summary.html`
+- extracts `umap_x`, `umap_y`, and `samples_raw` from the embedded split-pipe JavaScript
+- re-renders only the UMAP scatter plots (no embedded full report pages)
+- writes a self-contained HTML file at `figures/umap_sample_gallery.html`
+
+Notes:
+- The generated file is intended for visual comparison and figure prep; regenerate it after rerunning analysis outputs.
+- Current implementation targets Parse split-pipe report structure used here (tested with pipeline `v1.6.4` report HTMLs).
+- The gallery HTML still loads Plotly from the CDN, but it does not require access to the original report HTML files when viewing.
 
 ## Setup
 

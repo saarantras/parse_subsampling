@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
-"""Build a single HTML gallery of split-pipe UMAP reports in 'Samples' view.
+"""Build a single self-contained HTML gallery of split-pipe UMAPs in Samples mode.
 
-This generates an aggregate HTML document that embeds each split-pipe
-`all-sample_analysis_summary.html` report in an iframe, labels it with run
-metadata (fraction/replicate), and uses parent-page JavaScript to switch the
-embedded report to the Clustering page and click the "Samples" UMAP view.
+The generator reads split-pipe `all-sample_analysis_summary.html` reports, extracts the
+UMAP coordinates and sample labels (`umap_x`, `umap_y`, `samples_raw`) from the report's
+embedded JavaScript, and writes a standalone HTML page that re-renders only the UMAPs
+using Plotly.
 
-Notes:
-- The generated page is best opened via a local HTTP server (same-origin iframe
-  scripting is often blocked when opening with `file://` URLs).
-- The page is intentionally heavy because each panel embeds a full split-pipe
-  report.
+Result: the gallery HTML no longer depends on loading the original report pages at view
+ time and can be opened directly via `file://` (no local web server required).
 """
 
 from __future__ import annotations
@@ -19,9 +16,11 @@ import argparse
 import csv
 import json
 import os
+import re
+from collections import OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Sequence
 
 
 @dataclass(frozen=True)
@@ -40,6 +39,9 @@ class GalleryEntry:
     replicate: int
     is_reference: bool
     src_rel: str
+
+
+_JS_STRING_RE_TEMPLATE = r"const\s+{var}\s*=\s*{func}\(\s*'((?:\\'|[^'])*)'\s*\);"
 
 
 def parse_args() -> argparse.Namespace:
@@ -63,7 +65,7 @@ def parse_args() -> argparse.Namespace:
 def load_grid(grid_path: Path) -> Dict[str, RunMeta]:
     with grid_path.open("r", encoding="utf-8", newline="") as fh:
         reader = csv.DictReader(fh, delimiter="\t")
-        grid_rows = {}
+        grid_rows: Dict[str, RunMeta] = {}
         for row in reader:
             run_id = row["run_id"]
             grid_rows[run_id] = RunMeta(
@@ -93,7 +95,6 @@ def collect_entries(
             continue
         for report_path in sorted(run_dir.glob(f"{sublib_glob}/{report_name}")):
             sublib = report_path.parent.name
-            # Keep lexical paths (do not resolve symlinks), so URLs stay under `runs/...`.
             src_rel = os.path.relpath(report_path, start=output_dir)
             entries.append(
                 GalleryEntry(
@@ -109,33 +110,124 @@ def collect_entries(
 
 
 def _sort_key(entry: GalleryEntry):
-    # Reference first, then ascending fraction, then replicate, then sublib.
     return (0 if entry.is_reference else 1, entry.fraction, entry.replicate, entry.sublib)
 
 
-def build_html(entries: List[GalleryEntry]) -> str:
-    entries = sorted(entries, key=_sort_key)
-    payload = [
-        {
-            "run_id": e.run_id,
-            "sublib": e.sublib,
-            "fraction": e.fraction,
-            "replicate": e.replicate,
-            "is_reference": e.is_reference,
-            "src": e.src_rel,
-        }
-        for e in entries
-    ]
+def _extract_js_single_quoted(text: str, var_name: str, func_name: str) -> str:
+    pattern = _JS_STRING_RE_TEMPLATE.format(var=re.escape(var_name), func=re.escape(func_name))
+    m = re.search(pattern, text, flags=re.S)
+    if not m:
+        raise ValueError(f"Could not find {var_name} = {func_name}('...') in report HTML")
+    return m.group(1).replace("\\'", "'")
 
-    payload_json = json.dumps(payload, indent=2)
+
+def decode_nlist(raw_str: str) -> List[float]:
+    values: List[float] = []
+    if not raw_str:
+        return values
+    for word in raw_str.split(","):
+        if not word:
+            continue
+        if "x" in word:
+            num_s, count_s = word.split("x", 1)
+            count = int(count_s)
+        else:
+            num_s = word
+            count = 1
+        num = float(num_s)
+        if count == 1:
+            values.append(num)
+        else:
+            values.extend([num] * count)
+    return values
+
+
+def decode_comlist(raw_str: str) -> List[str]:
+    if not raw_str:
+        return []
+    return raw_str.split(",")
+
+
+def extract_umap_sample_traces(report_path: Path) -> List[dict]:
+    text = report_path.read_text(encoding="utf-8", errors="replace")
+    x_raw = _extract_js_single_quoted(text, "umap_x", "decode_nlist")
+    y_raw = _extract_js_single_quoted(text, "umap_y", "decode_nlist")
+    samples_raw = _extract_js_single_quoted(text, "samples_raw", "decode_comlist")
+
+    xs = decode_nlist(x_raw)
+    ys = decode_nlist(y_raw)
+    samples = decode_comlist(samples_raw)
+
+    if not (len(xs) == len(ys) == len(samples)):
+        raise ValueError(
+            f"UMAP length mismatch in {report_path}: x={len(xs)} y={len(ys)} samples={len(samples)}"
+        )
+
+    color_map = {
+        "xcond_1": "#1f77b4",
+        "xcond_2": "#ff7f0e",
+        "xcond_3": "#2ca02c",
+    }
+
+    grouped: "OrderedDict[str, tuple[list[float], list[float]]]" = OrderedDict()
+    for x, y, sample in zip(xs, ys, samples):
+        if sample not in grouped:
+            grouped[sample] = ([], [])
+        gx, gy = grouped[sample]
+        gx.append(x)
+        gy.append(y)
+
+    traces: List[dict] = []
+    for sample, (gx, gy) in grouped.items():
+        traces.append(
+            {
+                "type": "scattergl",
+                "mode": "markers",
+                "name": sample,
+                "x": gx,
+                "y": gy,
+                "marker": {"size": 3, "opacity": 0.85, "color": color_map.get(sample)},
+                "hovertemplate": f"<b>{sample}</b><extra></extra>",
+            }
+        )
+    return traces
+
+
+def build_panel_payload(
+    entries: Sequence[GalleryEntry],
+    runs_dir: Path,
+    report_name: str,
+) -> List[dict]:
+    panels: List[dict] = []
+    for e in sorted(entries, key=_sort_key):
+        report_path = runs_dir / e.run_id / e.sublib / report_name
+        traces = extract_umap_sample_traces(report_path)
+        panels.append(
+            {
+                "run_id": e.run_id,
+                "sublib": e.sublib,
+                "fraction": e.fraction,
+                "replicate": e.replicate,
+                "is_reference": e.is_reference,
+                "source_report": e.src_rel,
+                "n_traces": len(traces),
+                "n_points": int(sum(len(t.get("x", [])) for t in traces)),
+                "traces": traces,
+            }
+        )
+    return panels
+
+
+def build_html(panels: List[dict]) -> str:
+    payload_json = json.dumps(panels, separators=(",", ":"))
 
     template = """<!doctype html>
-<html lang="en">
+<html lang=\"en\">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset=\"utf-8\" />
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
   <title>UMAP Sample Gallery</title>
-  <script src="https://cdn.plot.ly/plotly-3.1.0.min.js"></script>
+  <script src=\"https://cdn.plot.ly/plotly-3.1.0.min.js\"></script>
   <style>
     :root {
       --bg: #f4f0e8;
@@ -147,7 +239,7 @@ def build_html(entries: List[GalleryEntry]) -> str:
       --shadow: 0 10px 24px rgba(40, 32, 18, 0.08);
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: Georgia, "Times New Roman", serif; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: Georgia, \"Times New Roman\", serif; }
     body { padding: 20px; }
     .topbar {
       position: sticky; top: 0; z-index: 20;
@@ -218,23 +310,6 @@ def build_html(entries: List[GalleryEntry]) -> str:
         linear-gradient(#fff, #fff);
       border: 1px solid #efe8da;
     }
-    .plot-placeholder {
-      height: 560px;
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    #worker-frame {
-      position: fixed;
-      width: 1px;
-      height: 1px;
-      left: -9999px;
-      top: -9999px;
-      border: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
     .hint {
       margin-top: 14px;
       font-size: 12px;
@@ -245,304 +320,155 @@ def build_html(entries: List[GalleryEntry]) -> str:
     @media (max-width: 760px) {
       body { padding: 10px; }
       .grid { grid-template-columns: 1fr; }
-      .plot-host, .plot-placeholder { min-height: 480px; height: 480px; }
     }
   </style>
 </head>
 <body>
-  <section class="topbar">
-    <h1 class="title">UMAP Sample Gallery</h1>
-    <p class="subtitle">Standalone UMAP plots extracted from split-pipe reports (Clustering → Samples only). Each panel is labeled by subsample fraction and replicate.</p>
-    <div class="stats" id="stats"></div>
-    <div class="actions">
-      <button id="reload-all" type="button">Rebuild All Panels</button>
-      <button id="single-col" type="button">Toggle Single Column</button>
+  <section class=\"topbar\">
+    <h1 class=\"title\">UMAP Sample Gallery</h1>
+    <p class=\"subtitle\">Standalone UMAP plots extracted at build time from split-pipe reports (Samples mode only). No local server is required to view this file.</p>
+    <div class=\"stats\" id=\"stats\"></div>
+    <div class=\"actions\">
+      <button id=\"single-col\" type=\"button\">Toggle Single Column</button>
     </div>
   </section>
 
-  <main class="grid" id="gallery"></main>
-  <iframe id="worker-frame" title="umap-worker"></iframe>
+  <main class=\"grid\" id=\"gallery\"></main>
 
-  <p class="hint">
-    This page extracts UMAP traces from each source report and re-renders them here. It still needs same-origin access to the report HTMLs:
-    serve the repo over HTTP (for example <span class="mono">python3 -m http.server</span> from repo root) and open
-    <span class="mono">/figures/umap_sample_gallery.html</span>.
+  <p class=\"hint\">
+    This HTML contains pre-extracted UMAP traces. It can be opened directly from <span class=\"mono\">file://</span> without loading the source report HTMLs.
+    (It still loads Plotly from the CDN.)
   </p>
 
-  <script type="application/json" id="gallery-data">__PAYLOAD_JSON__</script>
+  <script type=\"application/json\" id=\"gallery-data\">__PAYLOAD_JSON__</script>
   <script>
-    const data = JSON.parse(document.getElementById("gallery-data").textContent);
-    const gallery = document.getElementById("gallery");
-    const stats = document.getElementById("stats");
-    const workerFrame = document.getElementById("worker-frame");
-
-    let queue = [];
-    let queuePos = 0;
-    let activeIdx = null;
-    let workerBusy = false;
+    const panels = JSON.parse(document.getElementById('gallery-data').textContent);
+    const gallery = document.getElementById('gallery');
+    const stats = document.getElementById('stats');
 
     function fmtFraction(x) {
-      return Number(x).toFixed(3).replace(/0+$/, "").replace(/\\.$/, "");
+      return Number(x).toFixed(3).replace(/0+$/, '').replace(/\.$/, '');
     }
 
     function chip(text) {
-      const el = document.createElement("span");
+      const el = document.createElement('span');
       el.textContent = text;
       return el;
     }
 
+    function baseLayout() {
+      return {
+        height: 540,
+        margin: { l: 20, r: 14, t: 54, b: 20 },
+        hovermode: 'closest',
+        plot_bgcolor: 'white',
+        paper_bgcolor: 'white',
+        showlegend: true,
+        legend: { orientation: 'h', y: 1.02, yanchor: 'bottom', x: 0, font: { size: 11 } },
+        xaxis: {
+          zeroline: false,
+          showticklabels: false,
+          showgrid: false,
+          showline: false,
+          title: { text: 'UMAP 1' }
+        },
+        yaxis: {
+          zeroline: false,
+          showticklabels: false,
+          showgrid: false,
+          showline: false,
+          title: { text: 'UMAP 2' }
+        },
+        title: { text: 'Samples', x: 0.5 },
+      };
+    }
+
     function setStats() {
-      stats.innerHTML = "";
-      const runCount = new Set(data.map(d => d.run_id)).size;
-      const panelCount = data.length;
-      stats.append(
+      const runCount = new Set(panels.map(p => p.run_id)).size;
+      const panelCount = panels.length;
+      const totalPoints = panels.reduce((n, p) => n + (p.n_points || 0), 0);
+      stats.replaceChildren(
         chip(`${runCount} runs`),
         chip(`${panelCount} panels`),
-        chip(`mode: extracted UMAP (Samples)`),
-        chip(`source: all-sample_analysis_summary.html`)
+        chip(`${totalPoints.toLocaleString()} points`),
+        chip('mode: Samples only'),
+        chip('self-contained (report data baked in)')
       );
     }
 
-    function statusByIdx(idx) {
-      return document.getElementById(`status-${idx}`);
-    }
-
-    function hostByIdx(idx) {
-      return document.getElementById(`plot-${idx}`);
-    }
-
-    function setStatus(idx, text) {
-      const el = statusByIdx(idx);
-      if (el) el.textContent = text;
-    }
-
-    function buildCards() {
+    async function renderAll() {
+      if (!window.Plotly) {
+        console.error('Plotly failed to load');
+        return;
+      }
       setStats();
+
       const frag = document.createDocumentFragment();
-      data.forEach((d, idx) => {
-        const card = document.createElement("section");
-        card.className = "card";
-        card.dataset.runId = d.run_id;
-        card.dataset.sublib = d.sublib;
+      for (let i = 0; i < panels.length; i++) {
+        const p = panels[i];
+        const card = document.createElement('section');
+        card.className = 'card';
 
-        const head = document.createElement("div");
-        head.className = "card-head";
-        const left = document.createElement("div");
+        const head = document.createElement('div');
+        head.className = 'card-head';
+        const left = document.createElement('div');
 
-        const runline = document.createElement("div");
-        runline.className = "runline";
-        runline.textContent = `${d.run_id} (${d.sublib})`;
+        const runline = document.createElement('div');
+        runline.className = 'runline';
+        runline.textContent = `${p.run_id} (${p.sublib})`;
 
-        const metaline = document.createElement("div");
-        metaline.className = "metaline";
-        metaline.textContent = d.is_reference
-          ? `reference full depth • fraction=${fmtFraction(d.fraction)} • replicate=${d.replicate}`
-          : `fraction=${fmtFraction(d.fraction)} • replicate=${d.replicate}`;
+        const metaline = document.createElement('div');
+        metaline.className = 'metaline';
+        const refText = p.is_reference ? 'reference full depth • ' : '';
+        metaline.textContent = `${refText}fraction=${fmtFraction(p.fraction)} • replicate=${p.replicate} • ${p.n_points.toLocaleString()} cells`;
+
         left.append(runline, metaline);
 
-        const status = document.createElement("div");
-        status.className = "status";
-        status.id = `status-${idx}`;
-        status.textContent = "queued";
+        const status = document.createElement('div');
+        status.className = 'status';
+        status.textContent = 'rendering';
 
         head.append(left, status);
 
-        const wrap = document.createElement("div");
-        wrap.className = "plot-wrap";
-        const host = document.createElement("div");
-        host.className = "plot-host";
-        host.id = `plot-${idx}`;
-        const ph = document.createElement("div");
-        ph.className = "plot-placeholder";
-        ph.textContent = "Waiting to extract UMAP…";
-        host.appendChild(ph);
-        wrap.appendChild(host);
+        const wrap = document.createElement('div');
+        wrap.className = 'plot-wrap';
+        const host = document.createElement('div');
+        host.className = 'plot-host';
+        host.id = `plot-${i}`;
+        wrap.append(host);
 
         card.append(head, wrap);
-        frag.appendChild(card);
-      });
+        frag.append(card);
+      }
       gallery.replaceChildren(frag);
-    }
 
-    function resetQueue() {
-      queue = data.map((_, idx) => idx);
-      queuePos = 0;
-      activeIdx = null;
-      workerBusy = false;
-      for (const idx of queue) {
-        setStatus(idx, "queued");
-        const host = hostByIdx(idx);
-        if (!host) continue;
-        if (window.Plotly && host.classList.contains("js-plotly-plot")) {
-          Plotly.purge(host);
-        } else if (window.Plotly && host.querySelector(".js-plotly-plot")) {
-          const nested = host.querySelector(".js-plotly-plot");
-          Plotly.purge(nested);
-        }
-        host.innerHTML = '<div class="plot-placeholder">Waiting to extract UMAP…</div>';
-      }
-    }
-
-    function startQueue() {
-      if (!window.Plotly) {
-        console.error("Plotly failed to load");
-        return;
-      }
-      pumpQueue();
-    }
-
-    function pumpQueue() {
-      if (workerBusy) return;
-      if (queuePos >= queue.length) return;
-
-      activeIdx = queue[queuePos++];
-      workerBusy = true;
-      const entry = data[activeIdx];
-      setStatus(activeIdx, "loading report");
-      workerFrame.src = entry.src;
-    }
-
-    workerFrame.addEventListener("load", () => {
-      if (activeIdx == null) return;
-      tryExtract(activeIdx, 0);
-    });
-
-    function clickSafe(el) {
-      if (!el) return false;
-      try {
-        el.click();
-        return true;
-      } catch (err) {
-        console.warn("click failed", err);
-        return false;
-      }
-    }
-
-    function clonePlotState(gd) {
-      const data = JSON.parse(JSON.stringify(gd.data || []));
-      const layout = JSON.parse(JSON.stringify(gd.layout || {}));
-      const config = {
-        displayModeBar: false,
-        responsive: true,
-        scrollZoom: false,
-      };
-      if (!layout.margin) layout.margin = {};
-      layout.autosize = true;
-      delete layout.width;
-      layout.height = 540;
-      layout.margin.l = layout.margin.l ?? 20;
-      layout.margin.r = layout.margin.r ?? 20;
-      layout.margin.b = layout.margin.b ?? 20;
-      layout.margin.t = layout.margin.t ?? 56;
-      layout.title = { text: "Samples", x: 0.5 };
-      layout.paper_bgcolor = "white";
-      layout.plot_bgcolor = "white";
-      return { data, layout, config };
-    }
-
-    function renderExtractedPlot(idx, state) {
-      const host = hostByIdx(idx);
-      if (!host) return Promise.reject(new Error("host missing"));
-      host.innerHTML = "";
-      return Plotly.newPlot(host, state.data, state.layout, state.config)
-        .then(() => {
-          setStatus(idx, "ready");
-        });
-    }
-
-    function finishCurrent() {
-      workerBusy = false;
-      activeIdx = null;
-      setTimeout(pumpQueue, 0);
-    }
-
-    function failCurrent(idx, message) {
-      setStatus(idx, message);
-      const host = hostByIdx(idx);
-      if (host && !host.querySelector(".plot-placeholder")) {
-        host.innerHTML = `<div class="plot-placeholder">${message}</div>`;
-      }
-      finishCurrent();
-    }
-
-    function tryExtract(idx, tries) {
-      const entry = data[idx];
-      try {
-        const win = workerFrame.contentWindow;
-        const doc = workerFrame.contentDocument || (win && win.document);
-        if (!win || !doc) {
-          setStatus(idx, "waiting for report DOM");
-          if (tries < 12) return setTimeout(() => tryExtract(idx, tries + 1), 250);
-          return failCurrent(idx, "worker load timeout");
-        }
-
-        if (typeof win.show_page !== "function") {
-          setStatus(idx, "waiting for report scripts");
-          if (tries < 16) return setTimeout(() => tryExtract(idx, tries + 1), 250);
-          return failCurrent(idx, "report JS not ready");
-        }
-
-        win.show_page("Page2");
-        const clusterBtn = doc.getElementById("pg2-plotly-cluster-btn");
-        const sampleBtn = doc.getElementById("pg2-plotly-sample-btn");
-        const umap = doc.getElementById("pg2-plotly-umap");
-        if (!umap || !clusterBtn || !sampleBtn) {
-          setStatus(idx, "waiting for UMAP controls");
-          if (tries < 16) return setTimeout(() => tryExtract(idx, tries + 1), 250);
-          return failCurrent(idx, "UMAP controls not found");
-        }
-
-        clickSafe(clusterBtn);
-        if (typeof win.cur_cmap_focus !== "undefined") {
-          win.cur_cmap_focus = "sample";
-        }
-        clickSafe(sampleBtn);
-        if (typeof win.update_umap_plot === "function") {
-          try { win.update_umap_plot(); } catch (e) { /* ignore */ }
-        }
-
-        const hasData = Array.isArray(umap.data) && umap.data.length > 0;
-        const titleText =
-          (umap.layout && umap.layout.title && umap.layout.title.text) ||
-          (umap.querySelector(".gtitle") && umap.querySelector(".gtitle").textContent) ||
-          "";
-        const sampleReady = /sample/i.test(String(titleText));
-
-        if (!hasData || !sampleReady) {
-          setStatus(idx, !hasData ? "waiting for Plotly traces" : "switching to Samples");
-          if (tries < 20) return setTimeout(() => tryExtract(idx, tries + 1), 300);
-          if (!hasData) return failCurrent(idx, "no UMAP traces");
-        }
-
-        setStatus(idx, "extracting traces");
-        const state = clonePlotState(umap);
-        renderExtractedPlot(idx, state)
-          .catch((err) => {
-            console.warn("plot render failed", entry.src, err);
-            failCurrent(idx, "Plotly render failed");
-          })
-          .finally(() => {
-            if (activeIdx === idx) finishCurrent();
+      for (let i = 0; i < panels.length; i++) {
+        const p = panels[i];
+        const host = document.getElementById(`plot-${i}`);
+        const card = host.closest('.card');
+        const status = card.querySelector('.status');
+        const layout = baseLayout();
+        try {
+          await Plotly.newPlot(host, p.traces, layout, {
+            displayModeBar: false,
+            responsive: true,
+            scrollZoom: false,
           });
-      } catch (err) {
-        console.warn("extract failed", entry.src, err);
-        failCurrent(idx, "cross-origin blocked; use local http server");
+          status.textContent = 'ready';
+        } catch (err) {
+          console.warn('plot render failed', p.run_id, p.sublib, err);
+          status.textContent = 'render failed';
+          host.textContent = 'Plotly render failed';
+        }
       }
     }
 
-    document.getElementById("reload-all").addEventListener("click", () => {
-      resetQueue();
-      startQueue();
+    document.getElementById('single-col').addEventListener('click', () => {
+      const oneCol = gallery.style.gridTemplateColumns === '1fr';
+      gallery.style.gridTemplateColumns = oneCol ? '' : '1fr';
     });
 
-    document.getElementById("single-col").addEventListener("click", () => {
-      const oneCol = gallery.style.gridTemplateColumns === "1fr";
-      gallery.style.gridTemplateColumns = oneCol ? "" : "1fr";
-    });
-
-    buildCards();
-    resetQueue();
-    startQueue();
+    renderAll();
   </script>
 </body>
 </html>
@@ -554,6 +480,7 @@ def main() -> None:
     args = parse_args()
     grid_meta = load_grid(args.grid)
     args.output.parent.mkdir(parents=True, exist_ok=True)
+
     entries = collect_entries(
         runs_dir=args.runs_dir,
         grid_meta=grid_meta,
@@ -565,9 +492,12 @@ def main() -> None:
         raise SystemExit(
             f"No reports found for pattern {args.sublib_glob}/{args.report_name} under {args.runs_dir}"
         )
-    html = build_html(entries)
+
+    panels = build_panel_payload(entries, args.runs_dir, args.report_name)
+    html = build_html(panels)
     args.output.write_text(html, encoding="utf-8")
-    print(f"Wrote gallery: {args.output} ({len(entries)} panels)")
+    total_points = sum(p["n_points"] for p in panels)
+    print(f"Wrote gallery: {args.output} ({len(panels)} panels, {total_points} points)")
 
 
 if __name__ == "__main__":
